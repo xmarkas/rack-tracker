@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../Development/project tools/CSVparse.js"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

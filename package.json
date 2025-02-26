@@ -1,20 +1,23 @@
 {
   "name": "rack-logistics",
-  "version": "1.1.1",
+  "version": "1.1.2",
+  "description": "rack logistics app",
+  "homepage": "https://github.com/xmarkas/rack-tracker#readme",
+  "bugs": {
+    "url": "https://github.com/xmarkas/rack-tracker/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xmarkas/rack-tracker.git"
+  },
+  "license": "ISC",
+  "author": "Mark A Smith",
   "type": "module",
+  "main": "index.html",
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@types/papaparse": "^5.3.15",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "typescript": "^5.6.2",
-    "vite": "^5.4.5",
-    "vite-plugin-pwa": "^0.21.1",
-    "workbox-window": "^7.3.0"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -27,5 +30,14 @@
     "react-dom": "^18.3.1",
     "tinybase": "^5.3.0",
     "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/papaparse": "^5.3.15",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.5",
+    "vite-plugin-pwa": "^0.21.1",
+    "workbox-window": "^7.3.0"
   }
 }
