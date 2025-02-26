@@ -1,24 +1,24 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ["Products", "Pricing", "Blog"];
+
 
 export function HeaderBar() {
   // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-  
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -32,10 +32,17 @@ export function HeaderBar() {
     setAnchorElUser(null);
   };
 
+  const forceUpdate = () => {
+    window.location.reload();
+  };
+
   return (
-    <AppBar position="static" sx={{background: "white", color: "black", marginTop: "-5px"}} >
-      <Container maxWidth="xl" >
-        <Toolbar disableGutters >
+    <AppBar
+      position="static"
+      sx={{ background: "white", color: "black", marginTop: "-5px" }}
+    >
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
@@ -44,18 +51,17 @@ export function HeaderBar() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             RACK.app
           </Typography>
-          
-        
+
           <Typography
             variant="h5"
             noWrap
@@ -63,23 +69,22 @@ export function HeaderBar() {
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             RACK.app
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ my: 2, color: "black", display: "block" }}
               >
                 {page}
               </Button>
@@ -92,26 +97,30 @@ export function HeaderBar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem key={'account'} onClick={handleCloseUserMenu}>
+                <Typography sx={{ textAlign: "center" }}>Account</Typography>
+              </MenuItem>
+              <MenuItem key={'force'} onClick={forceUpdate}>
+                <Typography sx={{ textAlign: "center" }}>Force Update</Typography>
+              </MenuItem>
+              <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
+                <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -119,3 +128,5 @@ export function HeaderBar() {
     </AppBar>
   );
 }
+
+// const settings = ["Account", "Dashboard", "Force Update", "Logout"];
