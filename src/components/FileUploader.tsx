@@ -9,6 +9,8 @@ export const FileUploader = forwardRef((props, ref) => {
   // const [fileContent, setFileContent] = useState<string[] | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  console.log(props);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -89,7 +91,6 @@ export const FileUploader = forwardRef((props, ref) => {
 
   return (
     <div>
-      {/* <button onClick={handleButtonClick}>Select File</button> */}
       <input
         type="file"
         style={{ display: "none" }}
@@ -97,12 +98,6 @@ export const FileUploader = forwardRef((props, ref) => {
         ref={fileInputRef}
         accept=".csv"
       />
-      {/* {fileContent && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>File Content:</h2>
-          <pre>{fileContent}</pre>
-        </div>
-      )} */}
     </div>
   );
 });

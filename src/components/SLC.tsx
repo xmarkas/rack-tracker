@@ -1,10 +1,7 @@
 import {
   Grid2,
-  Typography,
-  Paper,
   Box,
   Badge,
-  Card,
   Button,
 } from "@mui/material";
 import Moves from "../store/Moves.model";

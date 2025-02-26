@@ -25,7 +25,7 @@ export function BottomNav() {
         <BottomNavigation
           showLabels
           value={value}
-          onChange={(event, newValue) => {
+          onChange={(_event, newValue) => {
             setValue(newValue);
           }}
         >

@@ -1,19 +1,11 @@
-import { useState, useEffect } from "react";
-import { UnsetMove } from "../store/models";
+import { useState } from "react";
 import { Grid2 } from "@mui/material";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import {
-  Teams,
-  Action,
-  MoveType,
-  Building,
-  Hall,
-  HallSide,
-} from "../store/types";
+import { Teams } from "../store/types";
 
 export const AddRack = () => {
   const [val, setVal] = useState("");
