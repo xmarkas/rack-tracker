@@ -52,7 +52,7 @@ export function HeaderBar() {
               textDecoration: 'none',
             }}
           >
-            RACK logistics
+            RACK.app
           </Typography>
           
         
