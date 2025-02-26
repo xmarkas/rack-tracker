@@ -141,6 +141,6 @@
     }
   ],
   "orientation": "portrait",
-  "scope": ".",
+  "scope": "/",
   "lang": "en"
 }
