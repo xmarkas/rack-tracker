@@ -72,7 +72,7 @@ export function HeaderBar() {
               textDecoration: 'none',
             }}
           >
-            RACK
+            RACK.app
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
