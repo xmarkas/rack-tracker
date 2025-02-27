@@ -14,8 +14,16 @@ const progress = () => {
 };
 
 export const WorkProgressBar = () => {
+  const progress = () => {
+    let totals: number = Moves.count() + Slcs.count() + Decoms.count();
+    let completed: number =
+      useResultRowIds("unsetCount", Moves.unSetCount).length +
+      useResultRowIds("slcCount", Slcs.slcCount).length +
+      useResultRowIds("decomCount", Decoms.decomCount).length;
+    return Math.floor(((totals - completed) / totals) * 100);
+  };
+
   return (
-    
     <Grid2 container py={1} px={0.5}>
       <Grid2 size={{ xs: 12 }}>
         <Typography>Task Progress</Typography>
@@ -38,7 +46,7 @@ export const WorkProgressBar = () => {
           </Box>
           <Box sx={{ minWidth: 35 }}>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              {progress()}%
+              {progress() || 100}%
             </Typography>
           </Box>
         </Box>
