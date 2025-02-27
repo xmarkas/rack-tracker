@@ -4,15 +4,6 @@ import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
 import { useResultRowIds } from "tinybase/ui-react";
 
-const progress = () => {
-  let totals: number = Moves.count() + Slcs.count() + Decoms.count();
-  let completed: number =
-    useResultRowIds("unsetCount", Moves.unSetCount).length +
-    useResultRowIds("slcCount", Slcs.slcCount).length +
-    useResultRowIds("decomCount", Decoms.decomCount).length;
-  return Math.floor(((totals - completed) / totals) * 100);
-};
-
 export const WorkProgressBar = () => {
   const progress = () => {
     let totals: number = Moves.count() + Slcs.count() + Decoms.count();
