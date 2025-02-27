@@ -8,11 +8,7 @@ import Slcs from '../store/Slcs.model';
 export const FileUploader = forwardRef((props, ref) => {
   // const [fileContent, setFileContent] = useState<string[] | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  // navigator.setAppBadge(1);
-  Notification.requestPermission().then(result => {
-    alert(result)
-    alert(navigator.setAppBadge)
-  })
+  
   console.log(props);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
