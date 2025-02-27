@@ -12,7 +12,7 @@ export const PCIview = () => {
       px={2}
     >
       {["PCI2", "PCI5"].map((v) => (
-        <Grid2 size={{ xs: 4 }}>
+        <Grid2 key={v} size={{ xs: 4 }}>
           <Button
             endIcon={<ForwardIcon />}
             variant="contained"

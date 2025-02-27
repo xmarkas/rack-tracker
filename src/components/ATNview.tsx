@@ -12,7 +12,7 @@ export const ATNview = () => {
       px={2}
     >
       {["ATN1", "ATN3", "ATN5", "ATN6", "ATN7"].map((v) => (
-        <Grid2 size={{ xs: 4 }}>
+        <Grid2 key={v} size={{ xs: 4 }}>
           <Button
             endIcon={<ForwardIcon />}
             variant="contained"

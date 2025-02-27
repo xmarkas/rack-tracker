@@ -150,6 +150,7 @@ export function HeaderBar() {
               <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
               </MenuItem>
+              
             </Menu>
           </Box>
         </Toolbar>
