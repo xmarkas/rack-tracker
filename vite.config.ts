@@ -107,5 +107,5 @@ export default defineConfig({
 	plugins: [react()],
 	optimizeDeps: {
 		include: ['@emotion/styled']
-	}
+	},
 });

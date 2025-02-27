@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useEffect, useState} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,15 +10,25 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import packageJSON from '../../package.json';
 
 const pages = ["Products", "Pricing", "Blog"];
+const vercelToken: string = 'OoEfoWGJ54rMDYukYEySaTJL';
+const vercelEndPoint: string = 'https://api.vercel.com/v9/projects/rack-tracker';
+// const vercelProjectId: string = 'prj_Uf1QZe4p3eBnVv70ubdabWce81Rp';
+const vApiConfig = {
+  method: 'GET',
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${vercelToken}`
+  }
+}
 
 
 export function HeaderBar() {
   // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [deployment, setDeployment] = useState(packageJSON.version);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -33,8 +43,26 @@ export function HeaderBar() {
   };
 
   const forceUpdate = () => {
-    window.location.reload();
+    window.location.href = window.location.href;
   };
+
+useEffect(() => {
+  fetch(vercelEndPoint, vApiConfig)
+  .then(res => res.json())
+  .then(res => {
+    if (res) {
+      if (res.crons.updatedAt > deployment) {
+
+      }
+      setDeployment(res.crons.updatedAt);
+      navigator.setAppBadge(1);
+    }
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}, [])
+
 
   return (
     <AppBar
@@ -59,7 +87,7 @@ export function HeaderBar() {
               textDecoration: "none",
             }}
           >
-            RACK.app
+            RACK.app {packageJSON.version}
           </Typography>
 
           <Typography
@@ -78,7 +106,7 @@ export function HeaderBar() {
               textDecoration: "none",
             }}
           >
-            RACK.app
+            RACK.app {packageJSON.version}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
