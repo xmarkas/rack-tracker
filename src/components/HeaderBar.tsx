@@ -29,6 +29,7 @@ export function HeaderBar() {
   // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [deployment, setDeployment] = useState(packageJSON.version);
+  
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -55,7 +56,8 @@ useEffect(() => {
 
       }
       setDeployment(res.crons.updatedAt);
-      navigator.setAppBadge(1);
+      
+
     }
   })
   .catch(err => {
