@@ -4,9 +4,9 @@ export enum Teams {
   }
   
   export enum Action {
-    UNSET = "unSLC",
+    UNSET = "Unset",
     SLC = "SLC",
-    DECOM = "unSLC-Decom",
+    DECOM = "Decom",
   }
   
   export enum MoveType {
@@ -22,6 +22,7 @@ export enum Teams {
     ATN4,
     ATN5,
     ATN6,
+    ATN7,
     PCI1,
     PCI2,
     PCI3,

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,26 +10,25 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import packageJSON from '../../package.json';
+import packageJSON from "../../package.json";
 
 const pages = ["Products", "Pricing", "Blog"];
-const vercelToken: string = 'OoEfoWGJ54rMDYukYEySaTJL';
-const vercelEndPoint: string = 'https://api.vercel.com/v9/projects/rack-tracker';
+const vercelToken: string = "OoEfoWGJ54rMDYukYEySaTJL";
+const vercelEndPoint: string =
+  "https://api.vercel.com/v9/projects/rack-tracker";
 // const vercelProjectId: string = 'prj_Uf1QZe4p3eBnVv70ubdabWce81Rp';
 const vApiConfig = {
-  method: 'GET',
+  method: "GET",
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${vercelToken}`
-  }
-}
-
+    Authorization: `Bearer ${vercelToken}`,
+  },
+};
 
 export function HeaderBar() {
   // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [deployment, setDeployment] = useState(packageJSON.version);
-  
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -47,24 +46,20 @@ export function HeaderBar() {
     window.location.href = window.location.href;
   };
 
-useEffect(() => {
-  fetch(vercelEndPoint, vApiConfig)
-  .then(res => res.json())
-  .then(res => {
-    if (res) {
-      if (res.crons.updatedAt > deployment) {
-
-      }
-      setDeployment(res.crons.updatedAt);
-      
-
-    }
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}, [])
-
+  useEffect(() => {
+    fetch(vercelEndPoint, vApiConfig)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res) {
+          if (res.crons.updatedAt > deployment) {
+          }
+          setDeployment(res.crons.updatedAt);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <AppBar
@@ -74,6 +69,7 @@ useEffect(() => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+
           <Typography
             variant="h6"
             noWrap
@@ -89,7 +85,7 @@ useEffect(() => {
               textDecoration: "none",
             }}
           >
-            RACK.app {packageJSON.version}
+            RACK.app
           </Typography>
 
           <Typography
@@ -108,8 +104,9 @@ useEffect(() => {
               textDecoration: "none",
             }}
           >
-            RACK.app {packageJSON.version}
+            RACK.app
           </Typography>
+          <span style={{ marginRight: 4 }}>{packageJSON.version}</span>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -142,13 +139,15 @@ useEffect(() => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key={'account'} onClick={handleCloseUserMenu}>
+              <MenuItem key={"account"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Account</Typography>
               </MenuItem>
-              <MenuItem key={'force'} onClick={forceUpdate}>
-                <Typography sx={{ textAlign: "center" }}>Force Update</Typography>
+              <MenuItem key={"force"} onClick={forceUpdate}>
+                <Typography sx={{ textAlign: "center" }}>
+                  Force Update
+                </Typography>
               </MenuItem>
-              <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
+              <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
               </MenuItem>
             </Menu>

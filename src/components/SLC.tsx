@@ -1,9 +1,4 @@
-import {
-  Grid2,
-  Box,
-  Badge,
-  Button,
-} from "@mui/material";
+import { Grid2, Box, Badge, Button } from "@mui/material";
 import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
@@ -15,8 +10,23 @@ export const SLC = () => {
       useResultRowIds("priorityMoves", Moves.priorityCount).length +
       useResultRowIds("prioritySlcs", Slcs.priorityCount).length +
       useResultRowIds("priorityDecoms", Decoms.priorityCount).length;
-
     return priorityTotals;
+  };
+
+  const getIssues = () => {
+    const issueTotals: number =
+      useResultRowIds("issueMoves", Moves.issueCount).length +
+      useResultRowIds("issueSlcs", Slcs.issueCount).length +
+      useResultRowIds("issueDecoms", Decoms.issueCount).length;
+    return issueTotals;
+  };
+
+  const getAuditCount = () => {
+    let total: number =
+      useResultRowIds("auditDecoms", Decoms.auditCount).length +
+      useResultRowIds("auditSlcs", Slcs.auditCount).length +
+      useResultRowIds("auditMoves", Moves.auditCount).length;
+    return total;
   };
 
   return (
@@ -106,14 +116,8 @@ export const SLC = () => {
         {/* L2+ AUDIT */}
         <Grid2 size={{ xs: 4 }} px={2} py={1} display="grid">
           <Badge
-            badgeContent={
-              useResultRowIds("unsetCount", Moves.unSetCount).length
-            }
-            color={
-              useResultRowIds("unsetCount", Moves.unSetCount).length === 0
-                ? "success"
-                : "error"
-            }
+            badgeContent={getAuditCount()}
+            color={getAuditCount() === 0 ? "success" : "error"}
             showZero={true}
           >
             <Button
@@ -131,12 +135,9 @@ export const SLC = () => {
         </Grid2>
         {/* HI PRIORITY */}
         <Grid2 size={{ xs: 4 }} p={1} px={2} display="grid">
-          <Badge
-            badgeContent={getPriorities()}
-            color="error"
-          >
+          <Badge badgeContent={getPriorities()} color="error">
             <Button
-            disabled={getPriorities() === 0 ? true: false}
+              disabled={getPriorities() === 0 ? true : false}
               disableElevation={true}
               variant={getPriorities() === 0 ? "outlined" : "contained"}
               sx={{
@@ -144,7 +145,7 @@ export const SLC = () => {
                 border: "lightgray 1px solid",
                 minWidth: "100%",
                 color: "black",
-                backgroundColor: getPriorities() === 0 ? "" : "#ffeb3b"
+                backgroundColor: getPriorities() === 0 ? "" : "#ffeb3b",
               }}
             >
               High Priority
@@ -153,21 +154,17 @@ export const SLC = () => {
         </Grid2>
         {/* ISSUES */}
         <Grid2 size={{ xs: 4 }} p={1} px={2} display="grid">
-          <Badge
-            badgeContent={
-              useResultRowIds("decomCount", Decoms.decomCount).length
-            }
-            color="info"
-          >
+          <Badge badgeContent={getIssues()} color="error">
             <Button
-            disableElevation={true}
-              variant="contained"
+              disabled={getIssues() === 0 ? true : false}
+              disableElevation={true}
+              variant={getIssues() === 0 ? "outlined" : "contained"}
               sx={{
                 p: 2,
                 border: "lightgray 1px solid",
                 minWidth: "100%",
-                backgroundColor: "#d32f2f",
-                color: "white"
+                backgroundColor: getIssues() === 0 ? "" : "#d32f2f",
+                color: "white",
               }}
             >
               ISSUES

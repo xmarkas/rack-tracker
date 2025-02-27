@@ -7,11 +7,9 @@ import { HeaderBar } from "./components/HeaderBar.tsx";
 import { BottomNav } from "../src/components/BottomNav.tsx";
 import { SLC } from "../src/components/SLC.tsx";
 import { WorkProgressBar } from "../src/components/WorkProgressBar.tsx";
-
+import { BuildingView } from "./components/BuildingView.tsx";
 
 export const App = () => {
- 
-
   return (
     <StrictMode>
       <Provider store={store}>
@@ -19,6 +17,8 @@ export const App = () => {
           <HeaderBar />
           <WorkProgressBar />
           <SLC />
+          <hr style={{borderTop: "1px solid #ccc", width:"90%"}} /> 
+          <BuildingView />
           <BottomNav />
           <Inspector />
         </Box>

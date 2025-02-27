@@ -28,21 +28,6 @@ export const queryTaskCount = (baseModel: { [key: string]: any }) => {
     );
     return results;
   }
-
-  // const priorityCounts = (queryId: string, cellId: string, val: string | boolean) => {
-  //   const results = queries.setQueryDefinition(
-  //     queryId,
-  //     baseModel.tableName,
-  //     ({ select, where }) => {
-  //       select(cellId);
-  //       where(cellId, val);
-  //     }
-  //   );
-  //   return results;
-  // }
-
-
-
-  return {taskCounts}
+return {taskCounts}
   
 };
