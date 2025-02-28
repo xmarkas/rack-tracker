@@ -11,54 +11,22 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
-
-const vercelToken: string = "OoEfoWGJ54rMDYukYEySaTJL";
-const vercelEndPoint: string =
-  "https://api.vercel.com/v9/projects/rack-tracker";
-// const vercelProjectId: string = 'prj_Uf1QZe4p3eBnVv70ubdabWce81Rp';
-const vApiConfig = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${vercelToken}`,
-  },
-};
+import { useValue } from "tinybase/ui-react";
 
 export function HeaderBar() {
-  // const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [deployment, setDeployment] = useState(packageJSON.version);
+  const deployment = useValue('deployment');
+  
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-  // };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-  const forceUpdate = () => {
-    window.location.href = window.location.href;
-  };
-
-  useEffect(() => {
-    fetch(vercelEndPoint, vApiConfig)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res) {
-          if (res.crons.updatedAt > deployment) {
-          }
-          setDeployment(res.crons.updatedAt);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const forceUpdate = () => {};
 
   return (
     <AppBar
@@ -139,7 +107,6 @@ export function HeaderBar() {
               <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
               </MenuItem>
-              
             </Menu>
           </Box>
         </Toolbar>
@@ -147,5 +114,3 @@ export function HeaderBar() {
     </AppBar>
   );
 }
-
-// const settings = ["Account", "Dashboard", "Force Update", "Logout"];

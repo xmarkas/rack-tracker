@@ -6,11 +6,12 @@ export const Home = () => {
 
   setTimeout(() => {
     navigate("/slc");
-  }, 3000);
+  }, 2000);
+
+  
 
   return (
     <Box id="app">
-      <h3 style={{ padding: 5, marginLeft: 5 }}>Refactoring.....</h3>
       <div
         style={{
           display: "flex",

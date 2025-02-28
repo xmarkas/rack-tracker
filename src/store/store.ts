@@ -7,20 +7,23 @@ export const store = createStore();
 export const indexes = createIndexes(store);
 export const queries = createQueries(store);
 
-export const values = () => {
-   
-  const add = (key: string, value: string | boolean | number) => store.setValue(key, value);
-  const get = (key: string) => store.getValue(key);
-  const getJson = () => store.getValuesJson();
+store.setValues({
+  deployment: 31
+})
 
+export const values = (() => {
+  const get = (key: string): any => store.getValue(key);
+  const add = (key: string, value: string | boolean | number) =>
+    store.setValue(key, value);
+  const getJson = () => store.getValuesJson();
+  const valueListener = (key: string) => store.addValueListener(key, () => get(key), false);
 
   return {
     add,
     get,
-    getJson
-  }
-}
-
+    getJson,
+  };
+})();
 
 // Create a Model for tables
 export const Model = (table: string) => {
