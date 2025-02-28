@@ -7,6 +7,21 @@ export const store = createStore();
 export const indexes = createIndexes(store);
 export const queries = createQueries(store);
 
+export const values = () => {
+   
+  const add = (key: string, value: string | boolean | number) => store.setValue(key, value);
+  const get = (key: string) => store.getValue(key);
+  const getJson = () => store.getValuesJson();
+
+
+  return {
+    add,
+    get,
+    getJson
+  }
+}
+
+
 // Create a Model for tables
 export const Model = (table: string) => {
   const add = (object: UnsetMove | SLC | Decom | null) => {

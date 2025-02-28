@@ -6,7 +6,7 @@ import LocalShipping from "@mui/icons-material/LocalShipping";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import FileUpload from "@mui/icons-material/FileUpload";
 import {Paper,} from "@mui/material";
-import { Link, NavLink, useNavigate , useHref} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { FileUploader } from "./FileUploader.tsx";
 import { useRef, useState } from "react";
@@ -16,13 +16,12 @@ export function BottomNav() {
   const parentRef: any = useRef();
   const n = useNavigate();
  
-
  const menuChange = (_event: any, newValue: string) => {
     if (newValue === "upload") {
       parentRef.current?.handleUploadClick();
-    } else if (['slc'].includes(newValue)) {
+    } else if (['slc', 'rack'].includes(newValue)) {
       setValue(newValue);
-      n('/slc')
+      n(`/${newValue}`)
     }
  }
   return (

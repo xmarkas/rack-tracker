@@ -37,7 +37,7 @@ export const WorkProgressBar = () => {
           </Box>
           <Box sx={{ minWidth: 35 }}>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              {progress() || 100}%
+              {progress() ? progress() : 0}%
             </Typography>
           </Box>
         </Box>

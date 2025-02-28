@@ -16,7 +16,7 @@ export const PCIview = () => {
           <Button
             endIcon={<ForwardIcon />}
             variant="contained"
-            sx={{ width: "100%", color: "black", background: "#dedede" }}
+            sx={{ width: "100%", color: "black", background: "#eeeeee" }}
           >
             {v}
           </Button>
