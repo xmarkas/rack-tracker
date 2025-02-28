@@ -12,6 +12,7 @@ export const FileUploader = forwardRef((props, ref) => {
   console.log(props);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();

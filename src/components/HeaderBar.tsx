@@ -7,12 +7,11 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
 
-const pages = ["Products", "Pricing", "Blog"];
 const vercelToken: string = "OoEfoWGJ54rMDYukYEySaTJL";
 const vercelEndPoint: string =
   "https://api.vercel.com/v9/projects/rack-tracker";
@@ -107,16 +106,6 @@ export function HeaderBar() {
             RACK.app
           </Typography>
           <span style={{ marginRight: 4 }}>{packageJSON.version}</span>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: "black", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

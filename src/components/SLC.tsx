@@ -3,6 +3,8 @@ import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
 import { useResultRowIds } from "tinybase/ui-react";
+import { WorkProgressBar } from "./WorkProgressBar";
+import { BuildingView } from "./BuildingView";
 
 export const SLC = () => {
   const getPriorities = () => {
@@ -31,6 +33,7 @@ export const SLC = () => {
 
   return (
     <Box>
+      <WorkProgressBar />
       {/* ROW 1 */}
       <Grid2 container py={1} px={0.5}>
         {/* Unsets */}
@@ -172,6 +175,8 @@ export const SLC = () => {
           </Badge>
         </Grid2>
       </Grid2>
+      <hr style={{ borderTop: "1px solid #ccc", width: "90%" }} />
+      <BuildingView />
     </Box>
   );
 };
