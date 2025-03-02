@@ -11,7 +11,7 @@ export const WorkProgressBar = () => {
       useResultRowIds("unsetCount", Moves.unSetCount).length +
       useResultRowIds("slcCount", Slcs.slcCount).length +
       useResultRowIds("decomCount", Decoms.decomCount).length;
-    return Math.floor(((totals - completed) / totals) * 100);
+    return completed ? Math.floor(((totals - completed) / totals) * 100) : 0;
   };
 
   return (
@@ -37,7 +37,7 @@ export const WorkProgressBar = () => {
           </Box>
           <Box sx={{ minWidth: 35 }}>
             <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              {progress() ? progress() : 0}%
+              {progress()}%
             </Typography>
           </Box>
         </Box>

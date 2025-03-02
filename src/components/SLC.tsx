@@ -4,7 +4,7 @@ import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
 import { useResultRowIds } from "tinybase/ui-react";
 import { WorkProgressBar } from "./WorkProgressBar";
-import { BuildingView } from "./BuildingView";
+import { BuildingNav } from "./BuildingNav";
 
 export const SLC = () => {
   const getPriorities = () => {
@@ -176,7 +176,7 @@ export const SLC = () => {
         </Grid2>
       </Grid2>
       <hr style={{ borderTop: "1px solid #ccc", width: "90%" }} />
-      <BuildingView />
+      <BuildingNav />
     </Box>
   );
 };

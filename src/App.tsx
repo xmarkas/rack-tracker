@@ -1,4 +1,4 @@
-import { StrictMode, useEffect } from "react";
+import { StrictMode, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -7,47 +7,30 @@ import { SLC } from "../src/components/SLC.tsx";
 import { RackTeam } from "./components/RackTeam.tsx";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Home } from "./components/Home.tsx";
-import { values as storeValues } from "./store/store";
-
-const vercelToken: string = "OoEfoWGJ54rMDYukYEySaTJL";
-const vercelEndPoint: string =
-  "https://api.vercel.com/v9/projects/rack-tracker";
-// const vercelProjectId: string = 'prj_Uf1QZe4p3eBnVv70ubdabWce81Rp';
-const vApiConfig = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${vercelToken}`,
-  },
-};
+import { HallView } from "./components/HallView.tsx";
+import { getDeploymentTime } from "./tools/forceUpdate.ts";
+import { RackModal } from "./components/RackModal.tsx";
 
 export const App = () => {
-  storeValues.add("deployment", 0);
-  let deployment: number = storeValues.get("deployment") || 0;
+  // Check for new deployment
+  setInterval(getDeploymentTime, 60000 * 60);
 
-  const getDeploymentTime = () => {
-    fetch(vercelEndPoint, vApiConfig)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res) {
-          console.log("deployment---> ", res.crons.updatedAt);
-          if (res.crons.updatedAt > deployment) {
-            alert("new deployment")
-            storeValues.add("deployment", res.crons.updatedAt);
-          }
-          
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState<{[key: string] : any}>({});
+
+  const handleOpenModal = (data = {}) => {
+    setModalData(data);
+    setIsModalOpen(true);
   };
-  getDeploymentTime();
-  setInterval(getDeploymentTime, 30000) //60000 * 60);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <StrictMode>
       <Provider store={store}>
+        <RackModal open={isModalOpen} handleClose={handleCloseModal} modalData={modalData}/>
         <Router>
           <Routes>
             <Route index={true} path="/" element={<Home />} />
@@ -65,6 +48,14 @@ export const App = () => {
                 <HeaderBar key="rack2" />,
                 <RackTeam key="rack1" />,
                 <BottomNav key="rack3" />,
+              ]}
+            />
+            <Route
+              path="/:building_ID/hall"
+              element={[
+                <HeaderBar key="hall2" />,
+                <HallView key="hall1" openModal={handleOpenModal} />,
+                <BottomNav key="hall3" />,
               ]}
             />
           </Routes>

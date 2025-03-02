@@ -49,7 +49,7 @@ export function BottomNav() {
             label="Upload CSV"
             icon={<FileUpload />}
           />
-          <Inspector position="top"/>
+          <Inspector position="right"/>
         </BottomNavigation>
       </Paper>
     </Box>

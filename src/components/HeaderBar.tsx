@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,11 +11,11 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
-import { useValue } from "tinybase/ui-react";
+import { useNavigate } from "react-router-dom";
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const deployment = useValue('deployment');
+  const navigate = useNavigate();
   
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,7 +26,7 @@ export function HeaderBar() {
     setAnchorElUser(null);
   };
 
-  const forceUpdate = () => {};
+  const forceUpdate = () => { navigate('/')};
 
   return (
     <AppBar

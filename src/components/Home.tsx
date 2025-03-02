@@ -1,14 +1,24 @@
 import { Box } from "@mui/material";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { getDeploymentTime } from "../tools/forceUpdate";
 
 export const Home = () => {
   const navigate = useNavigate();
 
-  setTimeout(() => {
-    navigate("/slc");
-  }, 2000);
+  // Check for Vercel update
+  const check = async () => {
+    let result = await getDeploymentTime();
+    if (result) {
+      setTimeout(() => {
+        navigate("/slc");
+      }, 2000);
+    }
+  };
 
-  
+  useEffect(() => {
+    check();
+  }, []);
 
   return (
     <Box id="app">
@@ -18,13 +28,17 @@ export const Home = () => {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
-          
-          width: "100%",
-          height: "400px"
+
+          width: "100vw",
+          height: "100vh",
         }}
       >
-        <img src={"/icon-512x512.png"}  width={"150vw"} style={{objectFit:"contain"}}/>
-        <h3 style={{marginLeft: 30}}>Rack Logistics</h3>
+        <img
+          src={"/icons/icon-512x512.png"}
+          width={"150vw"}
+          style={{ objectFit: "contain", marginLeft: -50 }}
+        />
+        <h3 style={{ marginLeft: -40 }}>Rack Logistics</h3>
       </div>
     </Box>
   );

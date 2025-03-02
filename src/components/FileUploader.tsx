@@ -5,14 +5,14 @@ import Moves from '../store/Moves.model';
 import Slcs from '../store/Slcs.model';
 
 
-export const FileUploader = forwardRef((props, ref) => {
+export const FileUploader = forwardRef((_props, ref) => {
   // const [fileContent, setFileContent] = useState<string[] | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   // navigator.setAppBadge(1);
-  console.log(props);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
+    Moves.deleteStoreAll(); // Purge the store data before uploading new CSV
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();

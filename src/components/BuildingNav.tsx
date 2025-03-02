@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ATNview } from "./ATNview";
 import { PCIview } from "./PCIview";
 
-export const BuildingView = () => {
+export const BuildingNav = () => {
   const [select, setSelect] = useState(true);
 
   const handleSelect = (s: boolean) => {

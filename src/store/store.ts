@@ -8,15 +8,16 @@ export const indexes = createIndexes(store);
 export const queries = createQueries(store);
 
 store.setValues({
-  deployment: 31
-})
+  deployment: 31,
+  getUpdate: false,
+  deploymentCheck: false,
+});
 
 export const values = (() => {
   const get = (key: string): any => store.getValue(key);
   const add = (key: string, value: string | boolean | number) =>
     store.setValue(key, value);
   const getJson = () => store.getValuesJson();
-  const valueListener = (key: string) => store.addValueListener(key, () => get(key), false);
 
   return {
     add,
@@ -38,10 +39,14 @@ export const Model = (table: string) => {
     store.setPartialRow(table, id, object).getRow(table, id);
 
   const remove = (id: string) => store.delRow(table, id);
-  const byId = (id: string) => store.getRow(table, id);
+  const byId = (id: string) => {
+    return { ...store.getRow(table, id), Id: id };
+  };
+
   const all = () => store.getTable(table);
   const count = () => store.getRowCount(table);
   const tableName: string = table;
+  const deleteStoreAll = () => store.delTables();
 
   // createQueries(store).addResultRowCountListener()
   return {
@@ -52,5 +57,6 @@ export const Model = (table: string) => {
     all,
     tableName,
     count,
+    deleteStoreAll
   };
 };
