@@ -22,6 +22,7 @@ export const App = () => {
   const [barcode, setBarcode] = useState("");
 
   const handleOpenModal = (data = {}) => {
+    console.log("modal", data)
     setModalData(data);
     setIsModalOpen(true);
   };

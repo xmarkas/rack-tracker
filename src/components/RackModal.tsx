@@ -23,7 +23,7 @@ export const RackModal = ({
 
   useEffect(() => {
     setData(modalData);
-  }, []);
+  }, [modalData]);
 
   const handleButtonClick = () => {
     handleClose();
@@ -41,15 +41,15 @@ export const RackModal = ({
         <Grid2 container size={{ xs: 12 }}>
           <Grid2 size={{ xs: 5 }}>
             <Typography>Location</Typography>
-            <Typography>{data.location}</Typography>
+            <Typography>{modalData.location}</Typography>
           </Grid2>
           <Grid2 size={{ xs: 4 }}>
             <Typography>Move Type</Typography>
-            <Typography>{data.moveType}</Typography>
+            <Typography>{modalData.moveType}</Typography>
           </Grid2>
           <Grid2 size={{ xs: 3 }}>
             <Typography>Serial #</Typography>
-            <Typography>{data.serialNumber}</Typography>
+            <Typography>{modalData.serialNumber}</Typography>
           </Grid2>
         </Grid2>
         <Grid2

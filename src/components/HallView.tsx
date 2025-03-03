@@ -13,6 +13,8 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Moves from "../store/Moves.model";
+import Slcs from "../store/Slcs.model"
+import Decoms from "../store/Decoms.model"
 import { store } from "../store/store";
 
 export const HallView = ({openModal = (_data = {}) => {}}) => {
@@ -31,7 +33,8 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
   }
   useEffect(() => {
     //Get hall data
-    const data = Moves.byBuilding(building_ID);
+    const data = [...Moves.byBuilding(building_ID),...Slcs.byBuilding(building_ID),...Decoms.byBuilding(building_ID)]
+    
     setHallData(data);
 
     // Get hall counts
