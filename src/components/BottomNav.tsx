@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Inspector } from "tinybase/ui-react-inspector";
 import { useState } from "react";
 
-export function BottomNav({ selectedNavs = [], showReader }: any) {
+export function BottomNav({ selectedNavs = [], showReader, setBarcode }: any) {
   const [value, setValue] = useState("");
   const n = useNavigate();
 
@@ -23,6 +23,7 @@ export function BottomNav({ selectedNavs = [], showReader }: any) {
       n(-1);
     } else if (newValue === "scan") {
       showReader(true);
+      setBarcode("");
     }
   };
 

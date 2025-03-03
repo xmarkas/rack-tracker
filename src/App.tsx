@@ -31,6 +31,7 @@ export const App = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setBarcode("");
   };
 
   const handleCloseScanner = (scanData: any) => {
@@ -38,7 +39,9 @@ export const App = () => {
     setBarcode(scanData.text);
   };
 
-  useEffect(() => {}, [barcode]);
+  useEffect(() => {
+    if (barcode !== "") setIsModalOpen(true)
+  }, [barcode]);
 
   enum NavItem {
     BACK,
@@ -55,6 +58,7 @@ export const App = () => {
             open={isModalOpen}
             handleClose={handleCloseModal}
             modalData={modalData}
+            barcode={barcode}
           />
           {showReader && <BarcodeReader closeReader={handleCloseScanner} />}
           <Router>
@@ -69,6 +73,7 @@ export const App = () => {
                     key="slc3"
                     selectedNavs={[NavItem.RACK, NavItem.BARCODE]}
                     showReader={setShowReader}
+                    setBarocde={setBarcode}
                   />,
                 ]}
               />
@@ -81,6 +86,7 @@ export const App = () => {
                     key="rack3"
                     selectedNavs={[NavItem.SLC, NavItem.BARCODE]}
                     showReader={setShowReader}
+                    setBarocde={setBarcode}
                   />,
                 ]}
               />
@@ -93,6 +99,7 @@ export const App = () => {
                     key="hall3"
                     selectedNavs={[NavItem.BACK, NavItem.BARCODE]}
                     showReader={setShowReader}
+                    setBarocde={setBarcode}
                   />,
                 ]}
               />

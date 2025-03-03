@@ -18,6 +18,7 @@ export const RackModal = ({
   open = false,
   handleClose = () => {},
   modalData,
+  barcode
 }: any) => {
   const [data, setData] = useState(modalData);
 
@@ -49,7 +50,7 @@ export const RackModal = ({
           </Grid2>
           <Grid2 size={{ xs: 3 }}>
             <Typography>Serial #</Typography>
-            <Typography>{data.serialNumber}</Typography>
+            <Typography>{data.serialNumber || barcode}</Typography>
           </Grid2>
         </Grid2>
         <Grid2
