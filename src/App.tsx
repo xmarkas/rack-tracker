@@ -11,6 +11,7 @@ import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
 import { BarcodeReader } from "./components/BarcodeReader.tsx";
+import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
 
 export const App = () => {
@@ -98,6 +99,19 @@ export const App = () => {
                   <BottomNav
                     key="hall3"
                     selectedNavs={[NavItem.BACK, NavItem.BARCODE]}
+                    showReader={setShowReader}
+                    setBarocde={setBarcode}
+                  />,
+                ]}
+              />
+              <Route
+                path="/beta"
+                element={[
+                  
+                  <BarcodeScanner />,
+                  <BottomNav
+                    key="beta"
+                    selectedNavs={[NavItem.BACK]}
                     showReader={setShowReader}
                     setBarocde={setBarcode}
                   />,
