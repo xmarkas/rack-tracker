@@ -10,21 +10,20 @@ import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Inspector } from "tinybase/ui-react-inspector";
 import { useState } from "react";
-// import { BarcodeReader } from "./BarcodeReader";
 
-export function BottomNav({ selectedNavs = [] }: any) {
+export function BottomNav({ selectedNavs = [], showReader }: any) {
   const [value, setValue] = useState("");
-  // const [showScanner, setShowScanner] = useState(false);
-
   const n = useNavigate();
 
   const menuChange = (_event: any, newValue: string) => {
-    if (["slc", "rack", "scan"].includes(newValue)) {
+    if (["slc", "rack"].includes(newValue)) {
       setValue(newValue);
       n(`/${newValue}`);
     } else if (newValue === "back") {
       n(-1);
-    } 
+    } else if (newValue === "scan") {
+      showReader(true);
+    }
   };
 
   const navItems = (val: number) => {

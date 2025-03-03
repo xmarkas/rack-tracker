@@ -1,35 +1,32 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 
-export const BarcodeReader = () => {
-  const [data, setData] = useState("Not Found");
+export const BarcodeReader = ({closeReader} : any) => {
 
   const constraints: MediaTrackConstraints = {
-    facingMode: "environment"
+    facingMode: "environment",
+    frameRate: 500,
   }
 
   
-  
   return (
-    <Box id="LLOOKK" >
+    <Box sx={{ position: "absolute", top: 0, left: 0, zIndex: 500, height: "100vh"}}>
       <BarcodeScannerComponent
         videoConstraints={constraints}
-        width={500}
-        height={500}
+        delay={500}
+        width="auto"
+        height="100%"
         facingMode="environment"
         onUpdate={(err, result:any) => {
           if (result) {
-            setData(result.text)
-            console.log("good",result)
+            closeReader(result);
           } else if (err) {
             console.log("bad", err)
           }
 
         }}
       />
-      <p>{data}</p>
     </Box>
   );
 };

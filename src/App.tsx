@@ -1,4 +1,4 @@
-import { StrictMode, useState } from "react";
+import { StrictMode, useEffect, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -17,7 +17,9 @@ export const App = () => {
   setInterval(getDeploymentTime, 60000 * 60);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState<{[key: string] : any}>({});
+  const [modalData, setModalData] = useState<{ [key: string]: any }>({});
+  const [showReader, setShowReader] = useState(false);
+  const [barcode, setBarcode] = useState("");
 
   const handleOpenModal = (data = {}) => {
     setModalData(data);
@@ -28,17 +30,31 @@ export const App = () => {
     setIsModalOpen(false);
   };
 
+  const handleCloseScanner = (scanData: any) => {
+    setShowReader(false);
+    setBarcode(scanData.text);
+  };
+
+  useEffect(() => {
+    
+  }, [barcode]);
+
   enum NavItem {
     BACK,
     SLC,
     RACK,
-    BARCODE
+    BARCODE,
   }
 
   return (
     <StrictMode>
       <Provider store={store}>
-        <RackModal open={isModalOpen} handleClose={handleCloseModal} modalData={modalData}/>
+        <RackModal
+          open={isModalOpen}
+          handleClose={handleCloseModal}
+          modalData={modalData}
+        />
+        {showReader && <BarcodeReader closeReader={handleCloseScanner} />}
         <Router>
           <Routes>
             <Route index={true} path="/" element={<Home />} />
@@ -47,7 +63,11 @@ export const App = () => {
               element={[
                 <HeaderBar key="slc1" />,
                 <SLC key="slc2" />,
-                <BottomNav key="slc3" selectedNavs={[NavItem.RACK, NavItem.BARCODE]}/>,
+                <BottomNav
+                  key="slc3"
+                  selectedNavs={[NavItem.RACK, NavItem.BARCODE]}
+                  showReader={setShowReader}
+                />,
               ]}
             />
             <Route
@@ -55,7 +75,11 @@ export const App = () => {
               element={[
                 <HeaderBar key="rack2" />,
                 <RackTeam key="rack1" />,
-                <BottomNav key="rack3" selectedNavs={[NavItem.SLC, NavItem.BARCODE]} />,
+                <BottomNav
+                  key="rack3"
+                  selectedNavs={[NavItem.SLC, NavItem.BARCODE]}
+                  showReader={setShowReader}
+                />,
               ]}
             />
             <Route
@@ -63,15 +87,11 @@ export const App = () => {
               element={[
                 <HeaderBar key="hall2" />,
                 <HallView key="hall1" openModal={handleOpenModal} />,
-                <BottomNav key="hall3" selectedNavs={[NavItem.BACK, NavItem.BARCODE]}/>,
-              ]}
-            />
-            <Route
-              path="/scan"
-              element={[
-                <HeaderBar key="hall2" />,
-                <BarcodeReader key="hall1" />,
-                <BottomNav key="hall3" selectedNavs={[NavItem.BACK]}/>,
+                <BottomNav
+                  key="hall3"
+                  selectedNavs={[NavItem.BACK, NavItem.BARCODE]}
+                  showReader={setShowReader}
+                />,
               ]}
             />
           </Routes>

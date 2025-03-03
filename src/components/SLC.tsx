@@ -6,6 +6,7 @@ import { useResultRowIds } from "tinybase/ui-react";
 import { WorkProgressBar } from "./WorkProgressBar";
 import { BuildingNav } from "./BuildingNav";
 
+
 export const SLC = () => {
   const getPriorities = () => {
     const priorityTotals: number =
