@@ -41,15 +41,15 @@ export const RackModal = ({
         <Grid2 container size={{ xs: 12 }}>
           <Grid2 size={{ xs: 5 }}>
             <Typography>Location</Typography>
-            <Typography>{modalData.location}</Typography>
+            <Typography>{data.location}</Typography>
           </Grid2>
           <Grid2 size={{ xs: 4 }}>
             <Typography>Move Type</Typography>
-            <Typography>{modalData.moveType}</Typography>
+            <Typography>{data.moveType}</Typography>
           </Grid2>
           <Grid2 size={{ xs: 3 }}>
             <Typography>Serial #</Typography>
-            <Typography>{modalData.serialNumber}</Typography>
+            <Typography>{data.serialNumber}</Typography>
           </Grid2>
         </Grid2>
         <Grid2
