@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from "react";
+import { StrictMode, useEffect, useRef, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -50,7 +50,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box>
+        <Box ref={screenRef}>
           <RackModal
             open={isModalOpen}
             handleClose={handleCloseModal}
