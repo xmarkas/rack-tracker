@@ -10,6 +10,7 @@ import { Home } from "./components/Home.tsx";
 import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
+import { BarcodeReader } from "./components/BarcodeReader.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -27,6 +28,13 @@ export const App = () => {
     setIsModalOpen(false);
   };
 
+  enum NavItem {
+    BACK,
+    SLC,
+    RACK,
+    BARCODE
+  }
+
   return (
     <StrictMode>
       <Provider store={store}>
@@ -39,7 +47,7 @@ export const App = () => {
               element={[
                 <HeaderBar key="slc1" />,
                 <SLC key="slc2" />,
-                <BottomNav key="slc3" />,
+                <BottomNav key="slc3" selectedNavs={[NavItem.RACK, NavItem.BARCODE]}/>,
               ]}
             />
             <Route
@@ -47,7 +55,7 @@ export const App = () => {
               element={[
                 <HeaderBar key="rack2" />,
                 <RackTeam key="rack1" />,
-                <BottomNav key="rack3" />,
+                <BottomNav key="rack3" selectedNavs={[NavItem.SLC, NavItem.BARCODE]} />,
               ]}
             />
             <Route
@@ -55,7 +63,15 @@ export const App = () => {
               element={[
                 <HeaderBar key="hall2" />,
                 <HallView key="hall1" openModal={handleOpenModal} />,
-                <BottomNav key="hall3" />,
+                <BottomNav key="hall3" selectedNavs={[NavItem.BACK, NavItem.BARCODE]}/>,
+              ]}
+            />
+            <Route
+              path="/scan"
+              element={[
+                <HeaderBar key="hall2" />,
+                <BarcodeReader key="hall1" />,
+                <BottomNav key="hall3" selectedNavs={[NavItem.BACK]}/>,
               ]}
             />
           </Routes>

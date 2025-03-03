@@ -43,8 +43,10 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
     setHall(val);
   };
 
-  const selectRow = (rowData: Object) => {
-    openModal(rowData);
+  const selectRow = (rowData: {[key: string] : any}) => {
+    const getData = hallData.find((obj: any) => obj.serialNumber === rowData.serialNumber);
+    console.log(getData);
+    openModal(getData);
   }
 
   const createRows = (e: { [key: string]: any }): {} => {
@@ -64,7 +66,7 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
     return list;
   };
 
-  //   ( row: string, side: string, position: string, action: string, serialNumber: string)
+
   return (
     <Grid2 container py={1} px={0.5}>
       <Grid2

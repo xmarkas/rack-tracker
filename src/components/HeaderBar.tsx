@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useRef, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,15 +7,16 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-// import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
 import { useNavigate } from "react-router-dom";
+import { FileUploader } from "./FileUploader.tsx";
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
+  const parentRef: any = useRef(); // For uploading CSV
   
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,7 +27,14 @@ export function HeaderBar() {
     setAnchorElUser(null);
   };
 
-  const forceUpdate = () => { navigate('/')};
+  const handleFileUpload = () => {
+    parentRef.current?.handleUploadClick();
+    handleCloseUserMenu();
+  }
+
+  const forceUpdate = () => {
+    navigate("/");
+  };
 
   return (
     <AppBar
@@ -34,6 +42,7 @@ export function HeaderBar() {
       sx={{ background: "white", color: "black", marginTop: "-5px" }}
     >
       <Container maxWidth="xl">
+        <FileUploader ref={parentRef} />
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
 
@@ -103,6 +112,9 @@ export function HeaderBar() {
                 <Typography sx={{ textAlign: "center" }}>
                   Force Update
                 </Typography>
+              </MenuItem>
+              <MenuItem key={"upload"} onClick={handleFileUpload}>
+                <Typography sx={{ textAlign: "center" }}>Upload CSV</Typography>
               </MenuItem>
               <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
