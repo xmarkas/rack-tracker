@@ -43,7 +43,6 @@ const useZxing = ({
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
       if (result) {
         onResult(result);
-        alert(result)
       }
       if (error) {
         onError(error);
