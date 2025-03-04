@@ -23,6 +23,7 @@ export const App = () => {
   const [modalData, setModalData] = useState<{ [key: string]: any }>({});
   const [_showReader, setShowReader] = useState(false);
   const [barcode, setBarcode] = useState("");
+  const [error, setError] = useState(null);
   const screenRef = useRef(null);
   
 
@@ -38,7 +39,13 @@ export const App = () => {
   };
 
   const barcodeFiresModal = (result : Result) => {
-      console.log(result);
+      setBarcode(result.getText());
+      setIsModalOpen(true);
+  }
+
+  const onBarcodeError = (err : any) => {
+    setError(err);
+    setIsModalOpen(true);
   }
 
   // const handleCloseScanner = (scanData: any) => {
@@ -66,6 +73,7 @@ export const App = () => {
             handleClose={handleCloseModal}
             modalData={modalData}
             barcode={barcode}
+            error={error}
           />
           {/* {showReader ?  <BarcodeReader closeReader={handleCloseScanner} />} */}
           <Router>
@@ -114,7 +122,7 @@ export const App = () => {
                 path="/beta"
                 element={[
                   
-                  <BarcodeScanner key="beta2" onResult={barcodeFiresModal} barcode={barcode}/>,
+                  <BarcodeScanner key="beta2" onResult={barcodeFiresModal} onError={onBarcodeError} barcode={barcode}/>,
                   <BottomNav
                     key="beta1"
                     selectedNavs={[NavItem.BACK]}

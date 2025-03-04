@@ -18,7 +18,8 @@ export const RackModal = ({
   open = false,
   handleClose = () => {},
   modalData,
-  barcode
+  barcode,
+  error = null
 }: any) => {
   const [data, setData] = useState(modalData);
 
@@ -38,8 +39,8 @@ export const RackModal = ({
       aria-describedby="modal-modal-description"
       sx={{ background: "#000000a6" }}
     >
-      <Box sx={style}>
-        <Grid2 container size={{ xs: 12 }}>
+      
+        {error ? (<Box sx={style}><Grid2 container size={{ xs: 12 }}>
           <Grid2 size={{ xs: 5 }}>
             <Typography>Location</Typography>
             <Typography>{data.location}</Typography>
@@ -85,8 +86,8 @@ export const RackModal = ({
               Mark Complete
             </Button>
           </Grid2>
-        </Grid2>
-      </Box>
+        </Grid2></Box>) : <Box>{error}</Box>}
+      
     </Modal>
   );
 };
