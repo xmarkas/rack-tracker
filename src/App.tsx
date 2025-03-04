@@ -13,6 +13,7 @@ import { RackModal } from "./components/RackModal.tsx";
 //import { BarcodeReader } from "./components/BarcodeReader.tsx";
 import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
+import {Result} from "@zxing/library"
 
 export const App = () => {
   // Check for new deployment
@@ -23,6 +24,7 @@ export const App = () => {
   const [_showReader, setShowReader] = useState(false);
   const [barcode, setBarcode] = useState("");
   const screenRef = useRef(null);
+  
 
   const handleOpenModal = (data = {}) => {
     console.log("modal", data);
@@ -34,6 +36,10 @@ export const App = () => {
     setIsModalOpen(false);
     setBarcode("");
   };
+
+  const barcodeFiresModal = (result : Result) => {
+      console.log(result);
+  }
 
   // const handleCloseScanner = (scanData: any) => {
   //   setShowReader(false);
@@ -108,12 +114,10 @@ export const App = () => {
                 path="/beta"
                 element={[
                   
-                  <BarcodeScanner />,
+                  <BarcodeScanner key="beta2" onResult={barcodeFiresModal} barcode={barcode}/>,
                   <BottomNav
-                    key="beta"
+                    key="beta1"
                     selectedNavs={[NavItem.BACK]}
-                    showReader={setShowReader}
-                    setBarocde={setBarcode}
                   />,
                 ]}
               />

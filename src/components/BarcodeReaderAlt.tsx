@@ -1,6 +1,10 @@
-import { BrowserMultiFormatReader, DecodeHintType, Result } from '@zxing/library';
-import { useEffect, useMemo, useRef } from 'react';
-
+import {
+  BrowserMultiFormatReader,
+  DecodeHintType,
+  Result,
+} from "@zxing/library";
+import { useEffect, useMemo, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ZxingOptions {
   hints?: Map<DecodeHintType, any>;
@@ -14,8 +18,9 @@ const useZxing = ({
   constraints = {
     audio: false,
     video: {
-      facingMode: 'environment',
+      facingMode: "environment",
     },
+    
   },
   hints,
   timeBetweenDecodingAttempts = 300,
@@ -23,7 +28,7 @@ const useZxing = ({
   onError = () => {},
 }: ZxingOptions = {}) => {
   const ref = useRef<HTMLVideoElement>(null);
-
+  
   const reader = useMemo<BrowserMultiFormatReader>(() => {
     const instance = new BrowserMultiFormatReader(hints);
     instance.timeBetweenDecodingAttempts = timeBetweenDecodingAttempts;
@@ -33,7 +38,11 @@ const useZxing = ({
   useEffect(() => {
     if (!ref.current) return;
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
-      if (result) onResult(result);
+      if (result) {
+        onResult(result);
+        console.log('alt', result)
+        alert(result.getText())
+      }
       if (error) onError(error);
     });
     return () => {
@@ -45,12 +54,17 @@ const useZxing = ({
 };
 
 export const BarcodeScanner = ({
-    onResult = () => {},
-    onError = () => {},
-  }) => {
-    const { ref } = useZxing({ onResult, onError });
-    console.log(onResult);
+  onResult = (_result: Result) => {},
+  onError = () => {}, barcode = ""
+}) => {
+  const { ref } = useZxing({ onResult, onError });
+  const navigate = useNavigate();
 
-    return <video ref={ref} />;
-  };
-  
+  const navBack = () => { navigate(-1)}
+
+  useEffect(() => {
+    if (barcode !== "") navBack();
+  }, [barcode])
+
+  return <video ref={ref} />;
+};
