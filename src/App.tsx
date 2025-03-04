@@ -35,18 +35,16 @@ export const App = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setBarcode("");
+    setError(null);
   };
 
   const barcodeFiresModal = (result: Result) => {
     setBarcode(result.getText());
-    setIsModalOpen(true);
-    
   };
 
   const onBarcodeError = (err: any) => {
-  
-    setError(err);
-    setIsModalOpen(true);
+    setError(err.message);
+
   };
 
   // const handleCloseScanner = (scanData: any) => {
@@ -54,9 +52,6 @@ export const App = () => {
   //   setBarcode(scanData.text);
   // };
 
-  // useEffect(() => {
-  //   if (barcode !== "") setIsModalOpen(true);
-  // }, [barcode]);
 
   enum NavItem {
     BACK,
@@ -127,7 +122,7 @@ export const App = () => {
                     onResult={barcodeFiresModal}
                     onError={onBarcodeError}
                   />,
-                  <BottomNav key="beta1" selectedNavs={[NavItem.BACK]} />,
+                  <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
             </Routes>

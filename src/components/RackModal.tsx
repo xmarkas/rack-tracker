@@ -19,13 +19,12 @@ export const RackModal = ({
   handleClose = () => {},
   modalData,
   barcode,
-  error,
 }: any) => {
   const [data, setData] = useState(modalData);
 
   useEffect(() => {
     setData(modalData);
-  }, [modalData]);
+  }, []);
 
   const handleButtonClick = () => {
     handleClose();
@@ -39,8 +38,8 @@ export const RackModal = ({
       aria-describedby="modal-modal-description"
       sx={{ background: "#000000a6" }}
     >
-      
-        {!error ? (<Box sx={style}><Grid2 container size={{ xs: 12 }}>
+      <Box sx={style}>
+        <Grid2 container size={{ xs: 12 }}>
           <Grid2 size={{ xs: 5 }}>
             <Typography>Location</Typography>
             <Typography>{data.location}</Typography>
@@ -86,8 +85,8 @@ export const RackModal = ({
               Mark Complete
             </Button>
           </Grid2>
-        </Grid2></Box>) : <Box>{error}</Box>}
-      
+        </Grid2>
+      </Box>
     </Modal>
   );
 };

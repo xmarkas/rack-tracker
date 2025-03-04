@@ -12,7 +12,7 @@ interface ZxingOptions {
   timeBetweenDecodingAttempts?: number;
   onResult?: (result: Result) => void;
   onError?: (error: Error) => void;
-  pause?: boolean
+  pause?: boolean;
 }
 
 const useZxing = ({
@@ -43,9 +43,11 @@ const useZxing = ({
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
       if (result) {
         onResult(result);
-        reader.stopAsyncDecode();
+       
       }
-      if (error) onError(error);
+      if (error) {
+        onError(error);
+      }
     });
     return () => {
       reader.reset();
@@ -57,18 +59,8 @@ const useZxing = ({
 
 export const BarcodeScanner = ({
   onResult = (_result: Result) => {},
-  onError = (_err: any) => {}
+  onError = (_err: any) => {},
 }) => {
-  const { ref } = useZxing({ onResult, onError});
-  // const navigate = useNavigate();
-
-  // const navBack = () => {
-  //   navigate(-1);
-  // };
-
-  // useEffect(() => {
-  //   if (barcode !== "") navBack();
-  // }, [barcode]);
-
+  const { ref } = useZxing({ onResult, onError });
   return <video ref={ref} />;
 };
