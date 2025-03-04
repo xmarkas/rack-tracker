@@ -10,7 +10,7 @@ import { Home } from "./components/Home.tsx";
 import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
-import { BarcodeReader } from "./components/BarcodeReader.tsx";
+//import { BarcodeReader } from "./components/BarcodeReader.tsx";
 import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
 
@@ -20,7 +20,7 @@ export const App = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState<{ [key: string]: any }>({});
-  const [showReader, setShowReader] = useState(false);
+  const [_showReader, setShowReader] = useState(false);
   const [barcode, setBarcode] = useState("");
   const screenRef = useRef(null);
 
@@ -35,10 +35,10 @@ export const App = () => {
     setBarcode("");
   };
 
-  const handleCloseScanner = (scanData: any) => {
-    setShowReader(false);
-    setBarcode(scanData.text);
-  };
+  // const handleCloseScanner = (scanData: any) => {
+  //   setShowReader(false);
+  //   setBarcode(scanData.text);
+  // };
 
   useEffect(() => {
     if (barcode !== "") setIsModalOpen(true)
@@ -61,7 +61,7 @@ export const App = () => {
             modalData={modalData}
             barcode={barcode}
           />
-          {showReader && <BarcodeReader closeReader={handleCloseScanner} />}
+          {/* {showReader ?  <BarcodeReader closeReader={handleCloseScanner} />} */}
           <Router>
             <Routes>
               <Route index={true} path="/" element={<Home />} />
