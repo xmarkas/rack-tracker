@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useRef, useState } from "react";
+import { StrictMode, useRef, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -40,11 +40,11 @@ export const App = () => {
   const barcodeFiresModal = (result: Result) => {
     setBarcode(result.getText());
     setIsModalOpen(true);
-    window.history.back();
+    
   };
 
   const onBarcodeError = (err: any) => {
-    window.history.back();
+  
     setError(err);
     setIsModalOpen(true);
   };
@@ -54,9 +54,9 @@ export const App = () => {
   //   setBarcode(scanData.text);
   // };
 
-  useEffect(() => {
-    if (barcode !== "") setIsModalOpen(true);
-  }, [barcode]);
+  // useEffect(() => {
+  //   if (barcode !== "") setIsModalOpen(true);
+  // }, [barcode]);
 
   enum NavItem {
     BACK,

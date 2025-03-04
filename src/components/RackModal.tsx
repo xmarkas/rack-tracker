@@ -19,7 +19,7 @@ export const RackModal = ({
   handleClose = () => {},
   modalData,
   barcode,
-  error = null
+  error,
 }: any) => {
   const [data, setData] = useState(modalData);
 
@@ -40,7 +40,7 @@ export const RackModal = ({
       sx={{ background: "#000000a6" }}
     >
       
-        {error ? (<Box sx={style}><Grid2 container size={{ xs: 12 }}>
+        {!error ? (<Box sx={style}><Grid2 container size={{ xs: 12 }}>
           <Grid2 size={{ xs: 5 }}>
             <Typography>Location</Typography>
             <Typography>{data.location}</Typography>
