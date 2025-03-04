@@ -1,4 +1,4 @@
-import { StrictMode, useRef, useState } from "react";
+import { StrictMode, useEffect, useRef, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -14,6 +14,7 @@ import { RackModal } from "./components/RackModal.tsx";
 import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
 import { Result } from "@zxing/library";
+import { LoadCSV } from "./tools/loadCSV.ts";
 
 export const App = () => {
   // Check for new deployment
@@ -25,6 +26,10 @@ export const App = () => {
   const [barcode, setBarcode] = useState("");
   const [error, setError] = useState(null);
   const screenRef = useRef(null);
+
+  useEffect(() => {
+    LoadCSV();
+  }, [])
 
   const handleOpenModal = (data = {}) => {
     console.log("modal", data);

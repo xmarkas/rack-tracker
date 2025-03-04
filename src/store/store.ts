@@ -3,6 +3,8 @@ import { createStore, createQueries, createIndexes } from "tinybase";
 import { UnsetMove, SLC, Decom } from "./models";
 import { v4 as uuidv4 } from "uuid";
 
+
+
 export const store = createStore();
 export const indexes = createIndexes(store);
 export const queries = createQueries(store);
@@ -60,3 +62,4 @@ export const Model = (table: string) => {
     deleteStoreAll
   };
 };
+
