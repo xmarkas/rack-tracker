@@ -121,6 +121,7 @@ export const App = () => {
                     key="beta2"
                     onResult={barcodeFiresModal}
                     onError={onBarcodeError}
+                    barcode={barcode}
                   />,
                   <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
                 ]}

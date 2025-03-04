@@ -43,7 +43,6 @@ const useZxing = ({
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
       if (result) {
         onResult(result);
-       
       }
       if (error) {
         onError(error);
@@ -60,7 +59,13 @@ const useZxing = ({
 export const BarcodeScanner = ({
   onResult = (_result: Result) => {},
   onError = (_err: any) => {},
+  barcode = "",
 }) => {
   const { ref } = useZxing({ onResult, onError });
-  return <video ref={ref} />;
+  return (
+    <div style={{display: "flex", justifyContent:"center"}}>
+      <video ref={ref} />
+      <div>{barcode}</div>
+    </div>
+  );
 };
