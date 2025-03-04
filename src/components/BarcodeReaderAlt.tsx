@@ -5,7 +5,6 @@ import {
   BarcodeFormat,
 } from "@zxing/library";
 import { useEffect, useMemo, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface ZxingOptions {
   hints?: Map<DecodeHintType, any>;
@@ -43,8 +42,6 @@ const useZxing = ({
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
       if (result) {
         onResult(result);
-        console.log("alt", result);
-        alert(result.getText());
       }
       if (error) onError(error);
     });
@@ -59,18 +56,17 @@ const useZxing = ({
 export const BarcodeScanner = ({
   onResult = (_result: Result) => {},
   onError = (_err: any) => {},
-  barcode = "",
 }) => {
   const { ref } = useZxing({ onResult, onError });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const navBack = () => {
-    navigate(-1);
-  };
+  // const navBack = () => {
+  //   navigate(-1);
+  // };
 
-  useEffect(() => {
-    if (barcode !== "") navBack();
-  }, [barcode]);
+  // useEffect(() => {
+  //   if (barcode !== "") navBack();
+  // }, [barcode]);
 
   return <video ref={ref} />;
 };

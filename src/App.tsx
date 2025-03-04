@@ -13,7 +13,7 @@ import { RackModal } from "./components/RackModal.tsx";
 //import { BarcodeReader } from "./components/BarcodeReader.tsx";
 import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
-import {Result} from "@zxing/library"
+import { Result } from "@zxing/library";
 
 export const App = () => {
   // Check for new deployment
@@ -25,7 +25,6 @@ export const App = () => {
   const [barcode, setBarcode] = useState("");
   const [error, setError] = useState(null);
   const screenRef = useRef(null);
-  
 
   const handleOpenModal = (data = {}) => {
     console.log("modal", data);
@@ -38,15 +37,17 @@ export const App = () => {
     setBarcode("");
   };
 
-  const barcodeFiresModal = (result : Result) => {
-      setBarcode(result.getText());
-      setIsModalOpen(true);
-  }
+  const barcodeFiresModal = (result: Result) => {
+    setBarcode(result.getText());
+    setIsModalOpen(true);
+    window.history.back();
+  };
 
-  const onBarcodeError = (err : any) => {
+  const onBarcodeError = (err: any) => {
+    window.history.back();
     setError(err);
     setIsModalOpen(true);
-  }
+  };
 
   // const handleCloseScanner = (scanData: any) => {
   //   setShowReader(false);
@@ -54,7 +55,7 @@ export const App = () => {
   // };
 
   useEffect(() => {
-    if (barcode !== "") setIsModalOpen(true)
+    if (barcode !== "") setIsModalOpen(true);
   }, [barcode]);
 
   enum NavItem {
@@ -121,12 +122,12 @@ export const App = () => {
               <Route
                 path="/beta"
                 element={[
-                  
-                  <BarcodeScanner key="beta2" onResult={barcodeFiresModal} onError={onBarcodeError} barcode={barcode}/>,
-                  <BottomNav
-                    key="beta1"
-                    selectedNavs={[NavItem.BACK]}
+                  <BarcodeScanner
+                    key="beta2"
+                    onResult={barcodeFiresModal}
+                    onError={onBarcodeError}
                   />,
+                  <BottomNav key="beta1" selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
             </Routes>
