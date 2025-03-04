@@ -2,7 +2,7 @@ import {
   BrowserMultiFormatReader,
   DecodeHintType,
   Result,
-  BarcodeFormat,
+  // BarcodeFormat,
 } from "@zxing/library";
 import { useEffect, useMemo, useRef } from "react";
 
