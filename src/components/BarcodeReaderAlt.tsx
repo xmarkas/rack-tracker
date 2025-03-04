@@ -22,10 +22,8 @@ const useZxing = ({
       facingMode: "environment",
     },
   },
-  hints = new Map().set(DecodeHintType.POSSIBLE_FORMATS, [
-    BarcodeFormat.CODE_128,
-    BarcodeFormat.CODE_39,
-  ]),
+  // 
+  hints,
   timeBetweenDecodingAttempts = 300,
   onResult = () => {},
   onError = () => {},
@@ -43,6 +41,7 @@ const useZxing = ({
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
       if (result) {
         onResult(result);
+
       }
       if (error) {
         onError(error);
