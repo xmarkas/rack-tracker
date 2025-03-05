@@ -1,4 +1,4 @@
-import { width } from "@mui/system";
+
 import { useState } from "react";
 import {
   BarcodeScanner,
