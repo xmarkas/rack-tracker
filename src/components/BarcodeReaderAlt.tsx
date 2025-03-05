@@ -1,6 +1,10 @@
-import { BrowserMultiFormatReader, DecodeHintType, Result } from '@zxing/library';
-import { useEffect, useMemo, useRef } from 'react';
-
+import { Box } from "@mui/material";
+import {
+  BrowserMultiFormatReader,
+  DecodeHintType,
+  Result,
+} from "@zxing/library";
+import { useEffect, useMemo, useRef } from "react";
 
 interface ZxingOptions {
   hints?: Map<DecodeHintType, any>;
@@ -14,7 +18,7 @@ const useZxing = ({
   constraints = {
     audio: false,
     video: {
-      facingMode: 'environment',
+      facingMode: "environment",
     },
   },
   hints,
@@ -33,7 +37,10 @@ const useZxing = ({
   useEffect(() => {
     if (!ref.current) return;
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
-      if (result) onResult(result);
+      if (result) {
+        onResult(result)
+        alert(result)
+      };
       if (error) onError(error);
     });
     return () => {
@@ -44,13 +51,12 @@ const useZxing = ({
   return { ref };
 };
 
-export const BarcodeScanner = ({
-    onResult = () => {},
-    onError = () => {},
-  }) => {
-    const { ref } = useZxing({ onResult, onError });
-    console.log(onResult);
-
-    return <video ref={ref} />;
-  };
-  
+export const BarcodeScanner = ({ onResult = () => {}, onError = () => {} }) => {
+  const { ref } = useZxing({ onResult, onError });
+ 
+  return (
+    <Box>
+      <video ref={ref} />
+    </Box>
+  );
+};
