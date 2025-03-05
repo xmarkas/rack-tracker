@@ -68,7 +68,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box ref={screenRef}>
+        <Box ref={screenRef} sx={{position: "relative"}}>
           <RackModal
             open={isModalOpen}
             handleClose={handleCloseModal}

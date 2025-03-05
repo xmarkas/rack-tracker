@@ -67,7 +67,7 @@ export function BottomNav({ selectedNavs = [], showReader, setBarcode, barcode }
       <CssBaseline />
 
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "75px" }}
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "10%" }}
         elevation={5}
       >
         <BottomNavigation showLabels value={value} onChange={menuChange}>

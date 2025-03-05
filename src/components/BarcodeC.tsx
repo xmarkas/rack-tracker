@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
 import {
   BarcodeScanner,
   DetectedBarcode,
@@ -8,36 +9,33 @@ import {
 import "react-barcode-scanner/polyfill";
 
 function BarcodeC() {
-  const [value, setValue] = useState("");
-  const [format, setFormat] = useState("");
-  const [_pause, setPause] = useState(false);
-  const [styles, setStyles] = useState({
-    top: 100,
-    left: 100,
-    height: 200,
-    width: 100,
-  });
+  const [barcode, setBarcode] = useState<DetectedBarcode | null>(null);
+  const [pause, setPause] = useState(false);
+
+  useEffect(() => {
+    if (pause) {
+    }
+  }, [barcode]);
+
+  const reScan = () => {
+    setBarcode(null);
+    setPause(false);
+  }
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
+    alert("capture")
     setPause(true);
     const code = barcode[0];
-    setValue(code.rawValue);
-    setFormat(code.format);
 
-    const bBox = code.boundingBox;
-    setStyles({
-      top: bBox.top,
-      left: bBox.left,
-      height: bBox.height,
-      width: bBox.width,
-    });
+    if (!barcode) {
+      setBarcode(code);
+    }
   };
 
   const constraintsConfig: MediaTrackConstraints = {
     facingMode: {
       ideal: "environment",
     },
-    
   };
   const formats = [
     BarcodeFormat.CODE_128,
@@ -51,39 +49,39 @@ function BarcodeC() {
   };
 
   return (
-    <>
-      <div>
-        <BarcodeScanner
-          options={optionsConfig}
-          trackConstraints={constraintsConfig}
-          onCapture={handleCapture}
-          paused={true}
-        />
-        <div
-          style={{
-            position: "absolute",
-            borderRight: "1px solid red",
-            top: 0,
-            height: "100%",
-            width: "50%",
-          }}
-        ></div>
-        <div
-          style={{
-            position: "absolute",
-            borderBottom: "1px solid red",
-            top: 0,
-            height: "50%",
-            width: "100%",
-          }}
-        ></div>
-        <div style={{position: "absolute", top: 0}}>
-          <div>{format}</div>
-          <div>{value}</div>
-          <div>top : {styles.top}  | height : {styles.height}  | left : {styles.left}  | width : {styles.width}</div>
-        </div>
+    <div>
+      <BarcodeScanner
+        options={optionsConfig}
+        trackConstraints={constraintsConfig}
+        onCapture={handleCapture}
+        paused={pause}
+        
+      />
+      <div
+        style={{
+          position: "absolute",
+          borderRight: "1px solid red",
+          top: 0,
+          height: "100%",
+          width: "50%",
+          zIndex:100
+        }}
+      ></div>
+      <div
+        style={{
+          position: "absolute",
+          borderBottom: "1px solid red",
+          top: 0,
+          height: "50%",
+          width: "100%",
+          zIndex:100
+        }}
+      ></div>
+      <div style={{ position: "absolute", bottom: 5, right: 5 }}>
+        {pause && <Button variant="contained" color="warning" onClick={reScan}>Re-Scan</Button>}
+
       </div>
-    </>
+    </div>
   );
 }
 
