@@ -9,20 +9,20 @@ import {
 import "react-barcode-scanner/polyfill";
 
 function BarcodeC() {
-  const [_barcode, setBarcode] = useState<DetectedBarcode | null>(null);
+  const [code, setCode] = useState<DetectedBarcode | null>(null);
   const [pause, setPause] = useState(false);
 
   const reScan = () => {
-    setBarcode(null);
+    setCode(null);
     setPause(false);
   }
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
     setPause(true);
-    const code = barcode[0];
+    const selectCode = barcode[0];
 
-    if (!barcode) {
-      setBarcode(code);
+    if (code) {
+      setCode(selectCode);
     }
   };
 
