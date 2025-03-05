@@ -21,7 +21,7 @@ function BarcodeC() {
     setPause(true);
     const selectCode = barcode[0];
 
-    if (code) {
+    if (!code) {
       setCode(selectCode);
     }
   };
@@ -71,7 +71,7 @@ function BarcodeC() {
           zIndex:100
         }}
       ></div>
-      <div style={{ position: "absolute", bottom: 5, right: 5 }}>
+      <div style={{ position: "absolute", top: 5, right: 5 }}>
         {pause && <Button variant="contained" color="warning" onClick={reScan}>Re-Scan</Button>}
 
       </div>
