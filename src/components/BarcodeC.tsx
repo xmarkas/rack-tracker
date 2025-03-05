@@ -10,6 +10,7 @@ import "react-barcode-scanner/polyfill";
 function BarcodeC() {
   const [value, setValue] = useState("");
   const [format, setFormat] = useState("");
+  const [pause, setPause] = useState(false);
   const [styles, setStyles] = useState({
     top: 100,
     left: 100,
@@ -18,6 +19,7 @@ function BarcodeC() {
   });
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
+    setPause(true);
     const code = barcode[0];
     setValue(code.rawValue);
     setFormat(code.format);
@@ -41,6 +43,7 @@ function BarcodeC() {
     BarcodeFormat.QR_CODE,
     BarcodeFormat.CODE_39,
   ];
+
   const optionsConfig: ScanOptions = {
     delay: 500,
     formats: formats,
@@ -53,6 +56,7 @@ function BarcodeC() {
           options={optionsConfig}
           trackConstraints={constraintsConfig}
           onCapture={handleCapture}
+          paused={pause}
         />
         <div
           style={{
