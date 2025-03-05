@@ -18,13 +18,13 @@ export const RackModal = ({
   open = false,
   handleClose = () => {},
   modalData,
-  barcode
+  barcode,
 }: any) => {
   const [data, setData] = useState(modalData);
 
   useEffect(() => {
     setData(modalData);
-  }, [modalData]);
+  }, []);
 
   const handleButtonClick = () => {
     handleClose();

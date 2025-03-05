@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { Inspector } from "tinybase/ui-react-inspector";
 import { useState } from "react";
 
-export function BottomNav({ selectedNavs = [], showReader, setBarcode }: any) {
+export function BottomNav({ selectedNavs = [], showReader, setBarcode, barcode }: any) {
   const [value, setValue] = useState("");
   const n = useNavigate();
 
@@ -32,7 +32,7 @@ export function BottomNav({ selectedNavs = [], showReader, setBarcode }: any) {
     const items = [
       {
         value: "back",
-        label: "",
+        label: barcode ? barcode : "",
         icon: <ForwardIcon sx={{ rotate: "180deg", fontSize: 40 }} />,
       },
       {

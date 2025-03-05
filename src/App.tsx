@@ -10,9 +10,12 @@ import { Home } from "./components/Home.tsx";
 import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
-import { BarcodeReader } from "./components/BarcodeReader.tsx";
+//import { BarcodeReader } from "./components/BarcodeReader.tsx";
 import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
+import { Result } from "@zxing/library";
+import { LoadCSV } from "./tools/loadCSV.ts";
+import BarcodeC from "./components/BarcodeC.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -20,9 +23,14 @@ export const App = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState<{ [key: string]: any }>({});
-  const [showReader, setShowReader] = useState(false);
+  const [_showReader, setShowReader] = useState(false);
   const [barcode, setBarcode] = useState("");
+  const [error, setError] = useState(null);
   const screenRef = useRef(null);
+
+  useEffect(() => {
+    LoadCSV();
+  }, [])
 
   const handleOpenModal = (data = {}) => {
     console.log("modal", data);
@@ -33,16 +41,23 @@ export const App = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setBarcode("");
+    setError(null);
   };
 
-  const handleCloseScanner = (scanData: any) => {
-    setShowReader(false);
-    setBarcode(scanData.text);
+  const barcodeFiresModal = (result: Result) => {
+    setBarcode(result.getText());
   };
 
-  useEffect(() => {
-    if (barcode !== "") setIsModalOpen(true)
-  }, [barcode]);
+  const onBarcodeError = (err: any) => {
+    setError(err.message);
+
+  };
+
+  // const handleCloseScanner = (scanData: any) => {
+  //   setShowReader(false);
+  //   setBarcode(scanData.text);
+  // };
+
 
   enum NavItem {
     BACK,
@@ -60,8 +75,9 @@ export const App = () => {
             handleClose={handleCloseModal}
             modalData={modalData}
             barcode={barcode}
+            error={error}
           />
-          {showReader && <BarcodeReader closeReader={handleCloseScanner} />}
+          {/* {showReader ?  <BarcodeReader closeReader={handleCloseScanner} />} */}
           <Router>
             <Routes>
               <Route index={true} path="/" element={<Home />} />
@@ -107,14 +123,22 @@ export const App = () => {
               <Route
                 path="/beta"
                 element={[
-                  
-                  <BarcodeScanner />,
-                  <BottomNav
-                    key="beta"
-                    selectedNavs={[NavItem.BACK]}
-                    showReader={setShowReader}
-                    setBarocde={setBarcode}
+                  <BarcodeScanner
+                    key="beta2"
+                    onResult={barcodeFiresModal}
+                    onError={onBarcodeError}
+                    barcode={barcode}
                   />,
+                  <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
+                ]}
+              />
+              <Route
+                path="/betaC"
+                element={[
+                  <BarcodeC
+                    key="beta2"
+                  />,
+                  <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
             </Routes>
