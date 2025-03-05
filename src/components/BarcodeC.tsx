@@ -1,3 +1,4 @@
+import { width } from "@mui/system";
 import { useState } from "react";
 import {
   BarcodeScanner,
@@ -8,12 +9,21 @@ import {
 import "react-barcode-scanner/polyfill";
 
 function BarcodeC({ onResult = () => {} }: any) {
-  const [result, setResult] = useState<DetectedBarcode[]>([]);
+  const [value, setValue] = useState("");
+  const [format, setFormat] = useState("");
+  const [styles, setStyles] = useState({top: 100, left: 100, height: 200, width: 100});
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
-    const code = barcode;
-    setResult(code);
-    onResult(barcode.values().next().value);
+    const code = barcode[0];
+    setValue(code.rawValue);
+    setFormat(code.format);
+
+
+    onResult(code.rawValue);
+    
+    const bBox = {top: 100, left: 100, height: 200, width: 100};
+    setStyles({ top: bBox.top, left: bBox.left, height: bBox.height, width: bBox.width})
+
   };
 
   const constraintsConfig: MediaTrackConstraints = {
@@ -38,13 +48,14 @@ function BarcodeC({ onResult = () => {} }: any) {
           options={optionsConfig}
           trackConstraints={constraintsConfig}
           onCapture={handleCapture}
+          
         />
-        {result.map((e) => (
+          <div id="capture" style={{...styles, position: "absolute", border: "1px solid red"}}></div>
           <div>
-            <div>{e.format}</div>
-            <div>{e.rawValue}</div>
+            <div>{format}</div>
+            <div>{value}</div>
           </div>
-        ))}
+        
       </div>
     </>
   );
