@@ -1,6 +1,9 @@
-import { BrowserMultiFormatReader, DecodeHintType, Result } from '@zxing/library';
-import { useEffect, useMemo, useRef } from 'react';
-
+import {
+  BrowserMultiFormatReader,
+  DecodeHintType,
+  Result,
+} from "@zxing/library";
+import { useEffect, useMemo, useRef } from "react";
 
 interface ZxingOptions {
   hints?: Map<DecodeHintType, any>;
@@ -18,7 +21,6 @@ const useZxing = ({
       facingMode: "environment",
     },
   },
-  // 
   hints,
   timeBetweenDecodingAttempts = 300,
   onResult = () => {},
@@ -47,12 +49,17 @@ const useZxing = ({
 };
 
 export const BarcodeScanner = ({
-    onResult = () => {},
-    onError = () => {},
-  }) => {
-    const { ref } = useZxing({ onResult, onError });
-    console.log(onResult);
+  onResult = (_result: Result) => {},
+  onError = (_err: Error) => {},
+  barcode = "",
+}) => {
+  const { ref } = useZxing({ onResult, onError });
+  console.log(onResult);
 
-    return <video ref={ref} />;
-  };
-  
+  return (
+    <div>
+      <video ref={ref} />
+      <div>{barcode}</div>
+    </div>
+  );
+};

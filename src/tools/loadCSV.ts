@@ -42,8 +42,6 @@ export const LoadCSV = async () => {
     const decoder = new TextDecoder("utf-8");
     const csv = decoder.decode(result?.value);
 
-    console.log(csv);
-
     // Create an array seperated by newline (/n)
     const byLine: string[] = getByNewLine(csv, 11);
     // Parse by ',' into array

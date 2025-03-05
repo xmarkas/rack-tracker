@@ -1,4 +1,4 @@
-import { BarcodeScanner, DetectedBarcode, ScanOptions} from 'react-barcode-scanner'
+import { BarcodeScanner, DetectedBarcode, ScanOptions, BarcodeFormat} from 'react-barcode-scanner'
 import "react-barcode-scanner/polyfill"
 
 function BarcodeC({onResult = () => {}}:any) { 
@@ -9,7 +9,7 @@ function BarcodeC({onResult = () => {}}:any) {
       onResult(barcode.toString());
   }
 
-  
+
 
   const constraintsConfig: MediaTrackConstraints = {
     width: { min: 640, ideal: 1280 },
@@ -23,10 +23,10 @@ function BarcodeC({onResult = () => {}}:any) {
     ],
     
   }
-
+  const formats = [BarcodeFormat.CODE_128, BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39]
   const optionsConfig: ScanOptions = {
     delay: 500,
-    formats: ['qr_code', "code_39", "code_128", "codabar","ean_13","ean_8","upc_a", "upc_e"],
+    formats: formats,
   
   }
 

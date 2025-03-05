@@ -32,8 +32,8 @@ export function HeaderBar() {
     handleCloseUserMenu();
   }
 
-  const handleBeta = () => {
-    navigate("/beta")
+  const handleBeta = (uri : string) => {
+    navigate(`/${uri}`)
   }
 
   const forceUpdate = () => {
@@ -120,8 +120,11 @@ export function HeaderBar() {
               <MenuItem key={"upload"} onClick={handleFileUpload}>
                 <Typography sx={{ textAlign: "center" }}>Upload CSV</Typography>
               </MenuItem>
-              <MenuItem key={"beta"} onClick={handleBeta}>
+              <MenuItem key={"beta"} onClick={() => handleBeta("beta")}>
                 <Typography sx={{ textAlign: "center" }}>Beta Scan</Typography>
+              </MenuItem>
+              <MenuItem key={"betaC"} onClick={() => handleBeta("betaC")}>
+                <Typography sx={{ textAlign: "center" }}>BetaC Scan</Typography>
               </MenuItem>
               <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
