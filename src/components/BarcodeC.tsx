@@ -7,6 +7,7 @@ function BarcodeC({onResult = () => {}}:any) {
   const handleCapture = (barcode: DetectedBarcode[]) => {
       console.log(barcode.toString())
       onResult(barcode.toString());
+      alert("capture")
   }
 
 
@@ -21,13 +22,12 @@ function BarcodeC({onResult = () => {}}:any) {
   const optionsConfig: ScanOptions = {
     delay: 500,
     formats: formats,
-  
   }
 
   return (
     <>
       <div>
-        <BarcodeScanner options={optionsConfig} trackConstraints={constraintsConfig} onCapture={handleCapture}/>
+        <BarcodeScanner options={optionsConfig} trackConstraints={constraintsConfig} onCapture={handleCapture} />
        </div>
     </>
   )
