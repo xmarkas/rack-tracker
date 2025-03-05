@@ -6,7 +6,7 @@ function BarcodeC({onResult = () => {}}:any) {
       const [result, setResult] = useState<string | undefined>("");
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
-      setResult(barcode.entries().next().value?.toString())
+      setResult(barcode.entries().next().value?.[1].rawValue)
       onResult(barcode.values().next().value);
   }
 
