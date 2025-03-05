@@ -24,10 +24,10 @@ function BarcodeC() {
 
     const bBox = code.boundingBox;
     setStyles({
-      top: bBox?.top | 10,
-      left: bBox?.left | 10,
-      height: bBox?.height | 10,
-      width: bBox?.width | 10,
+      top: bBox.top,
+      left: bBox.left,
+      height: bBox.height,
+      width: bBox.width,
     });
   };
 
@@ -55,12 +55,27 @@ function BarcodeC() {
           onCapture={handleCapture}
         />
         <div
-          id="capture"
-          style={{ ...styles, position: "absolute", border: "1px solid red" }}
+          style={{
+            position: "absolute",
+            borderRight: "1px solid red",
+            top: 0,
+            height: "100%",
+            width: "50%",
+          }}
         ></div>
-        <div>
+        <div
+          style={{
+            position: "absolute",
+            borderBottom: "1px solid red",
+            top: 0,
+            height: "50%",
+            width: "100%",
+          }}
+        ></div>
+        <div style={{position: "absolute", top: 0}}>
           <div>{format}</div>
           <div>{value}</div>
+          <div>top : {styles.top}  | height : {styles.height}  | left : {styles.left}  | width : {styles.width}</div>
         </div>
       </div>
     </>
