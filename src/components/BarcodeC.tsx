@@ -71,7 +71,7 @@ function BarcodeC() {
           zIndex:100
         }}
       ></div>
-      <div style={{ position: "absolute", top: 5, right: 5 }}>
+      <div>
         {pause && <Button variant="contained" color="warning" onClick={reScan}>Re-Scan</Button>}
 
       </div>
