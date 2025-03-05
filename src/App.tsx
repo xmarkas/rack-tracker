@@ -15,6 +15,7 @@ import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
 import { Result } from "@zxing/library";
 import { LoadCSV } from "./tools/loadCSV.ts";
+import BarcodeC from "./components/BarcodeC.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -127,6 +128,15 @@ export const App = () => {
                     onResult={barcodeFiresModal}
                     onError={onBarcodeError}
                     barcode={barcode}
+                  />,
+                  <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
+                ]}
+              />
+              <Route
+                path="/betaC"
+                element={[
+                  <BarcodeC
+                    key="beta2"
                   />,
                   <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
                 ]}
