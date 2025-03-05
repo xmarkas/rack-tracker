@@ -23,7 +23,6 @@ function BarcodeC() {
   }
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
-    alert("capture")
     setPause(true);
     const code = barcode[0];
 
@@ -35,7 +34,7 @@ function BarcodeC() {
   const constraintsConfig: MediaTrackConstraints = {
     facingMode: {
       ideal: "environment",
-    },
+    }
   };
   const formats = [
     BarcodeFormat.CODE_128,
@@ -44,8 +43,8 @@ function BarcodeC() {
   ];
 
   const optionsConfig: ScanOptions = {
-    delay: 500,
     formats: formats,
+    delay: 500
   };
 
   return (
