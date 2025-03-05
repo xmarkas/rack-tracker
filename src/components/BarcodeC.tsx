@@ -15,7 +15,7 @@ function BarcodeC() {
   useEffect(() => {
     if (pause) {
     }
-  }, [barcode]);
+  }, [barcode, pause]);
 
   const reScan = () => {
     setBarcode(null);
