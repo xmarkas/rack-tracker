@@ -12,15 +12,9 @@ function BarcodeC({onResult = () => {}}:any) {
 
 
   const constraintsConfig: MediaTrackConstraints = {
-    width: { min: 640, ideal: 1280 },
-    height: { min: 480, ideal: 720 },
     facingMode: {
       ideal: 'environment'
     },
-    advanced: [
-      { width: 1920, height: 1280 },
-      { aspectRatio: 1.333 }
-    ],
     
   }
   const formats = [BarcodeFormat.CODE_128, BarcodeFormat.QR_CODE, BarcodeFormat.CODE_39]

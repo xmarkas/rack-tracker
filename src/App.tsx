@@ -13,7 +13,6 @@ import { RackModal } from "./components/RackModal.tsx";
 //import { BarcodeReader } from "./components/BarcodeReader.tsx";
 import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
-import { Result } from "@zxing/library";
 import { LoadCSV } from "./tools/loadCSV.ts";
 import BarcodeC from "./components/BarcodeC.tsx";
 
@@ -44,8 +43,8 @@ export const App = () => {
     setError(null);
   };
 
-  const barcodeFiresModal = (result: Result) => {
-    setBarcode(result.getText());
+  const barcodeFiresModal = (result: string) => {
+    setBarcode(result);
   };
 
   const onBarcodeError = (err: any) => {

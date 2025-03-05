@@ -1,7 +1,7 @@
 import {
   BrowserMultiFormatReader,
   DecodeHintType,
-  Result,
+  
 } from "@zxing/library";
 import { useEffect, useMemo, useRef } from "react";
 
@@ -9,7 +9,7 @@ interface ZxingOptions {
   hints?: Map<DecodeHintType, any>;
   constraints?: MediaStreamConstraints;
   timeBetweenDecodingAttempts?: number;
-  onResult?: (result: Result) => void;
+  onResult?: (result: string) => void;
   onError?: (error: Error) => void;
   pause?: boolean;
 }
@@ -37,7 +37,7 @@ const useZxing = ({
   useEffect(() => {
     if (!ref.current) return;
     reader.decodeFromConstraints(constraints, ref.current, (result, error) => {
-      if (result) onResult(result);
+      if (result) onResult(result.getText());
       if (error) onError(error);
     });
     return () => {
@@ -49,7 +49,7 @@ const useZxing = ({
 };
 
 export const BarcodeScanner = ({
-  onResult = (_result: Result) => {},
+  onResult = (_result: string) => {},
   onError = (_err: Error) => {},
   barcode = "",
 }) => {
