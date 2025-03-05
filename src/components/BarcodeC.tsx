@@ -21,7 +21,7 @@ function BarcodeC({ onResult = () => {} }: any) {
 
     onResult(code.rawValue);
     
-    const bBox = {top: 100, left: 100, height: 200, width: 100};
+    const bBox = code.boundingBox;
     setStyles({ top: bBox.top, left: bBox.left, height: bBox.height, width: bBox.width})
 
   };
