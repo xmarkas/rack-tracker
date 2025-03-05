@@ -1,11 +1,12 @@
+import { useState } from 'react'
 import { BarcodeScanner, DetectedBarcode, ScanOptions, BarcodeFormat} from 'react-barcode-scanner'
 import "react-barcode-scanner/polyfill"
 
 function BarcodeC({onResult = () => {}}:any) { 
-  
+      const [result, setResult] = useState<string | undefined>("");
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
-      console.log(barcode.toString())
+      setResult(barcode.entries().next().value?.toString())
       onResult(barcode.values().next().value);
   }
 
@@ -27,6 +28,7 @@ function BarcodeC({onResult = () => {}}:any) {
     <>
       <div>
         <BarcodeScanner options={optionsConfig} trackConstraints={constraintsConfig} onCapture={handleCapture} />
+        <div>{result}</div>
        </div>
     </>
   )
