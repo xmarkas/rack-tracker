@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import {  useState } from "react";
+import { useState } from "react";
 import {
   BarcodeScanner,
   DetectedBarcode,
@@ -15,7 +15,7 @@ function BarcodeC() {
   const reScan = () => {
     setCode(null);
     setPause(false);
-  }
+  };
 
   const handleCapture = (barcode: DetectedBarcode[]) => {
     setPause(true);
@@ -29,7 +29,7 @@ function BarcodeC() {
   const constraintsConfig: MediaTrackConstraints = {
     facingMode: {
       ideal: "environment",
-    }
+    },
   };
   const formats = [
     BarcodeFormat.CODE_128,
@@ -39,41 +39,56 @@ function BarcodeC() {
 
   const optionsConfig: ScanOptions = {
     formats: formats,
-    delay: 500
+    delay: 500,
   };
 
   return (
-    <div>
-      <BarcodeScanner
-        options={optionsConfig}
-        trackConstraints={constraintsConfig}
-        onCapture={handleCapture}
-        paused={pause}
-        
-      />
+    <div style={{position: "relative"}}>
       <div
+        id="scannerbox"
         style={{
-          position: "absolute",
-          borderRight: "1px solid red",
-          top: 0,
-          height: "100%",
-          width: "50%",
-          zIndex:100
-        }}
-      ></div>
-      <div
-        style={{
-          position: "absolute",
-          borderBottom: "1px solid red",
-          top: 0,
-          height: "50%",
+          position: "relative",
           width: "100%",
-          zIndex:100
+          height: "auto",
+          background: "black",
         }}
-      ></div>
-      <div>
-        {pause && <Button variant="contained" color="warning" onClick={reScan}>Re-Scan</Button>}
+      >
+        <BarcodeScanner
+          options={optionsConfig}
+          trackConstraints={constraintsConfig}
+          onCapture={handleCapture}
+          paused={pause}
+        />
+        <div style={{ top: 0, left:0}}>
+          <div
+            style={{
+              position: "absolute",
+              borderRight: "1px solid red",
+              top: 0,
+              height: "100%",
+              width: "50%",
+              zIndex: 100,
+            }}
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              borderBottom: "1px solid red",
+              top: 0,
+              height: "50%",
+              width: "100%",
+              zIndex: 100,
+            }}
+          ></div>
+        </div>
+      </div>
 
+      <div style={{position: "absolute", right: 10, bottom: 10, zIndex: 500}}>
+        {pause && (
+          <Button variant="contained" color="warning" onClick={reScan}>
+            Re-Scan
+          </Button>
+        )}
       </div>
     </div>
   );
