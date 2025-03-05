@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import {
   BarcodeScanner,
   DetectedBarcode,
@@ -9,13 +9,8 @@ import {
 import "react-barcode-scanner/polyfill";
 
 function BarcodeC() {
-  const [barcode, setBarcode] = useState<DetectedBarcode | null>(null);
+  const [_barcode, setBarcode] = useState<DetectedBarcode | null>(null);
   const [pause, setPause] = useState(false);
-
-  useEffect(() => {
-    if (pause) {
-    }
-  }, [barcode, pause]);
 
   const reScan = () => {
     setBarcode(null);
