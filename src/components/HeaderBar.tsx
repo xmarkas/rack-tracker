@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
 import { useNavigate } from "react-router-dom";
 import { FileUploader } from "./FileUploader.tsx";
+import { sheetsLink } from "../tools/sheetsLink.ts";
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -39,6 +40,12 @@ export function HeaderBar() {
   const forceUpdate = () => {
     navigate("/");
   };
+
+  const handleDownload =() => {
+    const url = sheetsLink();
+    fetch(url)
+    .catch(err => console.log(err))
+  }
 
   return (
     <AppBar
@@ -125,6 +132,9 @@ export function HeaderBar() {
               </MenuItem>
               <MenuItem key={"betaC"} onClick={() => handleBeta("betaC")}>
                 <Typography sx={{ textAlign: "center" }}>BetaC Scan</Typography>
+              </MenuItem>
+              <MenuItem key={"download"} onClick={handleDownload}>
+                <Typography sx={{ textAlign: "center" }}>CSV Link</Typography>
               </MenuItem>
               <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
