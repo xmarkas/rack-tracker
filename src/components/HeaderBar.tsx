@@ -47,7 +47,14 @@ export function HeaderBar() {
     // setTimeout(() => {
     //   downloadWindow?.close()
     // }, 1000)
-    fetch(url)
+    fetch(url, {
+      method: "GET",
+      mode: "no-cors",
+      headers: {
+        'Content-Type': 'text/csv',
+        'Content-Disposition': 'attachment; filename=ATN_data.csv'
+      }
+    })
     .catch(err => console.log(err))
   }
 
