@@ -43,8 +43,9 @@ export function HeaderBar() {
 
   const handleDownload =() => {
     const url = sheetsLink();
-    fetch(url)
-    .catch(err => console.log(err))
+    window.open(url);
+    // fetch(url)
+    // .catch(err => console.log(err))
   }
 
   return (
