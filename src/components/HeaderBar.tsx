@@ -41,23 +41,13 @@ export function HeaderBar() {
     navigate("/");
   };
 
-  // const handleDownload =() => {
-  //   const url = sheetsLink();
-  //   // const downloadWindow = window.open(url)
-  //   // setTimeout(() => {
-  //   //   downloadWindow?.close()
-  //   // }, 1000)
-  //   fetch(url, {
-  //     method: "GET",
-  //     mode: "cors",
-  //     headers: {
-  //       'Content-Type': 'text/csv',
-  //       'Content-Disposition': 'attachment; filename=ATN_data.csv',
-        
-  //     }
-  //   })
-  //   .catch(err => console.log(err))
-  // }
+  const handleDownload =() => {
+    const filePath = sheetsLink();
+    let link=document.createElement('a');
+    link.href = filePath;
+    link.download = filePath.substr(filePath.lastIndexOf('/') + 1);
+    link.click();
+  }
 
   return (
     <AppBar
@@ -148,8 +138,11 @@ export function HeaderBar() {
               {/* <MenuItem key={"download"} onClick={handleDownload}>
                 <Typography sx={{ textAlign: "center" }}>CSV Link</Typography>
               </MenuItem> */}
-              <MenuItem key={"download"}>
+              {/* <MenuItem key={"download"}>
                 <a href={sheetsLink()} download="data_new.csv" style={{textDecoration: "none", color: "black"}}>Download CSV</a>
+              </MenuItem> */}
+              <MenuItem key={"download"} onClick={handleDownload}>
+                 <Typography>Download</Typography>
               </MenuItem>
               {/* <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
