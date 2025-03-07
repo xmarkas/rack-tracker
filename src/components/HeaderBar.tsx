@@ -13,6 +13,7 @@ import packageJSON from "../../package.json";
 import { useNavigate } from "react-router-dom";
 import { FileUploader } from "./FileUploader.tsx";
 import { sheetsLink } from "../tools/sheetsLink.ts";
+import DownloadLink from 'react-download-link'
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -49,10 +50,11 @@ export function HeaderBar() {
     // }, 1000)
     fetch(url, {
       method: "GET",
-      mode: "no-cors",
+      mode: "cors",
       headers: {
         'Content-Type': 'text/csv',
-        'Content-Disposition': 'attachment; filename=ATN_data.csv'
+        'Content-Disposition': 'attachment; filename=ATN_data.csv',
+        
       }
     })
     .catch(err => console.log(err))
@@ -144,8 +146,11 @@ export function HeaderBar() {
               <MenuItem key={"betaC"} onClick={() => handleBeta("betaC")}>
                 <Typography sx={{ textAlign: "center" }}>BetaC Scan</Typography>
               </MenuItem>
-              <MenuItem key={"download"} onClick={handleDownload}>
+              {/* <MenuItem key={"download"} onClick={handleDownload}>
                 <Typography sx={{ textAlign: "center" }}>CSV Link</Typography>
+              </MenuItem> */}
+              <MenuItem key={"download"}>
+                <a href={sheetsLink()} download="data_new.csv" >Dload</a>
               </MenuItem>
               <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
