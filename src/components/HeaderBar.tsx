@@ -13,7 +13,6 @@ import packageJSON from "../../package.json";
 import { useNavigate } from "react-router-dom";
 import { FileUploader } from "./FileUploader.tsx";
 import { sheetsLink } from "../tools/sheetsLink.ts";
-import DownloadLink from 'react-download-link'
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -42,23 +41,23 @@ export function HeaderBar() {
     navigate("/");
   };
 
-  const handleDownload =() => {
-    const url = sheetsLink();
-    // const downloadWindow = window.open(url)
-    // setTimeout(() => {
-    //   downloadWindow?.close()
-    // }, 1000)
-    fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        'Content-Type': 'text/csv',
-        'Content-Disposition': 'attachment; filename=ATN_data.csv',
+  // const handleDownload =() => {
+  //   const url = sheetsLink();
+  //   // const downloadWindow = window.open(url)
+  //   // setTimeout(() => {
+  //   //   downloadWindow?.close()
+  //   // }, 1000)
+  //   fetch(url, {
+  //     method: "GET",
+  //     mode: "cors",
+  //     headers: {
+  //       'Content-Type': 'text/csv',
+  //       'Content-Disposition': 'attachment; filename=ATN_data.csv',
         
-      }
-    })
-    .catch(err => console.log(err))
-  }
+  //     }
+  //   })
+  //   .catch(err => console.log(err))
+  // }
 
   return (
     <AppBar
