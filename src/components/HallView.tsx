@@ -13,44 +13,49 @@ import {
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Moves from "../store/Moves.model";
-import Slcs from "../store/Slcs.model"
-import Decoms from "../store/Decoms.model"
+import Slcs from "../store/Slcs.model";
+import Decoms from "../store/Decoms.model";
 import { store } from "../store/store";
 
-export const HallView = ({openModal = (_data = {}) => {}}) => {
+export const HallView = ({ openModal = (_data = {}) => {} }) => {
   const [hall, setHall] = useState("A");
   const building_ID: string = useParams().building_ID || "";
   const [hallData, setHallData] = useState<Object[]>([]);
-  const [hallCounts, setHallCounts] = useState({A:0, B:0,C:0, D:0});
+  const [hallCounts, setHallCounts] = useState({ A: 0, B: 0, C: 0, D: 0 });
 
   const getCounts = (arr: Object[]) => {
     return {
-        A: arr.filter((h: any) => h.hall === "A").length,
-        B: arr.filter((h:any) => h.hall === "B").length,
-        C: arr.filter((h: any) => h.hall === "C").length,
-        D: arr.filter((h: any)  => h.hall === "D").length,
-    }
-  }
+      A: arr.filter((h: any) => h.hall === "A").length,
+      B: arr.filter((h: any) => h.hall === "B").length,
+      C: arr.filter((h: any) => h.hall === "C").length,
+      D: arr.filter((h: any) => h.hall === "D").length,
+    };
+  };
   useEffect(() => {
     //Get hall data
-    const data = [...Moves.byBuilding(building_ID),...Slcs.byBuilding(building_ID),...Decoms.byBuilding(building_ID)]
-    
+    const data = [
+      ...Moves.byBuilding(building_ID),
+      ...Slcs.byBuilding(building_ID),
+      ...Decoms.byBuilding(building_ID),
+    ];
+
     setHallData(data);
 
     // Get hall counts
     setHallCounts(getCounts(data));
-
   }, [store]);
 
   const handleSelect = (val: string) => {
     setHall(val);
   };
 
-  const selectRow = (rowData: {[key: string] : any}) => {
-    const getData = hallData.find((obj: any) => obj.serialNumber === rowData.serialNumber);
+  const selectRow = (rowData: { [key: string]: any }) => {
+    const getData = hallData.find(
+      (obj: any) => obj.serialNumber === rowData.serialNumber
+    );
     console.log(getData);
     openModal(getData);
-  }
+  };
 
   const createRows = (e: { [key: string]: any }): {} => {
     return {
@@ -59,6 +64,8 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
       position: e.position,
       action: e.action,
       serialNumber: e.serialNumber,
+      slcSET: e.slcSET || false,
+      unset: e.unset || false,
     };
   };
 
@@ -68,7 +75,6 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
       [];
     return list;
   };
-
 
   return (
     <Grid2 container py={1} px={0.5}>
@@ -152,7 +158,8 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
               {listData().map((row: any) => (
                 <TableRow
                   key={row.serialNumber}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 },
+                background: row.unset || row.slcSET ? "darkgray" : "initial" }}
                 >
                   <TableCell
                     component="th"
@@ -162,8 +169,13 @@ export const HallView = ({openModal = (_data = {}) => {}}) => {
                     {row.row + row.side + "." + row.position}
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "large" }}>
-                    <Button size="small" variant="contained" onClick={() => selectRow(row)}>{row.action}</Button>
-                    
+                    <Button
+                      size="small"
+                      variant="contained"
+                      onClick={() => selectRow(row)}
+                    >
+                      {row.action}
+                    </Button>
                   </TableCell>
                   <TableCell align="right" sx={{ fontSize: "large" }}>
                     {row.serialNumber}

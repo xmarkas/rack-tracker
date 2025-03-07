@@ -20,7 +20,7 @@ export const FileUploader = forwardRef((_props, ref) => {
         const content = e.target?.result as string;
         
         // Create an array seperated by newline (/n)
-        const byLine: string[] = getByNewLine(content, 11);
+        const byLine: string[] = getByNewLine(content, 10);
         // Parse by ',' into array
         byLine.forEach((entry) => {
           const parsedLine: string[] = parser(entry);
