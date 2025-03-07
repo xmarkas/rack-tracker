@@ -139,9 +139,9 @@ export function HeaderBar() {
               <MenuItem key={"upload"} onClick={handleFileUpload}>
                 <Typography sx={{ textAlign: "center" }}>Upload CSV</Typography>
               </MenuItem>
-              <MenuItem key={"beta"} onClick={() => handleBeta("beta")}>
+              {/* <MenuItem key={"beta"} onClick={() => handleBeta("beta")}>
                 <Typography sx={{ textAlign: "center" }}>Beta Scan</Typography>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem key={"betaC"} onClick={() => handleBeta("betaC")}>
                 <Typography sx={{ textAlign: "center" }}>BetaC Scan</Typography>
               </MenuItem>
@@ -149,11 +149,11 @@ export function HeaderBar() {
                 <Typography sx={{ textAlign: "center" }}>CSV Link</Typography>
               </MenuItem> */}
               <MenuItem key={"download"}>
-                <a href={sheetsLink()} download="data_new.csv" >Dload</a>
+                <a href={sheetsLink()} download="data_new.csv" style={{textDecoration: "none", color: "black"}}>Download CSV</a>
               </MenuItem>
-              <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
+              {/* <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </Box>
         </Toolbar>

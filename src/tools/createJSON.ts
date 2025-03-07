@@ -86,9 +86,9 @@ export const createJsonForMove = (arr: string[]): UnsetMove | null => {
               obj[key] = fromObj[key];
           });
       } else if (val === 10) {
-          obj["unset"] = false; //arr[val] === "TRUE" ? true : false;
+          obj["unset"] = arr[val] === "TRUE" ? true : false;
       } else if (val === 13) {
-          obj["auditComplete"] = false; //arr[val] === "TRUE" ? true : false;
+          obj["auditComplete"] = arr[val] === "TRUE" ? true : false;
       }
   });
   return obj;
@@ -137,11 +137,11 @@ export const createJsonForSLC = (
               obj[key] = fromObj[key];
           });
       } else if (val === 11) {
-          obj["inPosition"] = false; //arr[val] === "TRUE" ? true : false;
+          obj["inPosition"] = arr[val] === "TRUE" ? true : false;
       } else if (val === 12) {
-          obj["slcSET"] = false; //arr[val] === "TRUE" ? true : false;
+          obj["slcSET"] = arr[val] === "TRUE" ? true : false;
       } else if (val === 13) {
-          obj["auditComplete"] = false; //arr[val] === "TRUE" ? true : false;
+          obj["auditComplete"] = arr[val] === "TRUE" ? true : false;
       }
   });
   return obj;
