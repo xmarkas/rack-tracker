@@ -11,7 +11,7 @@ export const WorkProgressBar = () => {
       useResultRowIds("unsetCount", Moves.unSetCount).length +
       useResultRowIds("slcCount", Slcs.slcCount).length +
       useResultRowIds("decomCount", Decoms.decomCount).length;
-    return completed ? Math.floor(((totals - completed) / totals) * 100) : 0;
+    return completed === totals ? 100 : Math.floor(((totals - completed) / totals) * 100);
   };
 
   return (
