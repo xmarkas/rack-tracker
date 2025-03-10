@@ -16,6 +16,7 @@ import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
 import { useTablesListener } from "tinybase/ui-react";
+import { WorkProgressBar } from "./WorkProgressBar";
 
 export const HallView = ({ openModal = (_data = {}) => {} }) => {
   const [hall, setHall] = useState("A");
@@ -147,6 +148,12 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
         }}
         py={2}
       >
+        <Grid2
+          size={{ xs: 12 }}
+          textAlign="center"
+        >
+          <WorkProgressBar />
+        </Grid2>
         <Grid2
           size={{ xs: 12 }}
           textAlign="center"
