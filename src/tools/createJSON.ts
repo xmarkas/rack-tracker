@@ -32,10 +32,19 @@ const locationParse = (local: string): { [key: string]: any } => {
   const localArr: string[] = local.toUpperCase().split(".");
   // location keys
   returnObj.building = localArr[0];
-  returnObj.hall = localArr[1]?.slice(localArr[1].length - 1);
-  returnObj.row = localArr[2]?.slice(0, localArr[2].length - 1);
-  returnObj.side = localArr[2]?.slice(localArr[2].length - 1);
-  returnObj.position = localArr[3];
+
+  if (returnObj.building === "ATN7") {
+    returnObj.hall = "A";
+    returnObj.row = localArr[2];
+    returnObj.side = "";
+    returnObj.position = localArr[3];
+  } else {
+    returnObj.hall = localArr[1]?.slice(localArr[1].length - 1);
+    returnObj.row = localArr[2]?.slice(0, localArr[2].length - 1);
+    returnObj.side = localArr[2]?.slice(localArr[2].length - 1);
+    returnObj.position = localArr[3];
+  }
+  
   return buildLocationID(returnObj);
 };
 

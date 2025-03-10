@@ -8,7 +8,6 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import ForwardIcon from "@mui/icons-material/Forward";
 import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Inspector } from "tinybase/ui-react-inspector";
 import { useState } from "react";
 
 export function BottomNav({ selectedNavs = [], showReader, setBarcode, barcode }: any) {
@@ -67,12 +66,11 @@ export function BottomNav({ selectedNavs = [], showReader, setBarcode, barcode }
       <CssBaseline />
 
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "10%" }}
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "80px", zIndex: 500 }}
         elevation={5}
       >
         <BottomNavigation showLabels value={value} onChange={menuChange}>
           {selectedNavs.map((item: any) => navItems(item))}
-          <Inspector position="right" />
         </BottomNavigation>
       </Paper>
      

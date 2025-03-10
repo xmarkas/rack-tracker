@@ -16,6 +16,7 @@ import { Box } from "@mui/material";
 import { LoadCSV } from "./tools/loadCSV.ts";
 import BarcodeC from "./components/BarcodeC.tsx";
 import { CSVinput } from "./components/CSVinput.tsx";
+import { Inspector } from "tinybase/ui-react-inspector";
 
 export const App = () => {
   // Check for new deployment
@@ -69,7 +70,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box ref={screenRef} sx={{position: "relative"}}>
+        <Box ref={screenRef} >
           <RackModal
             open={isModalOpen}
             handleClose={handleCloseModal}
@@ -153,7 +154,9 @@ export const App = () => {
             </Routes>
           </Router>
         </Box>
+        <Inspector />
       </Provider>
+     
     </StrictMode>
   );
 };

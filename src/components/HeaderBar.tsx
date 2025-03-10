@@ -51,14 +51,12 @@ export function HeaderBar() {
 
   return (
     <AppBar
-      position="static"
-      sx={{ background: "white", color: "black", marginTop: "-5px" }}
+      position="sticky"
+      sx={{ background: "white", color: "black", top: "-2px", height: "60px" }}
     >
       <Container maxWidth="xl">
         <FileUploader ref={parentRef} />
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-
           <Typography
             variant="h6"
             noWrap
