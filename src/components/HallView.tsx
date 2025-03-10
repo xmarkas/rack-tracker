@@ -43,7 +43,7 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
       D: arr.filter((h: any) => h.hall === "D").length,
     };
   };
-  
+
   useEffect(() => {
     //Get hall data
     const data = [
@@ -72,6 +72,7 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
   const createRows = (e: { [key: string]: any }): {} => {
     let action = e.action;
     let audit = false;
+    let rowColor = "initial"
 
     if (e.action === "SLC") {
       if (e.inPosition) {
@@ -85,6 +86,14 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
       audit = true;
     }
 
+    if (e.hasPriority ) {
+      rowColor = "#ffeb3b"
+    } else if (e.hasIssue) {
+      rowColor = "#f44336"
+    } else if (e.slcSET || e.unset) {
+      rowColor = "lightgray"
+    }
+
     return {
       row: e.row,
       side: e.side,
@@ -93,7 +102,10 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
       serialNumber: e.serialNumber,
       set: e.slcSET || e.unset || false,
       needsAudit: audit,
-      auditComplete: e.auditComplete
+      auditComplete: e.auditComplete,
+      hasPriority: e.hasPriority,
+      hasIssue: e.hasIssue,
+      rowColor: rowColor
     };
   };
 
@@ -219,7 +231,7 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
                   key={row.serialNumber}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
-                    background: row.set ? "lightgray" : "initial",
+                    background: row.rowColor,
                   }}
                 >
                   <TableCell

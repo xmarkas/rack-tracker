@@ -11,7 +11,7 @@ const style = {
   border: "1px solid #cecece",
   boxShadow: 24,
   p: 3,
-  borderRadius: 3,
+  borderRadius: 3
 };
 
 export const RackModal = ({
