@@ -102,9 +102,7 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
       [];
     
     return list.sort((a: any, b : any) => {
-      if (b.auditComplete) {
-        return -1;
-      }
+      
       if (a.auditComplete && b.auditComplete) {
         return +a.row < +b.row ? -1 : 1
       }  
@@ -113,6 +111,9 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
       }
       if (+a.row > +b.row) {
         return b.auditComplete ? -1 : 1; 
+      }
+      if (b.auditComplete) {
+        return -1;
       }
       return 0;
     })
