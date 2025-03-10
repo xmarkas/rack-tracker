@@ -4,9 +4,21 @@ import { useNavigate } from "react-router-dom";
 import Move from "../store/Moves.model";
 import SLC from "../store/Slcs.model";
 import Decom from "../store/Decoms.model";
+import { useTablesListener } from "tinybase/ui-react";
+import { useEffect, useState } from "react";
 
 export const ATNview = () => {
   const navigate = useNavigate();
+  const [buildings, setBuildings] = useState<string[]>([]);
+  useTablesListener(() => {
+    setBuildings([
+      ...new Set([
+        ...Move.buildings(),
+        ...SLC.buildings(),
+        ...Decom.buildings(),
+      ]),
+    ]);
+  });
 
   const handleClick = (_e: React.MouseEvent, value: string) => {
     navigate(`/${value}/hall`);
@@ -20,17 +32,15 @@ export const ATNview = () => {
     );
   };
 
-  const getBuildings = () => {
-    return [
+  useEffect(() => {
+    setBuildings([
       ...new Set([
         ...Move.buildings(),
         ...SLC.buildings(),
         ...Decom.buildings(),
       ]),
-    ];
-  };
-
-  console.log(getBuildings());
+    ]);
+  }, []);
 
   return (
     <Grid2
@@ -41,7 +51,7 @@ export const ATNview = () => {
       mt={2}
       px={2}
     >
-      {getBuildings().map((v, index) => (
+      {buildings.map((v, index) => (
         <Grid2 key={index} size={{ xs: 4 }}>
           <Badge
             badgeContent={getCountByBuilding(v)}

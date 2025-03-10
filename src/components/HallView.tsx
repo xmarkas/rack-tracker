@@ -43,6 +43,7 @@ export const HallView = ({ openModal = (_data = {}) => {} }) => {
       D: arr.filter((h: any) => h.hall === "D").length,
     };
   };
+  
   useEffect(() => {
     //Get hall data
     const data = [
