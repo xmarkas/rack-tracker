@@ -51,7 +51,7 @@ export const ATNview = () => {
       mt={2}
       px={2}
     >
-      {buildings.map((v, index) => (
+      {buildings.filter((b) => b.includes("ATN")).map((v, index) => (
         <Grid2 key={index} size={{ xs: 4 }}>
           <Badge
             badgeContent={getCountByBuilding(v)}
