@@ -23,7 +23,7 @@ export const App = () => {
   setInterval(getDeploymentTime, 60000 * 60);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState<{ [key: string]: any }>({});
+  const [modalData, _setModalData] = useState<{ [key: string]: any }>({});
   const [_showReader, setShowReader] = useState(false);
   const [barcode, setBarcode] = useState("");
   const [error, setError] = useState(null);
@@ -33,11 +33,7 @@ export const App = () => {
     LoadCSV();
   }, [])
 
-  const handleOpenModal = (data = {}) => {
-    console.log("modal", data);
-    setModalData(data);
-    setIsModalOpen(true);
-  };
+
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -112,7 +108,7 @@ export const App = () => {
                 path="/:building_ID/hall"
                 element={[
                   <HeaderBar key="hall2" />,
-                  <HallView key="hall1" openModal={handleOpenModal} />,
+                  <HallView key="hall1" />,
                   <BottomNav
                     key="hall3"
                     selectedNavs={[NavItem.BACK, NavItem.BARCODE]}
