@@ -1,3 +1,4 @@
+import { Grid2 } from "@mui/material";
 import { useEffect, useState } from "react";
 // import { useMediaDevices } from "react-media-devices";
 import { useZxing } from "react-zxing";
@@ -5,6 +6,8 @@ import { useZxing } from "react-zxing";
 const constraints: MediaStreamConstraints = {
   video: {
     facingMode: "environment",
+    height: 500,
+    width: 500
   },
   audio: false,
   
@@ -20,22 +23,25 @@ export const BRC = () => {
   };
 
   const { ref } = useZxing({
-    paused: false,
-    onResult: (r) => handleCapture(r),
+    
+    onResult: (r: any) => handleCapture(r),
     constraints: constraints,
     
   });
 
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true }).then((p) => {
-      setResult(`${p.active} `);
-    });
-  }, []);
+  // useEffect(() => {
+  //   navigator.mediaDevices.getUserMedia({ video: true }).then((p) => {
+  //     setResult(`${p.active} `);
+  //   });
+  // }, []);
 
   return (
-    <div style={{display: "flex", height:"auto", width: "100%"}}>
-      <video ref={ref} height={"100px"} width={"300px"} />
+    <Grid2 container={true}>
+      <Grid2 size={{xs:12}} style={{border: "1px solid red", height: "100%", width: "100%"}}>
+      <video ref={ref}  style={{zIndex:1000}}/>
       <span>{result}</span>
-    </div>
+      </Grid2>
+      
+    </Grid2>
   );
 };

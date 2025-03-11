@@ -57,7 +57,7 @@ export const BarcodeScanner = ({
   console.log(onResult);
 
   return (
-    <div>
+    <div >
       <video ref={ref} />
       <div>{barcode}</div>
     </div>
