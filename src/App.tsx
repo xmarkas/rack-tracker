@@ -18,6 +18,7 @@ import BarcodeC from "./components/BarcodeC.tsx";
 import { CSVinput } from "./components/CSVinput.tsx";
 import { Inspector } from "tinybase/ui-react-inspector";
 import { ViewList } from "./components/ViewList.tsx";
+import { BRC } from "./components/BCR.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -32,9 +33,7 @@ export const App = () => {
 
   useEffect(() => {
     LoadCSV();
-  }, [])
-
-
+  }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -48,14 +47,12 @@ export const App = () => {
 
   const onBarcodeError = (err: any) => {
     setError(err.message);
-
   };
 
   // const handleCloseScanner = (scanData: any) => {
   //   setShowReader(false);
   //   setBarcode(scanData.text);
   // };
-
 
   enum NavItem {
     BACK,
@@ -67,7 +64,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box ref={screenRef} >
+        <Box ref={screenRef}>
           <RackModal
             open={isModalOpen}
             handleClose={handleCloseModal}
@@ -119,33 +116,31 @@ export const App = () => {
                 ]}
               />
               <Route
-                path="/beta"
+                path="/scan"
                 element={[
-                  
-                  <BarcodeScanner
-                    key="beta2"
-                    onResult={barcodeFiresModal}
-                    onError={onBarcodeError}
+                  <BRC key="beta2" />,
+                  <BottomNav
+                    key="beta1"
                     barcode={barcode}
+                    selectedNavs={[NavItem.BACK]}
                   />,
-                  <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
               <Route
                 path="/betaC"
                 element={[
-                  <BarcodeC
-                    key="beta2"
+                  <BarcodeC key="beta2" />,
+                  <BottomNav
+                    key="beta1"
+                    barcode={barcode}
+                    selectedNavs={[NavItem.BACK]}
                   />,
-                  <BottomNav key="beta1" barcode={barcode} selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
               <Route
                 path="/download"
                 element={[
-                  <CSVinput
-                    key="download1"
-                  />,
+                  <CSVinput key="download1" />,
                   <BottomNav key="download2" selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
@@ -153,9 +148,7 @@ export const App = () => {
                 path="/:view/viewlist"
                 element={[
                   <HeaderBar key="v3" />,
-                  <ViewList
-                    key="v1"
-                  />,
+                  <ViewList key="v1" />,
                   <BottomNav key="v2" selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
@@ -164,7 +157,6 @@ export const App = () => {
         </Box>
         <Inspector />
       </Provider>
-     
     </StrictMode>
   );
 };
