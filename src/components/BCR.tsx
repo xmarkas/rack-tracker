@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import { useZxing } from "react-zxing";
 
 const constraints: MediaStreamConstraints = {
-  video: true,
+  video: {
+    facingMode: "environment",
+  },
   audio: false,
+  
 };
 
 export const BRC = () => {
@@ -30,8 +33,8 @@ export const BRC = () => {
   }, []);
 
   return (
-    <div>
-      <video ref={ref} height={"100px"} width={"300px"}/>
+    <div style={{display: "flex", height:"auto", width: "100%"}}>
+      <video ref={ref} height={"100px"} width={"300px"} />
       <span>{result}</span>
     </div>
   );
