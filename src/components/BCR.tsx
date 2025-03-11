@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMediaDevices } from "react-media-devices";
-import { useZxing, DecodeHintType } from "react-zxing";
+import { useZxing } from "react-zxing";
 
 const constraints: MediaStreamConstraints = {
   video: true,

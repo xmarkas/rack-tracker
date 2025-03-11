@@ -10,8 +10,6 @@ import { Home } from "./components/Home.tsx";
 import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
-//import { BarcodeReader } from "./components/BarcodeReader.tsx";
-import { BarcodeScanner } from "./components/BarcodeReaderAlt.tsx";
 import { Box } from "@mui/material";
 import { LoadCSV } from "./tools/loadCSV.ts";
 import BarcodeC from "./components/BarcodeC.tsx";
@@ -40,19 +38,6 @@ export const App = () => {
     setBarcode("");
     setError(null);
   };
-
-  const barcodeFiresModal = (result: string) => {
-    setBarcode(result);
-  };
-
-  const onBarcodeError = (err: any) => {
-    setError(err.message);
-  };
-
-  // const handleCloseScanner = (scanData: any) => {
-  //   setShowReader(false);
-  //   setBarcode(scanData.text);
-  // };
 
   enum NavItem {
     BACK,
