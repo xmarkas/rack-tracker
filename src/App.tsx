@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useRef, useState } from "react";
+import { StrictMode, useEffect, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -27,7 +27,7 @@ export const App = () => {
   const [_showReader, setShowReader] = useState(false);
   const [barcode, setBarcode] = useState("");
   const [error, setError] = useState(null);
-  const screenRef = useRef(null);
+  // const screenRef = useRef(null);
 
   useEffect(() => {
     LoadCSV();
@@ -49,7 +49,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box ref={screenRef}>
+        <Box >
           <RackModal
             open={isModalOpen}
             handleClose={handleCloseModal}
