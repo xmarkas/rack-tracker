@@ -17,6 +17,7 @@ import { LoadCSV } from "./tools/loadCSV.ts";
 import BarcodeC from "./components/BarcodeC.tsx";
 import { CSVinput } from "./components/CSVinput.tsx";
 import { Inspector } from "tinybase/ui-react-inspector";
+import { ViewList } from "./components/ViewList.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -120,6 +121,7 @@ export const App = () => {
               <Route
                 path="/beta"
                 element={[
+                  
                   <BarcodeScanner
                     key="beta2"
                     onResult={barcodeFiresModal}
@@ -145,6 +147,16 @@ export const App = () => {
                     key="download1"
                   />,
                   <BottomNav key="download2" selectedNavs={[NavItem.BACK]} />,
+                ]}
+              />
+              <Route
+                path="/:view/viewlist"
+                element={[
+                  <HeaderBar key="v3" />,
+                  <ViewList
+                    key="v1"
+                  />,
+                  <BottomNav key="v2" selectedNavs={[NavItem.BACK]} />,
                 ]}
               />
             </Routes>

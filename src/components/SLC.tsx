@@ -5,9 +5,16 @@ import Decoms from "../store/Decoms.model";
 import { useResultRowIds } from "tinybase/ui-react";
 import { WorkProgressBar } from "./WorkProgressBar";
 import { BuildingNav } from "./BuildingNav";
+import { useNavigate } from "react-router-dom";
 
 
 export const SLC = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (path: string) => {
+    navigate(`/${path}`);
+  }
+
   const getPriorities = () => {
     const priorityTotals: number =
       useResultRowIds("priorityMoves", Moves.priorityCount).length +
@@ -58,6 +65,7 @@ export const SLC = () => {
                 minWidth: "100%",
                 color: "black",
               }}
+              onClick={() => handleNavigate('Unset/viewlist')}
             >
               Unset
             </Button>

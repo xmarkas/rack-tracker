@@ -15,10 +15,11 @@ import { FC} from "react";
 
 interface Conditions {
     data: Object[],
-    filterConditions: {[key: string] : string | boolean}
+    filterConditions: {[key: string] : string | boolean},
+    location?: boolean
   }
 
-export const RackList: FC<Conditions> = ({data, filterConditions}) => {
+export const RackList: FC<Conditions> = ({data, filterConditions, location = false}) => {
 
   const createRows = (e: { [key: string]: any }): {} => {
     let action = e.action;
@@ -46,6 +47,7 @@ export const RackList: FC<Conditions> = ({data, filterConditions}) => {
     }
 
     return {
+      location: e.location,  
       row: e.row,
       side: e.side,
       position: e.position,
@@ -123,7 +125,7 @@ export const RackList: FC<Conditions> = ({data, filterConditions}) => {
                   scope="row"
                   sx={{ fontSize: "large" }}
                 >
-                  {row.row + row.side + "." + row.position}
+                  {location ? row.location : row.row + row.side + "." + row.position}
                 </TableCell>
                 <TableCell align="center" sx={{ fontSize: "large" }}>
                   <Badge
