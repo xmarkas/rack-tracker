@@ -23,7 +23,7 @@ export const BRC = () => {
   });
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true }).then(p => alert(p))
+    navigator.mediaDevices.getUserMedia({ video: true }).then(p => alert(p.id))
   },[])
 
   return (
