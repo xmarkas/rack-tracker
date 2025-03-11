@@ -10,42 +10,15 @@ import {
   Badge,
   Button,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
-import { useTablesListener } from "tinybase/ui-react";
-import Decoms from "../store/Decoms.model";
-import Moves from "../store/Moves.model";
-import Slcs from "../store/Slcs.model";
-import { useParams } from "react-router";
+import { FC} from "react";
+
 
 interface Conditions {
-    [index : string] : string | boolean
+    data: Object[],
+    filterConditions: {[key: string] : string | boolean}
   }
-// const filterConditions: Conditions = { hall: "A"}
 
-export const RackList: FC<Conditions> = ({filterConditions}) => {
-  const [hallData, setHallData] = useState<Object[]>([]);
-  const building_ID: string = useParams().building_ID || "";
-
-  useTablesListener(() => {
-    //Get hall data
-    const data = [
-      ...Moves.byBuilding(building_ID),
-      ...Slcs.byBuilding(building_ID),
-      ...Decoms.byBuilding(building_ID),
-    ];
-    setHallData(data);
-  });
-
-  useEffect(() => {
-    //Get hall data
-    const data = [
-      ...Moves.byBuilding(building_ID),
-      ...Slcs.byBuilding(building_ID),
-      ...Decoms.byBuilding(building_ID),
-    ];
-
-    setHallData(data);
-  }, []);
+export const RackList: FC<Conditions> = ({data, filterConditions}) => {
 
   const createRows = (e: { [key: string]: any }): {} => {
     let action = e.action;
@@ -88,7 +61,7 @@ export const RackList: FC<Conditions> = ({filterConditions}) => {
   };
 
   const listData = (): Object[] => {
-    let filterlist = hallData.filter((i: any) => {
+    let filterlist = data.filter((i: any) => {
         return Object.keys(filterConditions).every((key:string) =>
             i[key] === filterConditions[key]
         )

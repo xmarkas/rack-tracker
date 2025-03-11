@@ -12,15 +12,8 @@ export const HallView = () => {
   const [hall, setHall] = useState<string>("A");
   const building_ID: string = useParams().building_ID || "";
   const [hallCounts, setHallCounts] = useState({ A: 0, B: 0, C: 0, D: 0 });
+  const [hallData, setHallData] = useState<Object[]>([]);
 
-  // type Conditions = {
-  //   [key : string] : string | boolean
-  // }
-
-  // const conditions : Conditions = {
-  //   hall: hall
-  // }
-  
   useTablesListener(() => {
     //Get hall data
     const data = [
@@ -28,12 +21,12 @@ export const HallView = () => {
       ...Slcs.byBuilding(building_ID),
       ...Decoms.byBuilding(building_ID),
     ];
-   
+    setHallData(data);
+
     // Get hall counts
     setHallCounts(getCounts(data));
   });
 
-   
   const getCounts = (arr: Object[]) => {
     return {
       A: arr.filter((h: any) => h.hall === "A").length,
@@ -50,7 +43,7 @@ export const HallView = () => {
       ...Slcs.byBuilding(building_ID),
       ...Decoms.byBuilding(building_ID),
     ];
-
+    setHallData(data);
     // Get hall counts
     setHallCounts(getCounts(data));
   }, []);
@@ -58,7 +51,6 @@ export const HallView = () => {
   const handleSelect = (val: string) => {
     setHall(val);
   };
-  
 
   return (
     <Grid2 size={{ xs: 12 }} container px={0.5}>
@@ -130,8 +122,7 @@ export const HallView = () => {
           </Badge>
         </Grid2>
       </Grid2>
-      <RackList filterConditions={{hall: hall}} />
+      <RackList data={hallData} filterConditions={{ hall: hall }} />
     </Grid2>
-   
   );
 };
