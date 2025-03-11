@@ -38,7 +38,8 @@ export const BRC = () => {
   return (
     <Grid2 container={true}>
       <Grid2 size={{xs:12}} style={{border: "1px solid red", height: "100%", width: "100%"}}>
-      <video ref={ref}  style={{zIndex:1000}}/>
+      <video ref={ref}  style={{zIndex:1000}}playsInline={true}
+      />
       <span>{result}</span>
       </Grid2>
       

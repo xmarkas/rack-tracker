@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from "react";
+import { StrictMode, useState } from "react";
 import { store } from "./store/store.ts";
 import { Provider } from "tinybase/ui-react";
 import { HeaderBar } from "./components/HeaderBar.tsx";
@@ -11,7 +11,7 @@ import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
 import { Box } from "@mui/material";
-import { LoadCSV } from "./tools/loadCSV.ts";
+// import { LoadCSV } from "./tools/loadCSV.ts";
 import BarcodeC from "./components/BarcodeC.tsx";
 import { CSVinput } from "./components/CSVinput.tsx";
 import { Inspector } from "tinybase/ui-react-inspector";
@@ -29,9 +29,9 @@ export const App = () => {
   const [error, setError] = useState(null);
   // const screenRef = useRef(null);
 
-  useEffect(() => {
-    LoadCSV();
-  }, []);
+  // useEffect(() => {
+  //   LoadCSV();
+  // }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
