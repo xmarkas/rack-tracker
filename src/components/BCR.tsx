@@ -23,8 +23,8 @@ export const BRC = () => {
   });
 
   useEffect(() => {
-    alert(navigator.mediaDevices.getUserMedia({ video: true }))
-  })
+    navigator.mediaDevices.getUserMedia({ video: true }).then(p => alert(p))
+  },[])
 
   return (
     <div>
