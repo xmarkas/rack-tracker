@@ -65,7 +65,7 @@ export const SLC = () => {
                 minWidth: "100%",
                 color: "black",
               }}
-              onClick={() => handleNavigate('Unset/viewlist')}
+              onClick={() => handleNavigate('Moves/viewlist')}
             >
               Unset
             </Button>
@@ -90,6 +90,7 @@ export const SLC = () => {
                 minWidth: "100%",
                 color: "black",
               }}
+              onClick={() => handleNavigate('Slcs/viewlist')}
             >
               SLC
             </Button>
@@ -116,6 +117,7 @@ export const SLC = () => {
                 minWidth: "100%",
                 color: "black",
               }}
+              onClick={() => handleNavigate('Decoms/viewlist')}
             >
               Decom
             </Button>

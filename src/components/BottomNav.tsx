@@ -10,7 +10,7 @@ import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export function BottomNav({ selectedNavs = [], showReader, setBarcode, barcode }: any) {
+export function BottomNav({ selectedNavs = [], showReader, barcode }: any) {
   const [value, setValue] = useState("");
   const n = useNavigate();
 
@@ -22,7 +22,7 @@ export function BottomNav({ selectedNavs = [], showReader, setBarcode, barcode }
       n(-1);
     } else if (newValue === "scan") {
       showReader(true);
-      setBarcode("");
+      
     }
   };
 
