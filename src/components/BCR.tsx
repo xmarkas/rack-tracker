@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMediaDevices } from "react-media-devices";
 import { useZxing } from "react-zxing";
 
@@ -8,20 +8,23 @@ const constraints: MediaStreamConstraints = {
 };
 
 export const BRC = () => {
-    const [result, setResult] = useState("");
+  const [result, setResult] = useState("");
   const { devices } = useMediaDevices({ constraints });
   const deviceId = devices?.[0]?.deviceId;
 
-const handleCapture = (result: any) => {
+  const handleCapture = (result: any) => {
     setResult(result.text);
-}
-
+  };
 
   const { ref } = useZxing({
     paused: false,
     deviceId,
-    onResult: (r) => handleCapture(r)
+    onResult: (r) => handleCapture(r),
   });
+
+  useEffect(() => {
+    alert(navigator.mediaDevices.getUserMedia({ video: true }))
+  })
 
   return (
     <div>
