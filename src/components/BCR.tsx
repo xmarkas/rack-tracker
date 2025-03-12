@@ -1,7 +1,7 @@
 import { Grid2 } from "@mui/material";
 import { useState } from "react";
 // import { useMediaDevices } from "react-media-devices";
-import { useZxing } from "react-zxing";
+import { Result, useZxing } from "react-zxing";
 
 const constraints: MediaStreamConstraints = {
   video: {
@@ -18,14 +18,13 @@ export const BCR = () => {
   //   const { devices } = useMediaDevices({ constraints });
   //   const deviceId = devices?.[0]?.deviceId;
 
-  const handleCapture = (result: any) => {
-    alert("capture")
-    setResult(result.getText());
+  const handleCapture = (result: Result) => {
+    setResult(result.getText() + " " + result.getBarcodeFormat().toString());
   };
 
   const { ref } = useZxing({
     paused: false,
-    onResult: (r: any) => handleCapture(r),
+    onResult: (r: Result) => handleCapture(r),
     constraints: constraints,
     timeBetweenDecodingAttempts: 300
   });
