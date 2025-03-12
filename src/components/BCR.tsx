@@ -29,11 +29,7 @@ export const BCR = () => {
     
   });
 
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true }).then((p) => {
-      setResult(`${p.active} `);
-    });
-  }, []);
+
 
   return (
     <Grid2 container>
