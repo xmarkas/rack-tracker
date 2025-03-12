@@ -10,6 +10,7 @@ const constraints: MediaStreamConstraints = {
     width: 500,
   },
   audio: false,
+  
 };
 
 export const BCR = () => {
@@ -18,6 +19,7 @@ export const BCR = () => {
   //   const deviceId = devices?.[0]?.deviceId;
 
   const handleCapture = (result: any) => {
+    alert("capture")
     setResult(result.getText());
   };
 
@@ -25,6 +27,7 @@ export const BCR = () => {
     paused: false,
     onResult: (r: any) => handleCapture(r),
     constraints: constraints,
+    timeBetweenDecodingAttempts: 300
   });
 
   return (
@@ -73,11 +76,11 @@ export const BCR = () => {
       <Grid2
         size={{ xs: 12 }}
         textAlign={"center"}
-        sx={{ background: "black", color: "white" }}
+        sx={{ background: "black", color: "red", fontWeight: "700" }}
         display={"flex"}
         flex={1}
       >
-        {result}
+        {result} 
       </Grid2>
     </Grid2>
   );
