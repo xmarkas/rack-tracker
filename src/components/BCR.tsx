@@ -3,8 +3,8 @@ import { Grid2 } from "@mui/material";
 const gid = process.env.VITE_GID
 
 
-export const BRC = () => {
- 
+export const BCR = () => {
+ console.log("-->", gid)
 
   return (
     <Grid2 container={true}>

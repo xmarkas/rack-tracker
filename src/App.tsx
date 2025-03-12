@@ -16,7 +16,7 @@ import BarcodeC from "./components/BarcodeC.tsx";
 import { CSVinput } from "./components/CSVinput.tsx";
 import { Inspector } from "tinybase/ui-react-inspector";
 import { ViewList } from "./components/ViewList.tsx";
-import { BRC } from "./components/BCR.tsx";
+import { BCR } from "./components/BCR.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -103,9 +103,10 @@ export const App = () => {
               <Route
                 path="/scan"
                 element={[
-                  <BRC key="beta2" />,
+                  <HeaderBar key="s1" />,
+                  <BCR key="s2" />,
                   <BottomNav
-                    key="beta1"
+                    key="s3"
                     barcode={barcode}
                     selectedNavs={[NavItem.BACK]}
                   />,
