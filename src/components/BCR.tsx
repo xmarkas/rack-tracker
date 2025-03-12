@@ -19,7 +19,7 @@ export const BCR = () => {
   //   const deviceId = devices?.[0]?.deviceId;
 
   const handleCapture = (result: any) => {
-    setResult(result.text);
+    setResult(result.getText());
   };
 
   const { ref } = useZxing({
