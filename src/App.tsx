@@ -44,12 +44,13 @@ export const App = () => {
     SLC,
     RACK,
     BARCODE,
+    TORCH,
   }
 
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box >
+        <Box sx={{overflow: "hidden"}}>
           <RackModal
             open={isModalOpen}
             handleClose={handleCloseModal}
@@ -109,6 +110,7 @@ export const App = () => {
                     key="s3"
                     barcode={barcode}
                     selectedNavs={[NavItem.BACK]}
+                    bgColor="black"
                   />,
                 ]}
               />
@@ -135,7 +137,11 @@ export const App = () => {
                 element={[
                   <HeaderBar key="v3" />,
                   <ViewList key="v1" />,
-                  <BottomNav key="v2" selectedNavs={[NavItem.BACK]} />,
+                  <BottomNav
+                    key="v2"
+                    selectedNavs={[NavItem.BACK]}
+                    
+                  />,
                 ]}
               />
             </Routes>

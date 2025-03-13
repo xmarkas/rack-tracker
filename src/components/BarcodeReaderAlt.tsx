@@ -1,7 +1,6 @@
 import {
   BrowserMultiFormatReader,
   DecodeHintType,
-  
 } from "@zxing/library";
 import { useEffect, useMemo, useRef } from "react";
 
@@ -12,6 +11,7 @@ interface ZxingOptions {
   onResult?: (result: string) => void;
   onError?: (error: Error) => void;
   pause?: boolean;
+  
 }
 
 const useZxing = ({

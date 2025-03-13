@@ -10,11 +10,12 @@ import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export function BottomNav({ selectedNavs = [], barcode }: any) {
+export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any) {
   const [value, setValue] = useState("");
   const n = useNavigate();
 
   const menuChange = (_event: any, newValue: string) => {
+    
     if (["slc", "rack"].includes(newValue)) {
       setValue(newValue);
       n(`/${newValue}`);
@@ -22,8 +23,8 @@ export function BottomNav({ selectedNavs = [], barcode }: any) {
       n(-1);
     } else if (newValue === "scan") {
       n('/scan')
-      
-    }
+    } 
+    
   };
 
   const navItems = (val: number) => {
@@ -51,12 +52,18 @@ export function BottomNav({ selectedNavs = [], barcode }: any) {
       },
     ];
 
+    const styles = {
+      color: bgColor === "black" ? "white" : "black",
+    }
+
     return (
       <BottomNavigationAction
         key={items[val].value}
         value={items[val].value}
         label={items[val].label}
         icon={items[val].icon}
+        sx={styles}
+        
       />
     );
   };
@@ -66,10 +73,10 @@ export function BottomNav({ selectedNavs = [], barcode }: any) {
       <CssBaseline />
 
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "80px", zIndex: 500 }}
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "80px", zIndex: 500, background: bgColor }}
         elevation={5}
       >
-        <BottomNavigation showLabels value={value} onChange={menuChange}>
+        <BottomNavigation showLabels value={value} onChange={menuChange} sx={{background: bgColor}}>
           {selectedNavs.map((item: any) => navItems(item))}
         </BottomNavigation>
       </Paper>

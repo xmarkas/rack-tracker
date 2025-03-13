@@ -13,6 +13,7 @@ store.setValues({
   deployment: 31,
   getUpdate: false,
   deploymentCheck: false,
+  torch: <boolean>false
 });
 
 export const values = (() => {
