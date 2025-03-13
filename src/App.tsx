@@ -11,12 +11,11 @@ import { HallView } from "./components/HallView.tsx";
 import { getDeploymentTime } from "./tools/forceUpdate.ts";
 import { RackModal } from "./components/RackModal.tsx";
 import { Box } from "@mui/material";
-// import { LoadCSV } from "./tools/loadCSV.ts";
-import BarcodeC from "./components/BarcodeC.tsx";
 import { CSVinput } from "./components/CSVinput.tsx";
 import { Inspector } from "tinybase/ui-react-inspector";
 import { ViewList } from "./components/ViewList.tsx";
 import { BCR } from "./components/BCR.tsx";
+import { BCresult } from "./components/BCresult.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -115,12 +114,12 @@ export const App = () => {
                 ]}
               />
               <Route
-                path="/betaC"
+                path="/:barcode/:bctype/barcode"
                 element={[
-                  <BarcodeC key="beta2" />,
+                  <HeaderBar key="b1" />,
+                  <BCresult />,
                   <BottomNav
-                    key="beta1"
-                    barcode={barcode}
+                    key="b3"
                     selectedNavs={[NavItem.BACK]}
                   />,
                 ]}

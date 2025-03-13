@@ -3,7 +3,7 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { DecodeHintType, Result, useZxing } from "react-zxing";
 import { BarcodeFormat, BrowserMultiFormatReader } from "@zxing/library";
 import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
-
+import { useNavigate } from "react-router-dom";
 
 const constraints: MediaStreamConstraints = {
   video: {
@@ -25,12 +25,17 @@ interface OutputObj {
 
 const BCRoutput: FC<OutputObj> = ({ vRef, barcode }) => {
   const [result, setResult] = useState("");
+  const navigate = useNavigate();
 
   const reader = useMemo<BrowserMultiFormatReader>(() => {
     const instance = new BrowserMultiFormatReader(hints);
     instance.timeBetweenDecodingAttempts = 300;
     return instance;
   }, []);
+
+  const handleNavigate = (barcode: string, bctype: string) => {
+    navigate(`/${barcode}/${bctype}/barcode`)
+  }
 
   useEffect(() => {
     setResult(barcode);
@@ -39,7 +44,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, barcode }) => {
   useEffect(() => {
     if (!vRef.current) return;
     reader.decodeFromConstraints(constraints, vRef.current, (result, error) => {
-      if (result) console.log(result.getText());
+      if (result) handleNavigate(result.getText(), result.getBarcodeFormat().toString());
       if (error) console.log(error);
     });
     return () => {
@@ -75,6 +80,7 @@ export const BCR = () => {
   });
 
   const handleTorch = () => {
+    
     navigator.vibrate([900, 900, 500, 900])
     if (toggle) {
       torch.off().then(() => {
@@ -84,10 +90,7 @@ export const BCR = () => {
       torch.on().then(() => {
         setToggle(true);
       })
-    }
-   
-    
-    
+    } 
   }
 
   return (
