@@ -1,7 +1,7 @@
 import { Fab, Grid2,} from "@mui/material";
 import { FC, useEffect, useMemo, useState } from "react";
-import { DecodeHintType, Result, useZxing } from "react-zxing";
-import { BarcodeFormat, BrowserMultiFormatReader } from "@zxing/library";
+import {  Result, useZxing } from "react-zxing";
+import {  BrowserMultiFormatReader } from "@zxing/library";
 import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
