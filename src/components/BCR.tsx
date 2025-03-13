@@ -12,9 +12,9 @@ const constraints: MediaStreamConstraints = {
   audio: false,
 };
 
-const hints = new Map();
-const formats = [BarcodeFormat.QR_CODE, BarcodeFormat.CODE_128];
-hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
+// const hints = new Map();
+// const formats = [BarcodeFormat.QR_CODE, BarcodeFormat.CODE_128];
+// hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
 interface OutputObj {
   vRef: React.RefObject<HTMLVideoElement>;
@@ -28,7 +28,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, barcode }) => {
   const navigate = useNavigate();
 
   const reader = useMemo<BrowserMultiFormatReader>(() => {
-    const instance = new BrowserMultiFormatReader(hints);
+    const instance = new BrowserMultiFormatReader(new Map());
     instance.timeBetweenDecodingAttempts = 300;
     return instance;
   }, []);
@@ -76,7 +76,7 @@ export const BCR = () => {
     onResult: (r: Result) => setResult(r.getText()),
     constraints: {...constraints},
     timeBetweenDecodingAttempts: 300,
-    hints: hints,
+    
   });
 
   const handleTorch = () => {
