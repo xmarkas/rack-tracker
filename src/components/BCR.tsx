@@ -13,7 +13,7 @@ const constraints: MediaStreamConstraints = {
 };
 
 const hints = new Map();
-const formats = [BarcodeFormat.CODE_128];
+const formats = [BarcodeFormat.CODE_128 ];
 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
 interface OutputObj {
@@ -32,8 +32,9 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
   const navigate = useNavigate();
 
   const reader = useMemo<BrowserMultiFormatReader>(() => {
-    const instance = new BrowserMultiFormatReader(new Map());
+    const instance = new BrowserMultiFormatReader(hints);
     instance.timeBetweenDecodingAttempts = 300;
+    
     return instance;
   }, []);
 
