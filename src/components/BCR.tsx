@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 const constraints: MediaStreamConstraints = {
   video: {
-    facingMode: "environment",
+    facingMode: "environment"
   },
   audio: false,
+  
 };
 
 // const hints = new Map();
@@ -18,13 +19,18 @@ const constraints: MediaStreamConstraints = {
 
 interface OutputObj {
   vRef: React.RefObject<HTMLVideoElement>;
-  barcode: string;
-  torchOn?: () => Promise<void>;
-  torchOff?: () => Promise<void>;
+  barcode?: string;
+  torch: {
+    on: () => Promise<void>;
+    off: () => Promise<void>;
+    isAvailable: boolean | null;
+    isOn: boolean;
+  };
+  
 }
 
-const BCRoutput: FC<OutputObj> = ({ vRef, barcode }) => {
-  const [result, setResult] = useState("");
+const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
+  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
 
   const reader = useMemo<BrowserMultiFormatReader>(() => {
@@ -37,15 +43,23 @@ const BCRoutput: FC<OutputObj> = ({ vRef, barcode }) => {
     navigate(`/${barcode}/${bctype}/barcode`)
   }
 
-  useEffect(() => {
-    setResult(barcode);
-  }, [barcode]);
+  const handleTorch = () => {
+    console.log(torch.isAvailable, torch.isOn);
+    if (toggle) {
+        torch.on();
+    } else {
+        torch.off();
+    }
+    setToggle(!toggle);
+  }
+
 
   useEffect(() => {
     if (!vRef.current) return;
-    reader.decodeFromConstraints(constraints, vRef.current, (result, error) => {
+    reader.decodeFromConstraints(constraints, vRef.current, (result, _error) => {
       if (result) handleNavigate(result.getText(), result.getBarcodeFormat().toString());
-      if (error) console.log(error);
+    //   if (error) console.log(error);
+      
     });
     return () => {
       reader.reset();
@@ -54,45 +68,34 @@ const BCRoutput: FC<OutputObj> = ({ vRef, barcode }) => {
   }, [vRef, reader]);
 
   return (
-    <Grid2
-      size={{ xs: 12 }}
-      textAlign={"center"}
-      sx={{ background: "black", color: "red", fontWeight: "700" }}
-      position={"absolute"}
-      left={0}
-      top={200}
-    >
-      {result}
-    </Grid2>
+    <Fab
+          sx={{
+            position: "absolute",
+            right: 25,
+            bottom: 25,
+            background: "#f5f5f573",
+            border: "1px solid yellow"
+          }}
+          onClick={handleTorch}
+        >
+          {toggle ? <FlashlightOff />  : <FlashlightOn />}
+        </Fab>
   );
 };
 
 export const BCR = () => {
   const [result, setResult] = useState("");
-  const [toggle, setToggle] = useState(false);
+  
 
   const { ref, torch } = useZxing({
     paused: false,
     onResult: (r: Result) => setResult(r.getText()),
     constraints: {...constraints},
-    timeBetweenDecodingAttempts: 300,
+    timeBetweenDecodingAttempts: 300
     
   });
 
-  const handleTorch = () => {
-    
-    navigator.vibrate([900, 900, 500, 900])
-    if (toggle) {
-      torch.off().then(() => {
-        setToggle(false);
-      })    
-    } else {
-      torch.on().then(() => {
-        setToggle(true);
-      })
-    } 
-  }
-
+  
   return (
     <Grid2 container sx={{ background: "black", height: "75vh" }}>
       <Grid2
@@ -135,20 +138,9 @@ export const BCR = () => {
           ></div>
         </div>
         <video ref={ref} style={{ backgroundSize: "contain" }} />
-        <Fab
-          sx={{
-            position: "absolute",
-            right: 25,
-            bottom: 25,
-            background: "#f5f5f573",
-            border: "1px solid yellow"
-          }}
-          onClick={handleTorch}
-        >
-          {toggle ? <FlashlightOff />  : <FlashlightOn />}
-        </Fab>
+        
       </Grid2>
-      <BCRoutput vRef={ref} barcode={result} />
+      <BCRoutput vRef={ref} barcode={result} torch={torch} />
     </Grid2>
   );
 };
