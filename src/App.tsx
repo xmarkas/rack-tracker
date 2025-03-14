@@ -103,13 +103,12 @@ export const App = () => {
               <Route
                 path="/scan"
                 element={[
-                  <HeaderBar key="s1" />,
                   <BCR key="s2" />,
                   <BottomNav
                     key="s3"
                     barcode={barcode}
                     selectedNavs={[NavItem.BACK]}
-                    bgColor="black"
+                    bgColor="transparent"
                   />,
                 ]}
               />
