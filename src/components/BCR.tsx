@@ -8,13 +8,17 @@ import { useNavigate } from "react-router-dom";
 const constraints: MediaStreamConstraints = {
   video: {
     facingMode: "environment",
+    
   },
   audio: false,
+
 };
 
 const hints = new Map();
 const formats = [BarcodeFormat.CODE_128 ];
 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
+hints.set(DecodeHintType.TRY_HARDER, true)
+
 
 interface OutputObj {
   vRef: React.RefObject<HTMLVideoElement>;
@@ -35,10 +39,12 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
     const instance = new BrowserMultiFormatReader(hints);
     instance.timeBetweenDecodingAttempts = 300;
     
+    
     return instance;
   }, []);
 
   const handleNavigate = (barcode: string, bctype: string) => {
+    
     navigate(`/${barcode}/${bctype}/barcode`);
   };
 
@@ -67,6 +73,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
       }
     );
     return () => {
+        console.log(hints)
       reader.reset();
     };
   }, [vRef, reader]);
@@ -95,6 +102,7 @@ export const BCR = () => {
     onResult: (r: Result) => setResult(r.getText()),
     constraints: { ...constraints },
     timeBetweenDecodingAttempts: 300,
+    
   });
 
   return (
