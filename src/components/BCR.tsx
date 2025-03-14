@@ -1,21 +1,20 @@
-import { Fab, Grid2,} from "@mui/material";
+import { Button, Fab, Grid2 } from "@mui/material";
 import { FC, useEffect, useMemo, useState } from "react";
-import {  Result, useZxing } from "react-zxing";
-import {  BrowserMultiFormatReader } from "@zxing/library";
+import { Result, useZxing } from "react-zxing";
+import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library";
 import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 const constraints: MediaStreamConstraints = {
   video: {
-    facingMode: "environment"
+    facingMode: "environment",
   },
   audio: false,
-  
 };
 
-// const hints = new Map();
-// const formats = [BarcodeFormat.QR_CODE, BarcodeFormat.CODE_128];
-// hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
+const hints = new Map();
+const formats = [BarcodeFormat.CODE_128];
+hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
 interface OutputObj {
   vRef: React.RefObject<HTMLVideoElement>;
@@ -26,7 +25,6 @@ interface OutputObj {
     isAvailable: boolean | null;
     isOn: boolean;
   };
-  
 }
 
 const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
@@ -40,62 +38,64 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
   }, []);
 
   const handleNavigate = (barcode: string, bctype: string) => {
-    navigate(`/${barcode}/${bctype}/barcode`)
-  }
+    navigate(`/${barcode}/${bctype}/barcode`);
+  };
 
   const handleTorch = () => {
     console.log(torch.isAvailable, torch.isOn);
     if (toggle) {
-        torch.on();
+      torch.on();
     } else {
-        torch.off();
+      torch.off();
     }
     setToggle(!toggle);
-  }
-
+  };
 
   useEffect(() => {
     if (!vRef.current) return;
-    reader.decodeFromConstraints(constraints, vRef.current, (result, _error) => {
-      if (result) handleNavigate(result.getText(), result.getBarcodeFormat().toString());
-    //   if (error) console.log(error);
-      
-    });
+    reader.decodeFromConstraints(
+      constraints,
+      vRef.current,
+      (result, _error) => {
+        if (result)
+          handleNavigate(
+            result.getText(),
+            result.getBarcodeFormat().toString()
+          );
+        //   if (error) console.log(error);
+      }
+    );
     return () => {
       reader.reset();
-      
     };
   }, [vRef, reader]);
 
   return (
     <Fab
-          sx={{
-            position: "absolute",
-            right: 25,
-            bottom: 25,
-            background: "#f5f5f573",
-            border: "1px solid yellow"
-          }}
-          onClick={handleTorch}
-        >
-          {toggle ? <FlashlightOff />  : <FlashlightOn />}
-        </Fab>
+      sx={{
+        position: "absolute",
+        right: 25,
+        bottom: 25,
+        background: "#f5f5f573",
+        border: "1px solid yellow",
+      }}
+      onClick={handleTorch}
+    >
+      {toggle ? <FlashlightOff /> : <FlashlightOn />}
+    </Fab>
   );
 };
 
 export const BCR = () => {
   const [result, setResult] = useState("");
-  
 
   const { ref, torch } = useZxing({
     paused: false,
     onResult: (r: Result) => setResult(r.getText()),
-    constraints: {...constraints},
-    timeBetweenDecodingAttempts: 300
-    
+    constraints: { ...constraints },
+    timeBetweenDecodingAttempts: 300,
   });
 
-  
   return (
     <Grid2 container sx={{ background: "black", height: "75vh" }}>
       <Grid2
@@ -138,7 +138,14 @@ export const BCR = () => {
           ></div>
         </div>
         <video ref={ref} style={{ backgroundSize: "contain" }} />
-        
+      </Grid2>
+      <Grid2 size={{ xs: 12 }} textAlign={"center"}>
+        <Grid2 size={{ xs: 3 }}>
+          <Button variant="contained">C128</Button>
+        </Grid2>
+        <Grid2 size={{ xs: 3 }}></Grid2>
+        <Grid2 size={{ xs: 3 }}></Grid2>
+        <Grid2 size={{ xs: 3 }}></Grid2>
       </Grid2>
       <BCRoutput vRef={ref} barcode={result} torch={torch} />
     </Grid2>
