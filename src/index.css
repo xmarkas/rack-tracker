@@ -54,6 +54,7 @@ body {
     padding: 10px 150px 100px 150px;
     background: #9e9e9e00;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 0 150px rgb(158 158 158 / 42%)
-  
+    box-shadow: 0 0 0 150px rgb(0 0 0 / 43%);
+    border-radius: 15px;
+    border: 1px solid lightgrey;
 }
