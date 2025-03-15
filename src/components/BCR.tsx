@@ -118,7 +118,7 @@ export const BCR = () => {
             background: "lightblue",
             position: "absolute",
             left: "calc(50vw - 100px)",
-            top: "calc(37vh - 100px)",
+            top: "calc(50vh - 100px)",
           }}
         >
           <div

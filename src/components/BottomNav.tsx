@@ -53,7 +53,7 @@ export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any
     ];
 
     const styles = {
-      color: bgColor === "black" ? "white" : "black",
+      color: bgColor === "transparent" ? "white" : "black",
     }
 
     return (
