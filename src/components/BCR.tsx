@@ -127,7 +127,7 @@ export const BCR = () => {
               borderRight: "1px solid red",
               height: "200px",
               width: "100px",
-              zIndex: 100,
+              zIndex: 100
             }}
           ></div>
           <div

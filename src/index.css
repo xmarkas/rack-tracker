@@ -47,11 +47,13 @@ body {
 
 .vid-mask {
   position: absolute;
-  top: 65%;
-  left: 50%;
-  width: 50vw;
-  height: 50vh;
-  padding: 10px 150px 100px 150px;
-  background: blue;
-  transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    padding: 10px 150px 100px 150px;
+    background: #9e9e9e00;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 150px rgb(158 158 158 / 42%)
+  
 }
