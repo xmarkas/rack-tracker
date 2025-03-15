@@ -78,10 +78,11 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
     <Fab
       sx={{
         position: "absolute",
-        right: 25,
+        right: "20%",
         bottom: 100,
         background: "#f5f5f573",
         border: "1px solid yellow",
+        display: "none"
       }}
       onClick={handleTorch}
     >
