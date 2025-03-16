@@ -13,7 +13,8 @@ store.setValues({
   deployment: 31,
   getUpdate: false,
   deploymentCheck: false,
-  torch: <boolean>false
+  torch: <boolean>false,
+  
 });
 
 export const values = (() => {
@@ -43,7 +44,9 @@ export const Model = (table: string) => {
 
   const remove = (id: string) => store.delRow(table, id);
   const byId = (id: string) => {
-    return { ...store.getRow(table, id), Id: id };
+     let result = store.getRow(table, id);
+     result.Id = id;
+    return result;
   };
 
   const all = () => store.getTable(table);

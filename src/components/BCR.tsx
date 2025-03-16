@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const constraints: MediaStreamConstraints = {
   video: {
-    facingMode: "environment",
+    facingMode: "environment"
   },
   audio: false,
 };
@@ -93,6 +93,16 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
 
 export const BCR = () => {
   const [result, setResult] = useState("");
+
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({video: true})
+    .then(() => {
+      console.log("good")
+    }).catch(() => {
+      console.log("bad")
+    })
+   
+  },[])
 
   const { ref, torch } = useZxing({
     paused: false,

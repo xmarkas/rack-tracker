@@ -11,7 +11,7 @@ import {
   Button,
 } from "@mui/material";
 import { FC} from "react";
-
+import { useNavigate } from "react-router-dom";
 
 interface Conditions {
     data: Object[],
@@ -20,6 +20,7 @@ interface Conditions {
   }
 
 export const RackList: FC<Conditions> = ({data, filterConditions, location = false}) => {
+  const navigate = useNavigate();
 
   const createRows = (e: { [key: string]: any }): {} => {
     let action = e.action;
@@ -47,6 +48,7 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
     }
 
     return {
+      Id: e.Id,
       location: e.location,  
       row: e.row,
       side: e.side,
@@ -87,6 +89,11 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
       return 0;
     });
   };
+
+  const handleSelection = (rowId: string, action: string) => {
+    console.log(rowId, action)
+    navigate(`/${rowId}/${action}/thisrack`)
+  }
 
   return (
     <Grid2 size={{ xs: 12 }} sx={{ overflow: "hidden" }} mt={2}>
@@ -143,6 +150,7 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
                             ? "lightgray"
                             : "#1976d2",
                       }}
+                      onClick={() => handleSelection(row.Id, row.action)}
                     >
                       {row.action}
                     </Button>

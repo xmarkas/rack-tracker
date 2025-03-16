@@ -16,6 +16,7 @@ import { Inspector } from "tinybase/ui-react-inspector";
 import { ViewList } from "./components/ViewList.tsx";
 import { BCR } from "./components/BCR.tsx";
 import { BCresult } from "./components/BCresult.tsx";
+import { ThisRack } from "./components/ThisRack.tsx";
 
 export const App = () => {
   // Check for new deployment
@@ -137,6 +138,18 @@ export const App = () => {
                   <ViewList key="v1" />,
                   <BottomNav
                     key="v2"
+                    selectedNavs={[NavItem.BACK]}
+                    
+                  />,
+                ]}
+              />
+              <Route
+                path="/:rowId/:action/thisrack"
+                element={[
+                  <HeaderBar key="t3" />,
+                  <ThisRack key="t1" />,
+                  <BottomNav
+                    key="t2"
                     selectedNavs={[NavItem.BACK]}
                     
                   />,
