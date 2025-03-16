@@ -70,7 +70,7 @@ export const ThisRack = () => {
         <Grid2 size={{ xs: 6 }}>
           <Typography fontWeight={600}>Status</Typography>
           <Typography>
-            {rack?.auditComplete ? "Complete" : "Incomplete"}
+            {status(rack)}
           </Typography>
         </Grid2>
       </Grid2>
