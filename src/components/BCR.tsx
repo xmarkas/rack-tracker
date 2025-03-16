@@ -1,12 +1,12 @@
 import { Fab, Grid2 } from "@mui/material";
-import { FC, useEffect, useMemo, useState } from "react";
-import { Result, useZxing } from "react-zxing";
+import { FC, useEffect, useMemo } from "react";
+import { useZxing } from "react-zxing";
 import {
   BarcodeFormat,
   BrowserMultiFormatReader,
   DecodeHintType,
 } from "@zxing/library";
-import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
+// import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
@@ -28,7 +28,7 @@ hints.set(DecodeHintType.TRY_HARDER, true);
 interface OutputObj {
   vRef: React.RefObject<HTMLVideoElement>;
   barcode?: string;
-  torch: {
+  torch?: {
     on: () => Promise<void>;
     off: () => Promise<void>;
     isAvailable: boolean | null;
@@ -36,8 +36,7 @@ interface OutputObj {
   };
 }
 
-const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
-  const [toggle, setToggle] = useState(false);
+const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   const navigate = useNavigate();
 
   const reader = useMemo<BrowserMultiFormatReader>(() => {
@@ -69,14 +68,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
     }
   };
 
-  const handleTorch = () => {
-    if (toggle) {
-      torch.on();
-    } else {
-      torch.off();
-    }
-    setToggle(!toggle);
-  };
+  
 
   useEffect(() => {
     if (!vRef.current) return;
@@ -107,30 +99,27 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
         border: "1px solid yellow",
         display: "none"
       }}
-      onClick={handleTorch}
+      
     >
-      {toggle ? <FlashlightOff /> : <FlashlightOn />}
     </Fab>
   );
 };
 
 export const BCR = () => {
-  const [result, setResult] = useState("");
 
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(() => {
-        console.log("good");
-      })
-      .catch(() => {
-        console.log("bad");
-      });
-  }, []);
+  // useEffect(() => {
+  //   navigator.mediaDevices
+  //     .getUserMedia({ video: true })
+  //     .then(() => {
+  //       console.log("good");
+  //     })
+  //     .catch(() => {
+  //       console.log("bad");
+  //     });
+  // }, []);
 
-  const { ref, torch } = useZxing({
+  const { ref } = useZxing({
     paused: false,
-    onResult: (r: Result) => setResult(r.getText()),
     constraints: { ...constraints },
     timeBetweenDecodingAttempts: 300,
   });
@@ -180,7 +169,7 @@ export const BCR = () => {
           <div className="vid-mask"></div>
         </div>
       </Grid2>
-      <BCRoutput vRef={ref} barcode={result} torch={torch} />
+      <BCRoutput vRef={ref} />
     </Grid2>
   );
 };

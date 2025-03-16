@@ -82,7 +82,7 @@ export const ThisRack = () => {
             <Typography>{rackMove.location}</Typography>
           </Grid2>
           <Grid2 size={{ xs: 6 }}>
-            <Typography fontWeight={600}>Destination Status</Typography>
+            <Typography fontWeight={600}>{rackMove.destinationID ? "Origin Status" : "Destination Status"}</Typography>
             <Typography>{status(rackMove)}</Typography>
           </Grid2>
         </Grid2>
