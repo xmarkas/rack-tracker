@@ -9,7 +9,7 @@ export const BCresult = () => {
     return (
         <Box>
             <Grid2 container justifyContent={"center"}>
-                <Grid2 size={{xs:12}} textAlign={"center"}>
+                <Grid2 size={{xs:12}} pt={5} textAlign={"center"}>
                     <Typography variant="h6">Serial Number {barcode}</Typography>
                     <Typography color="red" fontWeight={700}>NOT FOUND!</Typography>
                 </Grid2>

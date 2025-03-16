@@ -16,7 +16,7 @@ export const buildingQueries = (baseModel: { [key: string]: any }) => {
   return { buildings, byBuilding };
 };
 
-export const queryTaskCount = (baseModel: { [key: string]: any }) => {
+export const queryTaskCount = ((baseModel: { [key: string]: any }) => {
   const taskCounts = (
     queryId: string,
     cellId: string,
@@ -47,5 +47,23 @@ export const queryTaskCount = (baseModel: { [key: string]: any }) => {
     return results;
   };
 
-  return { taskCounts,countsByHall };
-};
+  // by serial number
+  const bySerialNumber = (
+    queryId: string,
+    val: string | boolean
+  ) => {
+    console.log(queryId, val)
+    const results = queries.setQueryDefinition(
+      queryId,
+      baseModel.tableName,
+      ({ select, where }) => {
+        select('serialNumber');
+        where('serialNumber', val);
+      }
+    );
+    
+    return results.getResultRowIds(queryId)[0];
+  };
+
+  return { taskCounts,countsByHall, bySerialNumber };
+});

@@ -8,10 +8,14 @@ import {
 } from "@zxing/library";
 import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import Moves from "../store/Moves.model";
+import Slcs from "../store/Slcs.model";
+import Decoms from "../store/Decoms.model";
+import { MoveType } from "../store/types";
 
 const constraints: MediaStreamConstraints = {
   video: {
-    facingMode: "environment"
+    facingMode: "environment",
   },
   audio: false,
 };
@@ -42,12 +46,30 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
     return instance;
   }, []);
 
-  const handleNavigate = (barcode: string, bctype: string) => {
-    navigate(`/${barcode}/${bctype}/barcode`);
+  const handleNavigate = (
+    barcode: string = "50414697",
+    bctype: string = "c128"
+  ) => {
+    // Get serialNumber and moveType, search each table for result
+    const rowId = {
+      Unset: Moves.bySerialNumber("mRack", barcode),
+      Decom: Decoms.bySerialNumber("dRack", barcode),
+      SLC: Slcs.bySerialNumber("sRack", barcode)
+    }
+    
+    if (rowId.Unset && rowId.SLC) {
+      navigate(`/${rowId.Unset}/${MoveType.MOVE}/thisrack`);
+    } else if (rowId.SLC) {
+      navigate(`/${rowId.SLC}/${MoveType.INBOUND}/thisrack`);
+    } else if (rowId.Decom) {
+      navigate(`/${rowId.SLC}/${MoveType.DECOM}/thisrack`);
+    } else {
+      // When barcode is not in database
+      navigate(`/${barcode}/${bctype}/barcode`);
+    }
   };
 
   const handleTorch = () => {
-    console.log(torch.isAvailable, torch.isOn);
     if (toggle) {
       torch.on();
     } else {
@@ -58,6 +80,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
 
   useEffect(() => {
     if (!vRef.current) return;
+
     reader.decodeFromConstraints(
       constraints,
       vRef.current,
@@ -82,7 +105,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
         bottom: 100,
         background: "#f5f5f573",
         border: "1px solid yellow",
-        display: "none"
+        // display: "none"
       }}
       onClick={handleTorch}
     >
@@ -95,14 +118,15 @@ export const BCR = () => {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({video: true})
-    .then(() => {
-      console.log("good")
-    }).catch(() => {
-      console.log("bad")
-    })
-   
-  },[])
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(() => {
+        console.log("good");
+      })
+      .catch(() => {
+        console.log("bad");
+      });
+  }, []);
 
   const { ref, torch } = useZxing({
     paused: false,
@@ -138,7 +162,7 @@ export const BCR = () => {
               borderRight: "1px solid red",
               height: "200px",
               width: "100px",
-              zIndex: 100
+              zIndex: 100,
             }}
           ></div>
           <div

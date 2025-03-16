@@ -25,6 +25,7 @@ const Moves = (() => {
     "auditComplete",
     false
   );
+  
 
   return {
     ...baseModel,
@@ -33,8 +34,7 @@ const Moves = (() => {
     unSetCount,
     priorityCount,
     issueCount,
-    auditCount,
-    
+    auditCount
   };
 })();
 

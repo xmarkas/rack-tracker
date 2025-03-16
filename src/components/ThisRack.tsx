@@ -6,22 +6,23 @@ import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
 import { Row } from "tinybase";
+import { MoveType } from "../store/types";
 
 export const ThisRack = () => {
     const [rack, setRack] = useState<Row>({});
     const [destination, setDestination] = useState<Row>({});
     const rowId: string = useParams().rowId || "";
-    const action: string = useParams().action || "";
+    const moveType = useParams().moveType || "";
 
     useEffect(() => {
-        if (action === "Unset") {
+        if (moveType === MoveType.MOVE) {
             let unset = Moves.byId(rowId);
             let slc = Slcs.byId(unset.destinationID.toString());
             setDestination(slc);
             setRack(unset);
-        } else if (action === "SLC") {
+        } else if (moveType === MoveType.INBOUND) {
             setRack(Slcs.byId(rowId));
-        } else if (action === "Decom") {
+        } else if (moveType === MoveType.DECOM) {
             setRack(Decoms.byId(rowId));
         }
     },[])
@@ -42,7 +43,7 @@ export const ThisRack = () => {
         </Grid2>
         <Grid2 size={{ xs: 6 }}>
           <Typography fontWeight={600}>Type</Typography>
-          <Typography>{rack?.action}</Typography>
+          <Typography>{rack?.moveType}</Typography>
         </Grid2>
       </Grid2>
       {/*  */}
@@ -53,7 +54,7 @@ export const ThisRack = () => {
         </Grid2>
       </Grid2>
       {/*  */}
-      {action === "Unset" &&
+      {moveType === MoveType.MOVE &&
       <Grid2 container size={{xs:12}} mb={2} textAlign={"center"}>
         <Grid2 size={{ xs: 6 }}>
           <Typography fontWeight={600}>Destination</Typography>

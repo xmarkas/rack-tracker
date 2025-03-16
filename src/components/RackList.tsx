@@ -61,6 +61,7 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
       hasPriority: e.hasPriority,
       hasIssue: e.hasIssue,
       rowColor: rowColor,
+      moveType: e.moveType
     };
   };
 
@@ -90,9 +91,9 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
     });
   };
 
-  const handleSelection = (rowId: string, action: string) => {
-    console.log(rowId, action)
-    navigate(`/${rowId}/${action}/thisrack`)
+  const handleSelection = (rowId: string, moveType: string) => {
+    console.log(rowId, moveType)
+    navigate(`/${rowId}/${moveType}/thisrack`)
   }
 
   return (
@@ -150,7 +151,7 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
                             ? "lightgray"
                             : "#1976d2",
                       }}
-                      onClick={() => handleSelection(row.Id, row.action)}
+                      onClick={() => handleSelection(row.Id, row.moveType)}
                     >
                       {row.action}
                     </Button>

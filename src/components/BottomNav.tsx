@@ -28,7 +28,6 @@ export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any
   };
 
   const navItems = (val: number) => {
-    console.log(val);
     const items = [
       {
         value: "back",

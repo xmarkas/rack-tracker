@@ -117,7 +117,7 @@ export const App = () => {
                 path="/:barcode/:bctype/barcode"
                 element={[
                   <HeaderBar key="b1" />,
-                  <BCresult />,
+                  <BCresult key="b2"/>,
                   <BottomNav
                     key="b3"
                     selectedNavs={[NavItem.BACK]}
@@ -144,7 +144,7 @@ export const App = () => {
                 ]}
               />
               <Route
-                path="/:rowId/:action/thisrack"
+                path="/:rowId/:moveType/thisrack"
                 element={[
                   <HeaderBar key="t3" />,
                   <ThisRack key="t1" />,
