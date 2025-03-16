@@ -1,6 +1,6 @@
 // Create instance of Tinybase Store
 import { createStore, createQueries, createIndexes } from "tinybase";
-import { UnsetMove, SLC, Decom } from "./models";
+import { UnsetMove, SLC, Decom } from "./interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 

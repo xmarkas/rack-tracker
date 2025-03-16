@@ -1,4 +1,4 @@
-import { UnsetMove, SLC } from "../store/models";
+import { UnsetMove, SLC } from "../store/interfaces";
 import {
   Teams,
   Action,
@@ -56,6 +56,7 @@ const locationParse = (local: string): { [key: string]: any } => {
  */
 export const createJsonForMove = (arr: string[]): UnsetMove | null => {
   const obj: UnsetMove = {
+    Id: "",
     team: Teams.Commonwealth,
     action: arr[1] === "Decom Only" ? Action.DECOM : Action.UNSET,
     moveType: MoveType.MOVE,
@@ -108,6 +109,7 @@ export const createJsonForSLC = (
   moveEntryID: string
 ): SLC | null => {
   const obj: SLC = {
+    Id: "",
     team: Teams.Commonwealth,
     action: Action.SLC,
     moveType: MoveType.MOVE,

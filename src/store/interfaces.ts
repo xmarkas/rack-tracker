@@ -27,7 +27,7 @@ export interface UnsetMove {
   }
 
   export interface SLC {
-    [key: string]: string | number | boolean;
+    [index: string]: string | number | boolean ;
     Id: string;
     team: Teams;
     action: Action;
