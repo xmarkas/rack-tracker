@@ -13,8 +13,7 @@ export const ThisRack = () => {
   const [rackMove, setRackMove] = useState<Row>({});
   const rowId: string = useParams().rowId || "";
   const moveType = useParams().moveType || "";
-  console.log(rowId, moveType);
-  // cf39725b-fb72-4665-b207-6466628749b7 Rack Move
+  
   useEffect(() => {
     if (moveType === MoveType.MOVE) {
       let thisRack = { unset: Moves.byId(rowId), set: Slcs.byId(rowId) };

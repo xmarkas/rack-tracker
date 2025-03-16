@@ -52,7 +52,6 @@ export const queryTaskCount = ((baseModel: { [key: string]: any }) => {
     queryId: string,
     val: string | boolean
   ) => {
-    console.log(queryId, val)
     const results = queries.setQueryDefinition(
       queryId,
       baseModel.tableName,

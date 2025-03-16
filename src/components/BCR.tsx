@@ -105,7 +105,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef, torch }) => {
         bottom: 100,
         background: "#f5f5f573",
         border: "1px solid yellow",
-        // display: "none"
+        display: "none"
       }}
       onClick={handleTorch}
     >
