@@ -44,7 +44,7 @@ const locationParse = (local: string): { [key: string]: any } => {
     returnObj.side = localArr[2]?.slice(localArr[2].length - 1);
     returnObj.position = localArr[3];
   }
-  
+
   return buildLocationID(returnObj);
 };
 
@@ -56,7 +56,6 @@ const locationParse = (local: string): { [key: string]: any } => {
  */
 export const createJsonForMove = (arr: string[]): UnsetMove | null => {
   const obj: UnsetMove = {
-    Id: "",
     team: Teams.Commonwealth,
     action: arr[1] === "Decom Only" ? Action.DECOM : Action.UNSET,
     moveType: MoveType.MOVE,
@@ -75,6 +74,7 @@ export const createJsonForMove = (arr: string[]): UnsetMove | null => {
     notes: "",
     hasIssue: false,
     hasPriority: false,
+    Id: "",
   };
 
   // Map Values
@@ -88,18 +88,18 @@ export const createJsonForMove = (arr: string[]): UnsetMove | null => {
   const objKeys: string[] = Object.keys(obj);
 
   indexMapMove.forEach(function (val) {
-      if (val < 4) {
-          obj[objKeys[val]] = arr[val];
-      } else if (val === 5) {
-          let fromObj = locationParse(arr[val]);
-          Object.keys(fromObj).forEach((key) => {
-              obj[key] = fromObj[key];
-          });
-      } else if (val === 10) {
-          obj["unset"] = arr[val] === "TRUE" ? true : false;
-      } else if (val === 13) {
-          obj["auditComplete"] = arr[val] === "TRUE" ? true : false;
-      }
+    if (val < 4) {
+      obj[objKeys[val]] = arr[val];
+    } else if (val === 5) {
+      let fromObj = locationParse(arr[val]);
+      Object.keys(fromObj).forEach((key) => {
+        obj[key] = fromObj[key];
+      });
+    } else if (val === 10) {
+      obj["unset"] = arr[val] === "TRUE" ? true : false;
+    } else if (val === 13) {
+      obj["auditComplete"] = arr[val] === "TRUE" ? true : false;
+    }
   });
   return obj;
 };
@@ -109,7 +109,6 @@ export const createJsonForSLC = (
   moveEntryID: string
 ): SLC | null => {
   const obj: SLC = {
-    Id: "",
     team: Teams.Commonwealth,
     action: Action.SLC,
     moveType: MoveType.MOVE,
@@ -127,6 +126,7 @@ export const createJsonForSLC = (
     notes: "",
     hasIssue: false,
     hasPriority: false,
+    Id: "",
   };
 
   // Map Values
@@ -140,20 +140,20 @@ export const createJsonForSLC = (
   const objKeys: string[] = Object.keys(obj);
 
   indexMapMove.forEach(function (val) {
-      if (val < 4) {
-          obj[objKeys[val]] = arr[val];
-      } else if (val === 8) {
-          let fromObj = locationParse(arr[val]);
-          Object.keys(fromObj).forEach((key) => {
-              obj[key] = fromObj[key];
-          });
-      } else if (val === 11) {
-          obj["inPosition"] = arr[val] === "TRUE" ? true : false;
-      } else if (val === 12) {
-          obj["slcSET"] = arr[val] === "TRUE" ? true : false;
-      } else if (val === 13) {
-          obj["auditComplete"] = arr[val] === "TRUE" ? true : false;
-      }
+    if (val < 4) {
+      obj[objKeys[val]] = arr[val];
+    } else if (val === 8) {
+      let fromObj = locationParse(arr[val]);
+      Object.keys(fromObj).forEach((key) => {
+        obj[key] = fromObj[key];
+      });
+    } else if (val === 11) {
+      obj["inPosition"] = arr[val] === "TRUE" ? true : false;
+    } else if (val === 12) {
+      obj["slcSET"] = arr[val] === "TRUE" ? true : false;
+    } else if (val === 13) {
+      obj["auditComplete"] = arr[val] === "TRUE" ? true : false;
+    }
   });
   return obj;
 };
