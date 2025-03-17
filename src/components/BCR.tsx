@@ -107,16 +107,16 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
 
 export const BCR = () => {
 
-  // useEffect(() => {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true })
-  //     .then(() => {
-  //       console.log("good");
-  //     })
-  //     .catch(() => {
-  //       console.log("bad");
-  //     });
-  // }, []);
+  useEffect(() => {
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then(() => {
+        console.log("good");
+      })
+      .catch(() => {
+        console.log("bad");
+      });
+  }, []);
 
   const { ref } = useZxing({
     paused: false,
