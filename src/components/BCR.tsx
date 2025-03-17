@@ -45,10 +45,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
     return instance;
   }, []);
 
-  const handleNavigate = (
-    barcode: string = "50414697",
-    bctype: string = "c128"
-  ) => {
+  const handleNavigate = (barcode: string, bctype: string) => {
     // Get serialNumber and moveType, search each table for result
     const rowId = {
       Unset: Moves.bySerialNumber("mRack", barcode),
@@ -56,12 +53,13 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
       SLC: Slcs.bySerialNumber("sRack", barcode),
     };
 
+    console.log(rowId)
     if (rowId.Unset && rowId.SLC) {
       navigate(`/${rowId.Unset}/${MoveType.MOVE}/thisrack`);
     } else if (rowId.SLC) {
       navigate(`/${rowId.SLC}/${MoveType.INBOUND}/thisrack`);
     } else if (rowId.Decom) {
-      navigate(`/${rowId.SLC}/${MoveType.DECOM}/thisrack`);
+      navigate(`/${rowId.Decom}/${MoveType.DECOM}/thisrack`);
     } else {
       // When barcode is not in database
       navigate(`/${barcode}/${bctype}/barcode`);
@@ -77,7 +75,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
       (result, _error) => {
         if (result)
           handleNavigate(
-            result.getText(),
+             result.getText(),
             result.getBarcodeFormat().toString()
           );
       }
@@ -97,6 +95,9 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
         border: "1px solid yellow",
         display: "none",
       }}
+      onClick={() => handleNavigate(
+        '50427739',"C128")
+     }
     ></Fab>
   );
 };
