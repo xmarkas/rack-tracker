@@ -2,14 +2,21 @@ import { Grid2, Box, Badge, Button } from "@mui/material";
 import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
-import { useResultRowIds } from "tinybase/ui-react";
+import { useResultRowIds} from "tinybase/ui-react";
 import { WorkProgressBar } from "./WorkProgressBar";
 import { BuildingNav } from "./BuildingNav";
 import { useNavigate } from "react-router-dom";
+import { store } from "../store/store";
 
 
 export const SLC = () => {
   const navigate = useNavigate();
+  
+  let progressData = [
+    ...store.getRowIds('Moves').map(Moves.byId),
+    ...store.getRowIds('Slcs').map(Slcs.byId),
+    ...store.getRowIds('Decoms').map(Decoms.byId)
+  ]
 
   const handleNavigate = (path: string) => {
     navigate(`/${path}`);
@@ -41,7 +48,7 @@ export const SLC = () => {
 
   return (
     <Box>
-      <WorkProgressBar />
+      <WorkProgressBar title="Task Progress" data={progressData}/>
       {/* ROW 1 */}
       <Grid2 container py={1} px={0.5}>
         {/* Unsets */}

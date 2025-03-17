@@ -1,23 +1,26 @@
 import { LinearProgress, Grid2, Box, Typography } from "@mui/material";
-import Moves from "../store/Moves.model";
-import Slcs from "../store/Slcs.model";
-import Decoms from "../store/Decoms.model";
-import { useResultRowIds } from "tinybase/ui-react";
+import { FC } from "react";
+import { Row } from "tinybase";
 
-export const WorkProgressBar = () => {
+
+interface ProgressProps {
+  title: string;
+  data: Row[] | Object[];
+}
+
+export const WorkProgressBar: FC<ProgressProps> = ({title, data = []}) => {
+  console.log(data)
   const progress = () => {
-    let totals: number = Moves.count() + Slcs.count() + Decoms.count();
-    let completed: number =
-      useResultRowIds("unsetCount", Moves.unSetCount).length +
-      useResultRowIds("slcCount", Slcs.slcCount).length +
-      useResultRowIds("decomCount", Decoms.decomCount).length;
-    return completed === totals ? 100 : Math.floor(((totals - completed) / totals) * 100);
+    let totals : number = data.length;
+    let completed: number = data.filter((r : any) => {return r.unset || r.slcSET}).length;
+    console.log(completed)
+    return completed === totals ? 100 : Math.floor(((completed) / totals) * 100);
   };
 
   return (
     <Grid2 container py={1} px={0.5}>
       <Grid2 size={{ xs: 12 }}>
-        <Typography>Task Progress</Typography>
+        <Typography>{title}</Typography>
       </Grid2>
       <Grid2 size={{ xs: 12 }}>
         <Box

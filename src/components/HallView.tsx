@@ -8,6 +8,8 @@ import { useTablesListener } from "tinybase/ui-react";
 import { WorkProgressBar } from "./WorkProgressBar";
 import { RackList } from "./RackList";
 
+
+
 export const HallView = () => {
   const [hall, setHall] = useState<string>("A");
   const building_ID: string = useParams().building_ID || "";
@@ -66,7 +68,7 @@ export const HallView = () => {
         py={2}
       >
         <Grid2 size={{ xs: 12 }} textAlign="center">
-          <WorkProgressBar />
+          <WorkProgressBar title={`Progress for ${building_ID}`} data={hallData}/>
         </Grid2>
         <Grid2
           size={{ xs: 12 }}
