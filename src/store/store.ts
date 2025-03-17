@@ -35,6 +35,12 @@ export const Model = (table: string) => {
   const add = (object: UnsetMove | SLC | Decom | null) => {
     if (object === null) return null;
     const id: string = uuidv4();
+
+    /**
+     * Alt for reading spread sheet, if Moves/Unset is complete
+     * (unSET === true) then mark audit complete
+     */
+    if (table === "Moves" && object.unset) object.auditComplete = true;
     store.setRow(table, id, object);
     return { id: id, entry: object };
   };

@@ -10,15 +10,12 @@ import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
-import { useNavigate } from "react-router-dom";
 import { FileUploader } from "./FileUploader.tsx";
 import { sheetsLink } from "../tools/sheetsLink.ts";
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const navigate = useNavigate();
   const parentRef: any = useRef(); // For uploading CSV
-  
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -31,23 +28,15 @@ export function HeaderBar() {
   const handleFileUpload = () => {
     parentRef.current?.handleUploadClick();
     handleCloseUserMenu();
-  }
-
-  const handleBeta = (uri : string) => {
-    navigate(`/${uri}`)
-  }
-
-  const forceUpdate = () => {
-    navigate("/");
   };
 
-  const handleDownload =() => {
+  const handleDownload = () => {
     const filePath = sheetsLink();
-    let link=document.createElement('a');
+    let link = document.createElement("a");
     link.href = filePath;
-    link.download = filePath.substr(filePath.lastIndexOf('/') + 1);
+    link.download = filePath.substr(filePath.lastIndexOf("/") + 1);
     link.click();
-  }
+  };
 
   return (
     <AppBar
@@ -119,32 +108,13 @@ export function HeaderBar() {
               <MenuItem key={"account"} onClick={handleCloseUserMenu}>
                 <Typography sx={{ textAlign: "center" }}>Account</Typography>
               </MenuItem>
-              <MenuItem key={"force"} onClick={forceUpdate}>
-                <Typography sx={{ textAlign: "center" }}>
-                  Force Update
-                </Typography>
-              </MenuItem>
               <MenuItem key={"upload"} onClick={handleFileUpload}>
                 <Typography sx={{ textAlign: "center" }}>Upload CSV</Typography>
               </MenuItem>
-              {/* <MenuItem key={"beta"} onClick={() => handleBeta("beta")}>
-                <Typography sx={{ textAlign: "center" }}>Beta Scan</Typography>
-              </MenuItem> */}
-              <MenuItem key={"betaC"} onClick={() => handleBeta("betaC")}>
-                <Typography sx={{ textAlign: "center" }}>BetaC Scan</Typography>
-              </MenuItem>
-              {/* <MenuItem key={"download"} onClick={handleDownload}>
-                <Typography sx={{ textAlign: "center" }}>CSV Link</Typography>
-              </MenuItem> */}
-              {/* <MenuItem key={"download"}>
-                <a href={sheetsLink()} download="data_new.csv" style={{textDecoration: "none", color: "black"}}>Download CSV</a>
-              </MenuItem> */}
+
               <MenuItem key={"download"} onClick={handleDownload}>
-                 <Typography>Download</Typography>
+                <Typography>Download</Typography>
               </MenuItem>
-              {/* <MenuItem key={"logout"} onClick={handleCloseUserMenu}>
-                <Typography sx={{ textAlign: "center" }}>Log Out</Typography>
-              </MenuItem> */}
             </Menu>
           </Box>
         </Toolbar>

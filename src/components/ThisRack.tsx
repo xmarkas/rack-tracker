@@ -17,13 +17,24 @@ export const ThisRack = () => {
   useEffect(() => {
     if (moveType === MoveType.MOVE) {
       let thisRack = { unset: Moves.byId(rowId), set: Slcs.byId(rowId) };
+      let set: Row = {};
+      let unset: Row = {};
+    
+      // Find both destination and origin for rack
       if (thisRack.set.serialNumber && !thisRack.unset.serialNumber) {
-        let unset = Moves.byId(thisRack.set.originID.toString())
-        setRack(thisRack.set);
-        setRackMove(unset);
+        unset = Moves.byId(thisRack.set.originID.toString());
+        set = thisRack.set;
       } else if (!thisRack.set.serialNumber && thisRack.unset.serialNumber) {
-        let set = Slcs.byId(thisRack.unset.destinationID.toString())
-        setRack(thisRack.unset);
+        set = Slcs.byId(thisRack.unset.destinationID.toString())
+        unset = thisRack.unset;
+      }
+
+      // Check if rack has arrived to destination position
+      if (set.inPosition) {
+        setRack(set);
+        setRackMove(unset);
+      } else {
+        setRack(unset);
         setRackMove(set);
       }
     } else if (moveType === MoveType.INBOUND) {
@@ -66,7 +77,7 @@ export const ThisRack = () => {
         </Grid2>
       </Grid2>
       {/*  */}
-      <Grid2 container size={{ xs: 12 }} mb={2} textAlign={"center"}>
+      <Grid2 container size={{ xs: 12 }} my={2} textAlign={"center"}>
         <Grid2 size={{ xs: 6 }}>
           <Typography fontWeight={600}>Status</Typography>
           <Typography>
@@ -76,7 +87,7 @@ export const ThisRack = () => {
       </Grid2>
       {/*  */}
       {moveType === MoveType.MOVE && (
-        <Grid2 container size={{ xs: 12 }} mb={2} textAlign={"center"}>
+        <Grid2 container size={{ xs: 12 }} my={2} py={2} textAlign={"center"} borderTop={"1px solid lightgray"}>
           <Grid2 size={{ xs: 6 }}>
             <Typography fontWeight={600}>{rackMove.destinationID ? "Origin" : "Destination"}</Typography>
             <Typography>{rackMove.location}</Typography>
