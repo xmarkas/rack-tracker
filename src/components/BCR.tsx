@@ -87,17 +87,6 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
     };
   }, [vRef, reader]);
 
-  useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then(() => {
-        console.log("good");
-      })
-      .catch(() => {
-        console.log("bad");
-      });
-  }, []);
-
   return (
     <Fab
       sx={{
