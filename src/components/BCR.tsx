@@ -53,9 +53,9 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
     const rowId = {
       Unset: Moves.bySerialNumber("mRack", barcode),
       Decom: Decoms.bySerialNumber("dRack", barcode),
-      SLC: Slcs.bySerialNumber("sRack", barcode)
-    }
-    
+      SLC: Slcs.bySerialNumber("sRack", barcode),
+    };
+
     if (rowId.Unset && rowId.SLC) {
       navigate(`/${rowId.Unset}/${MoveType.MOVE}/thisrack`);
     } else if (rowId.SLC) {
@@ -67,8 +67,6 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
       navigate(`/${barcode}/${bctype}/barcode`);
     }
   };
-
-  
 
   useEffect(() => {
     if (!vRef.current) return;
@@ -89,24 +87,6 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
     };
   }, [vRef, reader]);
 
-  return (
-    <Fab
-      sx={{
-        position: "absolute",
-        right: "20%",
-        bottom: 100,
-        background: "#f5f5f573",
-        border: "1px solid yellow",
-        display: "none"
-      }}
-      
-    >
-    </Fab>
-  );
-};
-
-export const BCR = () => {
-
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true })
@@ -118,6 +98,21 @@ export const BCR = () => {
       });
   }, []);
 
+  return (
+    <Fab
+      sx={{
+        position: "absolute",
+        right: "20%",
+        bottom: 100,
+        background: "#f5f5f573",
+        border: "1px solid yellow",
+        display: "none",
+      }}
+    ></Fab>
+  );
+};
+
+export const BCR = () => {
   const { ref } = useZxing({
     paused: false,
     constraints: { ...constraints },
