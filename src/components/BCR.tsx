@@ -53,7 +53,6 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
       SLC: Slcs.bySerialNumber("sRack", barcode),
     };
 
-    console.log(rowId)
     if (rowId.Unset && rowId.SLC) {
       navigate(`/${rowId.Unset}/${MoveType.MOVE}/thisrack`);
     } else if (rowId.SLC) {
@@ -75,7 +74,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
       (result, _error) => {
         if (result)
           handleNavigate(
-             result.getText(),
+            result.getText(),
             result.getBarcodeFormat().toString()
           );
       }
@@ -95,9 +94,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
         border: "1px solid yellow",
         display: "none",
       }}
-      onClick={() => handleNavigate(
-        '50427739',"C128")
-     }
+      onClick={() => handleNavigate("50427739", "C128")}
     ></Fab>
   );
 };
@@ -110,12 +107,12 @@ export const BCR = () => {
   });
 
   return (
-    <Grid2 container sx={{ background: "black", height: "75vh" }}>
+    <Grid2 container sx={{ background: "black" }}>
       <Grid2
         size={{ xs: 12 }}
         display={"flex"}
-        width={"100vw"}
-        height={"75vh"}
+        // width={"100vw"}
+        // height={"75vh"}
         alignItems={"center"}
         justifyContent={"center"}
         flex={1}
@@ -127,7 +124,7 @@ export const BCR = () => {
             background: "lightblue",
             position: "absolute",
             left: "calc(50vw - 100px)",
-            top: "calc(50vh - 100px)",
+            top: "calc(38vh - 100px)",
           }}
         >
           <div
@@ -150,7 +147,7 @@ export const BCR = () => {
           ></div>
         </div>
         <div className="video-container">
-          <video ref={ref} />
+          <video ref={ref} style={{ minHeight: "100%", minWidth: "100%" }} />
           <div className="vid-mask"></div>
         </div>
       </Grid2>

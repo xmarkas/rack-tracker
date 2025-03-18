@@ -20,6 +20,7 @@ export const WorkProgressBar: FC<ProgressProps> = ({title, data = []}) => {
   return (
     <Grid2 container py={1} px={0.5}>
       <Grid2 size={{ xs: 12 }}>
+        
         <Typography>{title}</Typography>
       </Grid2>
       <Grid2 size={{ xs: 12 }}>
