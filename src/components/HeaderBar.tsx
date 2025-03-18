@@ -39,17 +39,11 @@ export function HeaderBar() {
   };
 
   const PciDownload = () => {
-    let file = "Test stuff";
-    let name = "PCI.csv"
-    let mimetype = "application/csv"
-    const blob = new File([file], name, { type: mimetype }); 
-    const url = window.URL.createObjectURL(blob);
-    window.open(url, '_blank');
-    fetch(PciLink()).then(r => r.json()).then((r) => {
-      console.log(r)
-    }).catch(err => console.log(err))
-    console.log(blob)
-    URL.revokeObjectURL(url);
+    const filePath = PciLink();
+    let link = document.createElement("a");
+    link.href = filePath;
+    link.download = "PCIsheet";
+    link.click();
   }
 
   return (
