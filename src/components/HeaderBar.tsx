@@ -30,13 +30,23 @@ export function HeaderBar() {
     handleCloseUserMenu();
   };
 
-  const handleDownload = () => {
+  const AtnDownload = () => {
     const filePath = sheetsLink();
     let link = document.createElement("a");
     link.href = filePath;
     link.download = filePath.substr(filePath.lastIndexOf("/") + 1);
     link.click();
   };
+
+  const PciDownload = () => {
+    let file = "Test stuff";
+    let name = "PCI.csv"
+    let mimetype = "application/text"
+    const blob = new File([file], name, { type: mimetype }); 
+    const url = window.URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <AppBar
@@ -112,8 +122,11 @@ export function HeaderBar() {
                 <Typography sx={{ textAlign: "center" }}>Upload CSV</Typography>
               </MenuItem>
 
-              <MenuItem key={"download"} onClick={handleDownload}>
-                <Typography>Download</Typography>
+              <MenuItem key={"download"} onClick={AtnDownload}>
+                <Typography>ATN Download</Typography>
+              </MenuItem>
+              <MenuItem key={"download"} onClick={PciDownload}>
+                <Typography>PCI Download</Typography>
               </MenuItem>
             </Menu>
           </Box>
