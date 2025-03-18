@@ -12,8 +12,15 @@ export const FileUploader = forwardRef((_props, ref) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
-    Moves.deleteStoreAll(); // Purge the store data before uploading new CSV
     const file = event.target.files?.[0];
+
+    // Check file name and remove previus entries
+    if (file?.name.includes("PCI")) {
+      [Moves, Slcs, Decoms].forEach(model => model.removeByFacility("PCI"));
+    } else if (file?.name.includes("ATN")) {
+      [Moves, Slcs, Decoms].forEach(model => model.removeByFacility("ATN"));
+    }
+
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {

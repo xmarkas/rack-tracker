@@ -60,6 +60,8 @@ export const Model = (table: string) => {
   const tableName: string = table;
   const deleteStoreAll = () => store.delTables();
 
+  
+
   // createQueries(store).addResultRowCountListener()
   return {
     add,

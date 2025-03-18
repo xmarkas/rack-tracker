@@ -1,5 +1,6 @@
 interface ImportMetaEnv {
-    readonly VITE_GID: string
+    readonly VITE_ATN_GID: string,
+    readonly VITE_PCI_GID: string
     // more env variables...
   }
   
