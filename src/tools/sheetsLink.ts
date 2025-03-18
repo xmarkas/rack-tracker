@@ -7,6 +7,6 @@ export const sheetsLink = () => {
   return `${sheetLink}${gid}`;
 };
 
-export const PciLink = () => {
+export const PciLink = () : string => {
   return `${pciLink}${PCIgid}`
 }

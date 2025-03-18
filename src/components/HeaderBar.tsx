@@ -11,7 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import packageJSON from "../../package.json";
 import { FileUploader } from "./FileUploader.tsx";
-import { sheetsLink } from "../tools/sheetsLink.ts";
+import { PciLink, sheetsLink } from "../tools/sheetsLink.ts";
 
 export function HeaderBar() {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -41,10 +41,14 @@ export function HeaderBar() {
   const PciDownload = () => {
     let file = "Test stuff";
     let name = "PCI.csv"
-    let mimetype = "application/text"
+    let mimetype = "application/csv"
     const blob = new File([file], name, { type: mimetype }); 
     const url = window.URL.createObjectURL(blob);
     window.open(url, '_blank');
+    fetch(PciLink()).then(r => r.json()).then((r) => {
+      console.log(r)
+    }).catch(err => console.log(err))
+    console.log(blob)
     URL.revokeObjectURL(url);
   }
 
@@ -122,10 +126,10 @@ export function HeaderBar() {
                 <Typography sx={{ textAlign: "center" }}>Upload CSV</Typography>
               </MenuItem>
 
-              <MenuItem key={"download"} onClick={AtnDownload}>
+              <MenuItem key={"atn"} onClick={AtnDownload}>
                 <Typography>ATN Download</Typography>
               </MenuItem>
-              <MenuItem key={"download"} onClick={PciDownload}>
+              <MenuItem key={"pci"} onClick={PciDownload}>
                 <Typography>PCI Download</Typography>
               </MenuItem>
             </Menu>
