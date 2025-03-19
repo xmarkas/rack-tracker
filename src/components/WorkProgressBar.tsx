@@ -9,10 +9,9 @@ interface ProgressProps {
 }
 
 export const WorkProgressBar: FC<ProgressProps> = ({title, data = []}) => {
-  console.log(data)
   const progress = () => {
     let totals : number = data.length;
-    let completed: number = data.filter((r : any) => {return r.unset || r.slcSET}).length;
+    let completed: number = [...data].filter((r : any) => {return r.unset || r.slcSET}).length;
     console.log(completed)
     return completed === totals ? 100 : Math.floor(((completed) / totals) * 100);
   };
@@ -20,7 +19,7 @@ export const WorkProgressBar: FC<ProgressProps> = ({title, data = []}) => {
   return (
     <Grid2 container py={1} px={0.5}>
       <Grid2 size={{ xs: 12 }}>
-        
+
         <Typography>{title}</Typography>
       </Grid2>
       <Grid2 size={{ xs: 12 }}>

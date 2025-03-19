@@ -121,26 +121,27 @@ export const BCR = () => {
       >
         <div
           style={{
-            background: "lightblue",
             position: "absolute",
             left: "calc(50vw - 100px)",
-            top: "calc(38vh - 100px)",
+            top: "calc(40vh - 283px)",
           }}
         >
           <div
+            className="scan-targetV"
             style={{
               position: "absolute",
-              borderRight: "1px solid red",
-              height: "200px",
+              // borderRight: "1px solid rgb(255 0 0 / 49%)",
+              height: "565px",
               width: "100px",
               zIndex: 100,
             }}
           ></div>
           <div
+            className="scan-targetH"
             style={{
               position: "absolute",
-              borderBottom: "1px solid red",
-              height: "100px",
+              // borderBottom: "1px solid rgb(255 0 0 / 49%)",
+              height: "285px",
               width: "200px",
               zIndex: 100,
             }}
