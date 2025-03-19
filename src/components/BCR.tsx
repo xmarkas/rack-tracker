@@ -71,7 +71,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
 
     // testing
     reader.decodeFromVideoContinuously(vRef.current,null, (res, _err) => {
-        if (res) alert(res.getText())
+        if (res) console.log(res.getText())
         
     })
 
