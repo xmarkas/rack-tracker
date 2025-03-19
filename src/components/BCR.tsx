@@ -42,9 +42,10 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   const reader = useMemo<BrowserMultiFormatReader>(() => {
     const instance = new BrowserMultiFormatReader(hints);
     instance.timeBetweenDecodingAttempts = 300;
+    
     return instance;
   }, []);
-
+  
   const handleNavigate = (barcode: string, bctype: string) => {
     // Get serialNumber and moveType, search each table for result
     const rowId = {
@@ -68,6 +69,12 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   useEffect(() => {
     if (!vRef.current) return;
 
+    // testing
+    reader.decodeFromVideoContinuously(vRef.current,null, (res, _err) => {
+        if (res) alert(res.getText())
+        
+    })
+
     reader.decodeFromConstraints(
       constraints,
       vRef.current,
@@ -79,6 +86,8 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
           );
       }
     );
+
+    
     return () => {
       reader.reset();
     };
