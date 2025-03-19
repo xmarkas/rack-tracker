@@ -15,7 +15,7 @@ import { MoveType } from "../store/types";
 
 const constraints: MediaStreamConstraints = {
   video: {
-    facingMode: "environment",
+    facingMode: "environment"
   },
   audio: false,
 };
@@ -157,7 +157,7 @@ export const BCR = () => {
           ></div>
         </div>
         <div className="video-container">
-          <video ref={ref} style={{ minHeight: "100%", minWidth: "100%" }} />
+          <video ref={ref} style={{ minHeight: "100%", minWidth: "100%" }} autoFocus={true}  />
           <div className="vid-mask"></div>
         </div>
       </Grid2>
