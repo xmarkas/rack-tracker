@@ -76,8 +76,8 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
         console.log(res.getResultMetadata());
         let points = res.getResultPoints()[0];
         let style = {
-          top: points.getY() / 2,
-          left: points.getX() / 2,
+          top: points.getY(),
+          left: points.getX(),
           position: "absolute",
           width: "20px",
           height: "20px",
@@ -85,6 +85,7 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
           borderRadius: "50%",
         };
         setScanBoxStyles(style);
+        res.getResultMetadata();
       }
     });
 
@@ -97,11 +98,6 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
             result.getText(),
             result.getBarcodeFormat().toString()
           );
-        let style = {
-          position: "absolute",
-        };
-        setScanBoxStyles(style);
-        console.log(result.getResultMetadata());
       }
     );
 
