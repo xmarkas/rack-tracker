@@ -1,5 +1,5 @@
 import { Grid2 } from "@mui/material";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { useZxing } from "react-zxing";
 import {
   BarcodeFormat,
@@ -38,7 +38,6 @@ interface OutputObj {
 
 const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   const navigate = useNavigate();
-  const [scanboxStyles, setScanBoxStyles] = useState<{}>();
 
   const reader = useMemo<BrowserMultiFormatReader>(() => {
     const instance = new BrowserMultiFormatReader(hints);
@@ -74,32 +73,21 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
       if (res) {
         console.log(res.getText());
         console.log(res.getResultMetadata());
-        let points = res.getResultPoints()[0];
-        let style = {
-          top: points.getY(),
-          left: points.getX(),
-          position: "absolute",
-          width: "20px",
-          height: "20px",
-          background: "yellow",
-          borderRadius: "50%",
-        };
-        setScanBoxStyles(style);
-        res.getResultMetadata();
+        handleNavigate(res.getText(), res.getBarcodeFormat().toString());
       }
     });
 
-    reader.decodeFromConstraints(
-      constraints,
-      vRef.current,
-      (result, _error) => {
-        if (result)
-          handleNavigate(
-            result.getText(),
-            result.getBarcodeFormat().toString()
-          );
-      }
-    );
+    // reader.decodeFromConstraints(
+    //   constraints,
+    //   vRef.current,
+    //   (result, _error) => {
+    //     if (result)
+    //       handleNavigate(
+    //         result.getText(),
+    //         result.getBarcodeFormat().toString()
+    //       );
+    //   }
+    // );
 
     return () => {
       reader.reset();
@@ -107,48 +95,8 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   }, [vRef, reader]);
 
   return (
-    // <Fab
-    //   sx={{
-    //     position: "absolute",
-    //     right: "20%",
-    //     bottom: 100,
-    //     background: "#f5f5f573",
-    //     border: "1px solid yellow",
-    //     display: "none",
-    //   }}
-    //   onClick={() => handleNavigate("50427739", "C128")}
-    // ></Fab>
-    <div style={{position: "absolute", top: 0, left: 0}}>
-      <div
-        style={{
-          position: "absolute",
-          left: "calc(50vw - 100px)",
-          top: "calc(40vh - 283px)",
-        }}
-      >
-        <div
-          className="scan-targetV"
-          style={{
-            position: "absolute",
-            // borderRight: "1px solid rgb(255 0 0 / 49%)",
-            height: "565px",
-            width: "100px",
-            zIndex: 100,
-          }}
-        ></div>
-        <div
-          className="scan-targetH"
-          style={{
-            position: "absolute",
-            // borderBottom: "1px solid rgb(255 0 0 / 49%)",
-            height: "285px",
-            width: "200px",
-            zIndex: 100,
-          }}
-        ></div>
-        
-      </div>
-      <div className="scan-box" style={scanboxStyles}></div>
+    <div className="vid-mask">
+      <div className="scan-targetH"></div>
     </div>
   );
 };
@@ -179,7 +127,7 @@ export const BCR = () => {
             style={{ minHeight: "100%", minWidth: "100%" }}
             autoFocus={true}
           />
-          <div className="vid-mask"></div>
+
           <BCRoutput vRef={ref} />
         </div>
       </Grid2>
