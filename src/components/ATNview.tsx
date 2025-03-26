@@ -17,7 +17,7 @@ export const ATNview = () => {
         ...SLC.buildings(),
         ...Decom.buildings(),
       ]),
-    ]);
+    ].sort());
   });
 
   const handleClick = (_e: React.MouseEvent, value: string) => {
@@ -39,7 +39,7 @@ export const ATNview = () => {
         ...SLC.buildings(),
         ...Decom.buildings(),
       ]),
-    ]);
+    ].sort());
   }, []);
 
   return (
