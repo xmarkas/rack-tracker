@@ -1,9 +1,11 @@
 import { Grid2 } from "@mui/material"
 import { RackList } from "./RackList"
 import { useEffect, useState } from "react";
-import { useTableListener } from "tinybase/ui-react";
 import { useParams } from "react-router-dom";
-import { store } from "../store/store";
+import Slcs from "../store/Slcs.model";
+import { Row } from "tinybase";
+import Moves from "../store/Moves.model";
+import Decoms from "../store/Decoms.model";
 
 
 export const ViewList = () => {
@@ -11,20 +13,18 @@ export const ViewList = () => {
     const [action, setAction] = useState<string>("");
     const model : string = useParams().view || "";
 
-    useTableListener(model,() => {
-        setData(Object.values(store.getTable(model)))
-    })
-
     useEffect(() => {
         if (model === "Moves") {
             setAction("Unset")
+            setData(Object.entries(Moves.all()).map((row: [string, Row]) => {return {...row[1], Id: row[0]}}))
         } else if (model === "Slcs") {
             setAction("SLC")
+            setData(Object.entries(Slcs.all()).map((row: [string, Row]) => {return {...row[1], Id: row[0]}}))
         } else if (model === "Decoms") {
             setAction("Decom")
+            setData(Object.entries(Decoms.all()).map((row: [string, Row]) => {return {...row[1], Id: row[0]}}))
         }
-
-        setData(Object.values(store.getTable(model)))
+        
     },[])
 
     return (
