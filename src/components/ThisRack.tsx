@@ -6,7 +6,7 @@ import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
 import { Row } from "tinybase";
-import { Action, MoveType } from "../store/types";
+import { Action, MoveType } from "../store/enums";
 
 export const ThisRack = () => {
   const [rack, setRack] = useState<Row>({});

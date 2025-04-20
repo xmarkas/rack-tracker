@@ -1,7 +1,7 @@
-import { Teams, Action, MoveType, Building, Hall, HallSide} from './types'
+import { Teams, Action, MoveType, Building, Hall, HallSide} from './enums'
 
 export interface UnsetMove {
-    [index: string]: string | number | boolean;
+    [key: string]: string | number | boolean;
     Id: string;
     team: Teams;
     action: Action;
@@ -27,7 +27,7 @@ export interface UnsetMove {
   }
 
   export interface SLC {
-    [index: string]: string | number | boolean ;
+    [key: string]: string | number | boolean ;
     Id: string;
     team: Teams;
     action: Action;
@@ -54,7 +54,7 @@ export interface UnsetMove {
   }
 
   export interface Decom {
-    [index: string]: string | number | boolean;
+    [key: string]: string | number | boolean;
     Id: string;
     team: Teams;
     action: Action;

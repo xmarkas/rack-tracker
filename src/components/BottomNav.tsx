@@ -10,21 +10,23 @@ import { Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any) {
+export function BottomNav({
+  selectedNavs = [],
+  barcode,
+  bgColor = "white",
+}: any) {
   const [value, setValue] = useState("");
   const n = useNavigate();
 
   const menuChange = (_event: any, newValue: string) => {
-    
     if (["slc", "rack"].includes(newValue)) {
       setValue(newValue);
       n(`/${newValue}`);
     } else if (newValue === "back") {
       n(-1);
     } else if (newValue === "scan") {
-      n('/scan')
-    } 
-    
+      n("/scan");
+    }
   };
 
   const navItems = (val: number) => {
@@ -53,7 +55,7 @@ export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any
 
     const styles = {
       color: bgColor === "transparent" ? "white" : "black",
-    }
+    };
 
     return (
       <BottomNavigationAction
@@ -62,7 +64,6 @@ export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any
         label={items[val].label}
         icon={items[val].icon}
         sx={styles}
-        
       />
     );
   };
@@ -72,14 +73,26 @@ export function BottomNav({ selectedNavs = [], barcode, bgColor = "white" }: any
       <CssBaseline />
 
       <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, height: "80px", zIndex: 500, background: bgColor }}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "80px",
+          zIndex: 500,
+          background: bgColor,
+        }}
         elevation={5}
       >
-        <BottomNavigation showLabels value={value} onChange={menuChange} sx={{background: bgColor}}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={menuChange}
+          sx={{ background: bgColor }}
+        >
           {selectedNavs.map((item: any) => navItems(item))}
         </BottomNavigation>
       </Paper>
-     
     </Box>
   );
 }

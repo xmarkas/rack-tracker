@@ -6,12 +6,12 @@ import {
   BrowserMultiFormatReader,
   DecodeHintType,
 } from "@zxing/library";
-// import { FlashlightOff, FlashlightOn } from "@mui/icons-material";
+
 import { useNavigate } from "react-router-dom";
 import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import Decoms from "../store/Decoms.model";
-import { MoveType } from "../store/types";
+import { MoveType } from "../store/enums";
 
 const constraints: MediaStreamConstraints = {
   video: {
@@ -36,6 +36,14 @@ interface OutputObj {
   };
 }
 
+/**
+ * BCRoutput - Scanner box element compenent
+ * 
+ * Processing in a different component to avoid re-rendering
+ * 
+ * @param param0 vRef - the ref to the video element
+ * @returns The scan box for lining up the barcode
+ */
 const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   const navigate = useNavigate();
 
@@ -45,6 +53,15 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
     return instance;
   }, []);
 
+  /**
+   * handleNavigate
+   * 
+   * If a known barcode exists the app will navigate to the ThisRack compenent
+   * and display additional information about the scanned rack.
+   * 
+   * @param barcode the scan result
+   * @param bctype barcode type
+   */
   const handleNavigate = (barcode: string, bctype: string) => {
     // Get serialNumber and moveType, search each table for result
     const rowId = {
@@ -101,6 +118,11 @@ const BCRoutput: FC<OutputObj> = ({ vRef }) => {
   );
 };
 
+/**
+ * BCR
+ * 
+ * @returns Barcode Reader
+ */
 export const BCR = () => {
   const { ref } = useZxing({
     paused: false,

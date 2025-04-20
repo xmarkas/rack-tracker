@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 export const ATNview = () => {
   const navigate = useNavigate();
   const [buildings, setBuildings] = useState<string[]>([]);
+
+  // Get buildings the need rack logistics
   useTablesListener(() => {
     setBuildings([
       ...new Set([
@@ -20,10 +22,12 @@ export const ATNview = () => {
     ].sort());
   });
 
+  // Navigate to the selected hall view
   const handleClick = (_e: React.MouseEvent, value: string) => {
     navigate(`/${value}/hall`);
   };
 
+  // Count the number of rack tasks in each building
   const getCountByBuilding = (b: string) => {
     return (
       Move.byBuilding(b).length +

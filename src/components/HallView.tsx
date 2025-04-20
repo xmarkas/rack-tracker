@@ -55,12 +55,12 @@ export const HallView = () => {
   };
 
   return (
-    <Grid2 size={{ xs: 12 }} container px={0.5}>
+    <Grid2 size={{ xs: 12 }} container px={0.5} sx={{overflow: "hidden", height: "calc(100vh - 140px)"}}>
       <Grid2
         size={{ xs: 12 }}
         sx={{
-          position: "sticky",
-          top: "58px",
+          
+          top: "0px",
           background: "white",
           zIndex: 100,
           borderBottom: "1px solid lightgray",

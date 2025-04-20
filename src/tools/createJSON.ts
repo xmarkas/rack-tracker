@@ -6,7 +6,7 @@ import {
   Building,
   Hall,
   HallSide,
-} from "../store/types";
+} from "../store/enums";
 
 /**
  *

@@ -18,6 +18,12 @@ export const buildingQueries = (baseModel: { [key: string]: any }) => {
   return { buildings, byBuilding };
 };
 
+/**
+ * queryTack Count
+ * 
+ * @param baseModel 
+ * @returns Id's of the selected rows
+ */
 export const queryTaskCount = (baseModel: { [key: string]: any }) => {
   const taskCounts = (
     queryId: string,
@@ -35,7 +41,14 @@ export const queryTaskCount = (baseModel: { [key: string]: any }) => {
     return results;
   };
 
-  // by hall
+  /**
+   * countsByHall
+   * 
+   * @param queryId name of the queryId
+   * @param building the building to query
+   * @param hall the hall to query
+   * @returns returns the Id's of the selected rows
+   */
   const countsByHall = (queryId: string, building: string, hall: string) => {
     const results = queries.setQueryDefinition(
       queryId,
@@ -49,7 +62,12 @@ export const queryTaskCount = (baseModel: { [key: string]: any }) => {
     return results;
   };
 
-  // by serial number
+  /**
+   * 
+   * @param queryId the name of the query
+   * @param val the serial number of the requested row
+   * @returns the result row Id
+   */
   const bySerialNumber = (queryId: string, val: string | boolean) => {
     const results = queries.setQueryDefinition(
       queryId,
@@ -63,6 +81,11 @@ export const queryTaskCount = (baseModel: { [key: string]: any }) => {
     return results.getResultRowIds(queryId)[0];
   };
 
+  /**
+   * removebyFacility (For demo only)
+   * 
+   * @param facility The facility to remove the store (ATN/PCI)
+   */
   const removeByFacility = (facility: string) => {
     const queryId = baseModel.tableName + facility + "remove";
     const result = queries.setQueryDefinition(

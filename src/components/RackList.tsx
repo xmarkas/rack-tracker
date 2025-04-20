@@ -97,13 +97,13 @@ export const RackList: FC<Conditions> = ({data, filterConditions, location = fal
   }
 
   return (
-    <Grid2 size={{ xs: 12 }} sx={{ overflow: "hidden" }} mt={2}>
+    <Grid2 size={{ xs: 12 }}  mt={2} >
       <TableContainer component={Paper}>
-        <Table stickyHeader size="small" aria-label="a dense table">
+        <Table size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
               <TableCell sx={{ fontWeight: 700, fontSize: "large" }}>
-                Row.Position
+                Row Position
               </TableCell>
               <TableCell
                 sx={{ fontWeight: 700, fontSize: "large" }}

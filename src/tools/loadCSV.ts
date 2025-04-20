@@ -3,12 +3,30 @@ import Moves from "../store/Moves.model";
 import Slcs from "../store/Slcs.model";
 import { createJsonForMove, createJsonForSLC } from "./createJSON";
 
+/**
+ * getByNewLine 
+ * 
+ * FOR TESTING - processes CSV file line by line
+ * 
+ * @param fileData the uploaded CSV file
+ * @param index the line of the spread to began processing
+ * @returns array of entries for rack logistics
+ */
 const getByNewLine = (fileData: string, index: number): string[] => {
   let result: string[] = fileData.split(/\r?\n/); // seperate by newline
   result = result.slice(index);
   return result;
 };
 
+/**
+ * parser
+ * 
+ * parses the CSV line the "," delimiter, but preserves user notes that may have the
+ * used delimiter within notes. Also limits to the first 14 columns of data.
+ * 
+ * @param s a single entry into the spreadsheet
+ * @returns a single entry 
+ */
 const parser = (s: string): string[] => {
   const result: string[] = [];
   let temp: string = "";
@@ -34,6 +52,9 @@ const parser = (s: string): string[] => {
   return result.slice(0, 14); // trim to first 14 entries
 };
 
+/**
+ * FOR TESTING - using to load csv file for testing
+ */
 export const LoadCSV = async () => {
   try {
     const response = await fetch("/march3_data.csv");

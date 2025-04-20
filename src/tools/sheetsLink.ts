@@ -3,10 +3,20 @@ const pciLink = "https://docs.google.com/spreadsheets/d/1pDUSmeC9pmCqjpZUMn92aHf
 const ATNgid = import.meta.env.VITE_ATN_GID
 const PCIgid = import.meta.env.VITE_PCI_GID
 
+/**
+ * Link for ATN
+ * 
+ * @returns the link for downloading ATN buildings
+ */
 export const sheetsLink = () => {
   return `${sheetLink}${ATNgid}`;
 };
 
+/**
+ * Link for PCI
+ * 
+ * @returns the link for downloading PCI buildings
+ */
 export const PciLink = () : string => {
   return `${pciLink}${PCIgid}`
 }

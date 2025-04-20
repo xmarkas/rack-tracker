@@ -31,7 +31,7 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <Box sx={{overflow: "hidden"}}>
+        <Box>
           <Router>
             <Routes>
               <Route index={true} path="/" element={<Home />} />

@@ -6,14 +6,8 @@ body {
 }
 
 #app {
-  /* max-width: 40rem; */
-  /* margin: 0rem auto; */
-  /* display: grid; */
-  /* grid-template-columns: 1fr; */
-  /* column-gap: 1rem;
-  align-items: start;
-  row-gap: 1rem; */
-  background-color: #ffffff;
+   background-color: #ffffff;
+  overflow: hidden;
 }
 
 .badge {
@@ -30,15 +24,12 @@ body {
 }
 
 .video-container video {
-  /* Make video to at least 100% wide and tall */
   min-width: 100%;
   min-height: 100%;
 
-  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
   width: auto;
   height: auto;
 
-  /* Center the video */
   position: absolute;
   top: 50%;
   left: 50%;
