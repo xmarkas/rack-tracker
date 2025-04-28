@@ -9,7 +9,7 @@ The app was create with a Vite template for React w/ Typescript and Tinybase.
 
 ### In app main screen view
 | <kbd> <img width="50%" alt="image" src="https://github.com/xmarkas/rack-tracker/blob/main/public/image2.png?raw=true" style="border: 1px solid gray; margin: 10px;">
--
+|-
 
 ### In app hall view
 | <img width="50%" alt="image" src="https://github.com/xmarkas/rack-tracker/blob/main/public/image1.png?raw=true">
