@@ -7,5 +7,8 @@ It currently design to read a Google sheet and simply and organize the tasks int
 
 The app was create with a Vite template for React w/ Typescript and Tinybase.
 
+<img width="50%" alt="image" src="https://github.com/xmarkas/rack-tracker/blob/main/public/image2.png?raw=true">
+
 <img width="50%" alt="image" src="https://github.com/xmarkas/rack-tracker/blob/main/public/image1.png?raw=true">
 
+<img width="50%" alt="image" src="https://github.com/xmarkas/rack-tracker/blob/main/public/image0.png?raw=true">
