@@ -17,3 +17,4 @@ The app was create with a Vite template for React w/ Typescript and Tinybase.
 
 ### In app barcode scanner
 | <kbd> <img width="50%" alt="image" src="https://github.com/xmarkas/rack-tracker/blob/main/public/image0.png?raw=true">
+|-
